@@ -1,4 +1,4 @@
-grammar grafl;
+grammar graffle;
 
 //
 // LEXER
