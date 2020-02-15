@@ -1,3 +1,3 @@
-module github.com/PlagaMedicum/graphLang
+module github.com/PlagaMedicum/grafl
 
 go 1.13
