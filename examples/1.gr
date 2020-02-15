@@ -1,0 +1,20 @@
+f(entity)
+    print(entity)
+
+main()
+    v1 = 12
+    v2 = 3
+    v3 = 4
+    e = v1 -> v2
+    g = (G) e
+    v4 = 5
+    g = (G) g + v4
+    f(g)
+    f(e)
+    e1 = v1 -[1]-> v2
+    e0 = v2 -- v3
+    g1 = g + g
+    g1 = g * g
+    g1 = g - g
+    v = "HEllo"(2)
+    print(g == g)
