@@ -1,5 +1,5 @@
 f(entity)
-    print(entity)
+    << entity
 
 main()
     v1 = 12
@@ -17,4 +17,4 @@ main()
     g1 = g * g
     g1 = g - g
     v = "HEllo"(2)
-    print(g == g)
+    << g == g
