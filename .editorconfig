@@ -1,6 +1,6 @@
 root = true
 
-[*.{js,go,proto}]
+[*.{js,go,proto,g4}]
 charset = utf-8
 end_of_line = lf
 insert_final_newline = true
