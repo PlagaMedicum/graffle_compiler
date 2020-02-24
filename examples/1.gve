@@ -1,20 +1,46 @@
-f(entity)
-    << entity
+`This is a
+multiline comment`
+``` Here is the single-linecomment
 
-main()
-    v1 = 12
-    v2 = 3
-    v3 = 4
-    e = v1 -> v2
-    g = (G) e
-    v4 = 5
-    g = (G) g + v4
-    f(g)
-    f(e)
-    e1 = v1 -[1]-> v2
-    e0 = v2 -- v3
-    g1 = g + g
-    g1 = g * g
-    g1 = g - g
-    v = "HEllo"(2)
-    << g == g
+f(entity) =
+    if entity then
+        <<< 1
+    else
+        <<< "FALSE"
+
+v1 = 12
+v2 = 3
+
+e = v1 -> v2
+
+g = (G) e
+
+v3 = 5
+g = (G) g + v4
+
+f(g), f(e)
+
+e1 = v1 -[1]-> v2
+e0 = v2 -- v3
+
+g1 = g + g
+g1 = g * g
+g1 = g - g
+
+v = "Why do we all must to wear those ridiculous ties?!" : question
+
+Print g equals to g
+
+If 1, the
+    v = 5
+Else
+    v = 6
+
+o = 0
+While o != 1
+    print "Hello"
+    o+=1
+
+>>> i
+until i == 1 do
+    i = 1

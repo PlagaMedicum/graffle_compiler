@@ -1,0 +1,14 @@
+some_function(b)
+    If b, then
+        i = 0
+        for i = 0, i less than 10, i += 1
+            if i < 5 then
+                <<< i
+            else
+                <<< -i
+    else
+        <<< "b is not true! Would you like to run it anyway?"
+        >>> answer
+        some_function(answer)
+
+some_function(false)
