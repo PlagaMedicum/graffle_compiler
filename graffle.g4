@@ -11,10 +11,11 @@ NUMBER  : INT
 INT     : '-'? Digit+ ;
 FLOAT   : INT ('.' | ',') Digit+ ;
 
-STRING  : '"'  ~[\\"]* '"'
-        | '\'' ~[\\']* '\''
-        ;
-LABEL   : ':' ~[\\]* ;
+STRING      : '"'  ~[\\"]* '"'
+            | '\'' ~[\\']* '\''
+            ;
+LABEL       : '@' ~[\r\n]* ;
+ML_LABEL    : '@[' ~[\\[]* ']' ;
 
 BOOL    : True
         | False
@@ -42,10 +43,10 @@ DIV         : '/' ;
 
 // logical
 // - binary
-NEQ         : '!='
-            | [Nn]'ot' EQ
+NEQ         : NOT '='
+            | NOT EQUALS
             ;
-EQ          : '=='
+EQUALS      : '=='
             | [Ee]'quals' To?
             ;
 LESS_THAN   : '<'
@@ -53,6 +54,14 @@ LESS_THAN   : '<'
             ;
 GR_THAN     : '>'
             | [Gg]'reater' Than?
+            ;
+LESS_THAN_E : '<='
+            | [Ll]'ess' Than? OR EQUALS
+            | NOT GR_THAN
+            ;
+GR_THAN_E   : '>='
+            | [Gg]'reater' Than? OR EQUALS
+            | NOT LESS_THAN
             ;
 AND         : '&'
             | [Aa]'nd'
@@ -92,10 +101,15 @@ UNTIL   : [Uu]'ntil'
         ;
 FOR     : [Ff]'or'
         ;
+FROM    : [Ff]'rom'
+        ;
+TO      : [Tt]'o'
+        ;
 DO      : [Dd]'o'
         ;
 
-DELIM : ',' ; // operations delimiter. Example: v1 = 1, v2 = 2
+ACT_DELIM : '.' ; // operations delimiter. Example: v1 = 1. v2 = 2
+ARG_DELIM : ',' ;
 
 // Built-in functions:
 PRINTER     : '<<<'
@@ -116,11 +130,13 @@ E_N : 'E'
     | 'Arc'
     ;
 
+// Other:
 ID : [a-zA-Z_][a-zA-Z_0-9]* ;
+// INDENT : ;
 
 // Ignore:
-WS      : [ \t]+    -> skip ;
-NEWLINE : [\n\r]+   -> skip ;
+WS      : ~[\n\r][ \t]+ -> skip ;
+NEWLINE : [\n\r]+       -> skip ;
 
 LINE_COMMENT   : CommentSym{3} ~[\r\n]*      -> skip ;
 M_LINE_COMMENT : CommentSym ~'`'* CommentSym -> skip ;
@@ -142,6 +158,14 @@ action
     | builtin_function_call
     ;
 
+action_line
+    : action (ACT_DELIM action)*
+    ;
+
+//sub_block
+//    : ([ \t]+ action_line [\n\r])+
+//    ;
+
 function_param
     : STRING
     | NUMBER
@@ -151,12 +175,20 @@ function_param
     | '(' logical_expr ')'
     ;
 
+integral_param
+    : NUMBER
+    | ID
+    | function_call
+    | BOOL
+    | '(' logical_expr ')'
+    ;
+
 function_call
-    : ID '(' (function_param (',' function_param)*)? ')'
+    : ID '(' (function_param (ARG_DELIM function_param)*)? ')'
     ;
 
 bin_log_operator
-    : EQ
+    : EQUALS
     | NEQ
     | LESS_THAN
     | GR_THAN
@@ -177,30 +209,45 @@ logical_expr
     ;
 
 var_declaration
-    : type_assignement
-    | nw_arc_declaration
-    | w_arc_declaration
+    : arc_declaration
     | vertice_declaration
-    ;
-
-type_assignement
-    : ID ASSIGN (G_N | V_N | E_N) '(' ID ')' // Example: graph = G(vertice)
+    | graph_declaration
+    | ID ASSIGN ID
     ;
 
 // Declarations:
 function_declaration
-    : ID '(' (ID (',' ID)*)? ')' ASSIGN
+    : ID '(' (ID (ARG_DELIM ID)*)? ')' ASSIGN
     ;
 
-nw_arc_declaration
-    : ID ASSIGN ID (OR_ARC_LR | OR_ARC_RL | UNOR_ARC) ID // Example: arc = v1 -> v2
-    ;
-w_arc_declaration
-    : ID ASSIGN ID (OR_W_ARC_LR | OR_W_ARC_RL | UNOR_W_ARC) ID // Example: w_arc = v1 <-[30]- v2
+arc_declaration
+    : ID ASSIGN E_N '(' ID ')'
+    | ID ASSIGN ID OR_ARC_LR ID
+    | ID ASSIGN ID OR_ARC_RL ID
+    | ID ASSIGN ID UNOR_ARC ID
+    | ID ASSIGN ID OR_W_ARC_LR ID
+    | ID ASSIGN ID OR_W_ARC_RL ID
+    | ID ASSIGN ID UNOR_W_ARC ID
     ;
 
 vertice_declaration
-    : ID ASSIGN (ID | vertice_value) LABEL? // Example: v = "OSTIS" {Best semantic technology}
+    : ID ASSIGN V_N '(' ID 'ID'
+    | ID ASSIGN (ID | vertice_value) // Example: v = "OSTIS" @ Best semantic technology ever
+    ;
+
+graph_declaration
+    : ID ASSIGN G_N '(' ID ')'
+    | ID ASSIGN
+    ;
+
+label
+    : LABEL
+    | ML_LABEL
+    ;
+labeled_expression
+    : vertice_declaration label?
+    | arc_declaration label?
+    | graph_declaration label?
     ;
 
 vertice_value
@@ -217,15 +264,18 @@ else_stmnt
     : ELSE DO?
     ;
 
-for_stmnt
-    : FOR logical_expr DO?
-    | FOR action DELIM logical_expr DELIM action DO?
-    ;
 while_stmnt
     : WHILE logical_expr DO?
     ;
 until_stmnt
     : UNTIL logical_expr DO?
+    ;
+for_stmnt
+    : FOR logical_expr DO?
+    | FOR action ARG_DELIM logical_expr ARG_DELIM action DO?
+    ;
+from_to_stmnt
+    : FROM integral_param TO integral_param DO?
     ;
 
 // Built-in functions
