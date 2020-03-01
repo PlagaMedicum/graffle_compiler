@@ -34,7 +34,7 @@ OR_W_ARC_RL : OR_ARC_RL '[' NUMBER ']-' ;
 UNOR_ARC    : '--' ;
 UNOR_W_ARC  : '-[' NUMBER ']-' ;
 
-// asiignements
+// assignements
 ASSIGN          : '=' ;
 ADD_ASSIGN      : '+=' ;
 SUB_ASSIGN      : '-=' ;
@@ -99,6 +99,8 @@ NOT         : '!'
 IF      : [Ii]'f' ;
 THEN    : [Tt]'hen' ;
 ELSE    : [Ee]'lse' ;
+IS      : [Ii]'s' ;
+DEFAULT : [Dd]'efault' ;
 
 // cycles
 WHILE   : [Ww]'hile' ;
@@ -112,9 +114,19 @@ TO      : [Tt]'o'
         ;
 DO      : [Dd]'o' ;
 
+SKIP_ITERATION  : [Ss]'kip' 'the'? 'iteration'?
+                | [Cc]'ontinue'
+                ;
+BREAK           : [Bb]'reak'
+                | [Ee]'nd'
+                ;
+
+// Delimiters and blocks:
 ACT_DELIM : '.' ;
 ARG_DELIM : ',' ;
 NEWLINE : [\n\r]+ ;
+
+INDENT : [\n\r][ \t];
 
 // Built-in functions:
 PRINTER     : '<<<'
@@ -136,6 +148,8 @@ E_N : 'E'
     ;
 
 // Other:
+WHERE : [Ww]'here' ;
+
 ID : Letter (Letter | UnicodeDigit)* ;
 
 // Ignore:

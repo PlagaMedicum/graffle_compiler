@@ -5,6 +5,14 @@ options {
     superClass=GraffleParserBase;
 }
 
+sequence
+    : (sequence_element (ACT_DELIM sequence_element)* ACT_DELIM? (NEWLINE+ | EOF))*
+    ;
+sequence_element
+    : action
+    | one_line_stmnt
+    ;
+
 action
     : var_declaration
     | function_call
@@ -20,8 +28,17 @@ var_declaration
     | labeled_declaration
     ;
 
+one_line_function_declaration
+    : function_declaration ','? WHERE sequence
+    ;
+mult_line_function_declaration
+    : function_declaration (','? WHERE)? NEWLINE
+    ;
 function_declaration
-    : ID '(' (ID (ARG_DELIM ID)*)? ')' ASSIGN?
+    : ID '(' (ID (ARG_DELIM ID)*)? ')' ASSIGN value
+    ;
+procedure_declaration
+    : ID '(' (ID (ARG_DELIM ID)*)? ')' NEWLINE
     ;
 
 arc_declaration
@@ -56,10 +73,6 @@ labeled_declaration
     : vertice_declaration label?
     | arc_declaration label?
     | graph_declaration label?
-    ;
-
-sequence
-    : (action (ACT_DELIM action)* ACT_DELIM? (NEWLINE+ | EOF))*
     ;
 
 value
@@ -139,19 +152,35 @@ input
     ;
 
 // Statements:
-stmnt
-    : {}
+one_line_stmnt
+    : stmnt sequence
+    ;
+mult_line_stmnt
+    : stmnt NEWLINE
     ;
 
-block
-    : '{'  '}'
+stmnt
+    : if_stmnt
+    | if_is_stmnt
+    | case_stmnt
+    | else_stmnt
+    | while_stmnt
+    | until_stmnt
     ;
 
 if_stmnt
-    : IF logical_expr ','? THEN? DO?
+    : IF logical_expr ( ','? (THEN | DO | THEN DO) )?
     ;
 else_stmnt
     : ELSE DO?
+    ;
+
+if_is_stmnt
+    : IF value
+    ;
+case_stmnt
+    : IS value ( ','? (THEN | DO | THEN DO) )?  #Case
+    | DEFAULT DO?                               #Default
     ;
 
 while_stmnt
