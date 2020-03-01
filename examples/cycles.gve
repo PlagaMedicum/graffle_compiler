@@ -1,12 +1,14 @@
 for i = 0, i less than 10, i+=1
-    print "Test1"
+    print "Test for"
+
+for i in range from 0 to 10 print "Test for in range"
 
 i = 0
 while i < 10
-    <<< 'Test2'
+    <<< 'Test while'
 
 i = 0
 Until i not less than 10 do
-    Print 'Test3'
+    Print 'Test until'
 
-from 0 to 10 print 'Test4'
+from 0 to 10 print 'Test from to'
