@@ -7,6 +7,8 @@ f(entity) =
         <<< 1
     else
         <<< "FALSE"
+    end
+end
 
 v1 = 12
 v2 = 3
@@ -35,12 +37,15 @@ If 1, then
     v = 5
 Else
     v = 6
+end
 
 o = 0
 While o != 1
     print "Hello"
     o += 1
+end
 
 >>> i
 until i == 1 do
     i = 1
+end

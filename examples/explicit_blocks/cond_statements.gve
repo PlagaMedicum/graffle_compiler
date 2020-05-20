@@ -4,12 +4,14 @@ if a then
     <<< "OK"
 else
     <<< "Not OK"
+end
 
 if a
     is 1 then
         <<< "KO"
-    is 2 then
+    is 2 then do
         <<< "LOL"
     default do
         <<< "Well..."
+end
 
