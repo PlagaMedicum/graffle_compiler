@@ -1,6 +1,6 @@
 NUMBER=1
-INT=2
-FLOAT=3
+FLOAT=2
+INT=3
 STRING=4
 LABEL=5
 ML_LABEL=6
@@ -86,6 +86,5 @@ M_LINE_COMMENT=70
 '-'=26
 '*'=27
 '/'=28
-'=='=30
 '.'=56
 ','=57

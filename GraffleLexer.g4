@@ -4,8 +4,8 @@ lexer grammar GraffleLexer;
 NUMBER  : INT
         | FLOAT
         ;
+FLOAT   : INT ('.' | ',') Spaces Digit+ ;
 INT     : '-'? Digit+ ;
-FLOAT   : INT ('.' | ',') Digit+ ;
 
 STRING      : '"'  ( '\\"' | '\\\\' | . )*? '"'
             | '\'' ( '\\\'' | '\\\\' | . )*? '\''
@@ -49,26 +49,28 @@ DIV         : '/' ;
 
 // logical
 // - binary
-NEQ         : NOT '='
+NEQ         : NOT Spaces '='
             | '=\\='
-            | NOT EQUALS
+            | NOT Spaces EQUALS
             ;
 EQUALS      : '=='
-//            | [Ee]'quals' [Tt]'o'
+            | [Ee]'quals' (Spaces [Tt]'o')?
             ;
 LESS_THAN   : '<'
-            | [Ll]'ess' Than?
+            | [Ll]'ess' (Spaces Than)?
+            | NOT Spaces GR_THAN
             ;
 GR_THAN     : '>'
-            | [Gg]'reater' Than?
+            | [Gg]'reater' (Spaces Than)?
+            | NOT Spaces LESS_THAN
             ;
 LESS_THAN_E : '<='
-            | [Ll]'ess' Than? OR EQUALS
-            | NOT GR_THAN
+            | [Ll]'ess' (Spaces Than)? Spaces OR Spaces EQUALS
+            | NOT Spaces GR_THAN_E
             ;
 GR_THAN_E   : '>='
-            | [Gg]'reater' Than? OR EQUALS
-            | NOT LESS_THAN
+            | [Gg]'reater' (Spaces Than)? Spaces OR Spaces EQUALS
+            | NOT Spaces LESS_THAN_E
             ;
 AND         : '&'
             | [Aa]'nd'
@@ -80,13 +82,13 @@ OR          : '|'
             ;
 XOR         : '^'
             | 'XOR'
-            |[Xx]'or'
+            | [Xx]'or'
             ;
-NOR         : NOT OR
+NOR         : NOT Spaces OR
             | [Nn]'or'
             | 'NOR'
             ;
-NAND        : NOT AND
+NAND        : NOT Spaces AND
             | [Nn]'and'
             | 'NAND'
             ;
@@ -115,10 +117,11 @@ TO      : [Tt]'o'
         ;
 DO      : [Dd]'o' ;
 
-SKIP_ITERATION  : [Ss]'kip' 'the'? 'iteration'?
+SKIP_ITERATION  : [Ss]'kip' ((Spaces 'the')? Spaces 'iteration')?
                 | [Cc]'ontinue'
                 ;
-BREAK           : [Bb]'reak'
+BREAK           : [Bb]'reak' (Spaces 'out')?
+                | ([Gg]'o' Spaces)? [Oo]'ut'
 //                | [Ee]'nd'
                 ;
 
@@ -170,6 +173,7 @@ fragment Digit      : [0-9] ;
 fragment True       : [Tt]'rue' | '1' ;
 fragment False      : [Ff]'alse' | '0' ;
 fragment Than       : [Tt]'han' ;
+fragment Spaces     : ' '*;
 fragment Letter
     : UnicodeLetter
     | '_'
