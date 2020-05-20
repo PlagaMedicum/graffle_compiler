@@ -1,5 +1,5 @@
 factorial(value) = answer, where
-    if value =\= 0, then
+    if value == 0, then
         answer = 1.
     Else answer = (value * factorial(value - 1))
     end.

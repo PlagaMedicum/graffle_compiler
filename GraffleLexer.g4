@@ -160,7 +160,7 @@ ID : Letter (Letter | UnicodeDigit)* ;
 
 // Ignore:
 WS      : [ \t]+        -> skip ;
-INDENT : [\n\r][ \t]+   -> skip;
+//INDENT : [\n\r][ \t]+   -> skip;
 
 LINE_COMMENT   : '```' ~[\r\n]*             -> skip ;
 M_LINE_COMMENT : CommentSym .*? CommentSym  -> skip ;
