@@ -7,11 +7,11 @@ NUMBER  : INT
 INT     : '-'? Digit+ ;
 FLOAT   : INT ('.' | ',') Digit+ ;
 
-STRING      : '"'  ~[\\"]* '"'
-            | '\'' ~[\\']* '\''
+STRING      : '"'  ( '\\"' | '\\\\' | . )*? '"'
+            | '\'' ( '\\\'' | '\\\\' | . )*? '\''
             ;
 LABEL       : '@' ~[\r\n]* ;
-ML_LABEL    : '@[' ~[\\[]* ']' ;
+ML_LABEL    : '@[' ( '\\]' | '\\\\' | . )*? ']' ;
 
 BOOL    : True
         | False
@@ -50,10 +50,11 @@ DIV         : '/' ;
 // logical
 // - binary
 NEQ         : NOT '='
+            | '=\\='
             | NOT EQUALS
             ;
 EQUALS      : '=='
-            | [Ee]'quals' TO?
+//            | [Ee]'quals' [Tt]'o'
             ;
 LESS_THAN   : '<'
             | [Ll]'ess' Than?
@@ -118,7 +119,7 @@ SKIP_ITERATION  : [Ss]'kip' 'the'? 'iteration'?
                 | [Cc]'ontinue'
                 ;
 BREAK           : [Bb]'reak'
-                | [Ee]'nd'
+//                | [Ee]'nd'
                 ;
 
 // Delimiters and blocks:
@@ -126,7 +127,12 @@ ACT_DELIM : '.' ;
 ARG_DELIM : ',' ;
 NEWLINE : [\n\r]+ ;
 
-INDENT : [\n\r][ \t];
+BLOCK_BEGIN : 'BEGIN'
+            | [Bb]'egin'
+            ;
+BLOCK_END   : 'END'
+            | [Ee]'nd'
+            ;
 
 // Built-in functions:
 PRINTER     : '<<<'
@@ -153,10 +159,11 @@ WHERE : [Ww]'here' ;
 ID : Letter (Letter | UnicodeDigit)* ;
 
 // Ignore:
-WS      : [ \t]+    -> skip ;
+WS      : [ \t]+        -> skip ;
+INDENT : [\n\r][ \t]+   -> skip;
 
-LINE_COMMENT   : '```' ~[\r\n]*      -> skip ;
-M_LINE_COMMENT : CommentSym ~[`]*? CommentSym -> skip ;
+LINE_COMMENT   : '```' ~[\r\n]*             -> skip ;
+M_LINE_COMMENT : CommentSym .*? CommentSym  -> skip ;
 
 fragment CommentSym : '`' ;
 fragment Digit      : [0-9] ;
