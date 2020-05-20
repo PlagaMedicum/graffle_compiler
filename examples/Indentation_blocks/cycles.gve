@@ -7,7 +7,6 @@ i = 0
 while i < 10
     <<< 'Test while'
 
-i = 0
 Until i not less than 10 do
     Print 'Test until'
 

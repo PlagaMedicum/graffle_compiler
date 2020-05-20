@@ -1,0 +1,16 @@
+a = true
+
+if a then
+    <<< "OK"
+else
+    <<< "Not OK"
+
+if a
+    is 1 then
+        <<< "KO"
+    is 2 then
+        <<< "LOL"
+    default do
+        <<< "Well..."
+
+
