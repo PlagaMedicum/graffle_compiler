@@ -1,17 +1,17 @@
 factorial(value) = answer, where
-    if value == 0, then
+    if value equals to 0, then
         answer = 1.
-    Else answer = (value * factorial(value - 1))
+    Else answer = (value * factorial((value - 1)))
     end.
 end
 
-f1(arg) = arg * z, where
+f1(arg) = (arg * z), where
     z = 9
 end
 
-f2(k) = a, where if k = false, then a = "NO". Else a = "YES". end
+f2(k) = a, where if k == false, then a = "NO". Else a = "YES". end. end
 
-f3(i) = a, where if i is 1 then a = 1. is 2 then a = 10. default a = "RRRRARRRR!" end
+f3(i) = a, where if i is 1 then a = 1. is 2 then a = 10. default a = "RRRRARRRR!". end. end
 
 procedure()
     <<< "I am the dragon!"

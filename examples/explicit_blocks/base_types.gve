@@ -7,9 +7,8 @@ e1 = v1 -> v2 @ not weighted oriented arc
 e2 = v2 -- v3 @ not weighted not oriented arc
 e3 = v1 -[1]-> v2 @ weighted oriented arc
 
-g1 = (G) e1 @ graph converted from arc
-g2 = (G) g1 + v3 @ graph converted from summ of graph and vertice
+g1 = G(e1) @ graph converted from arc
+g2 = G((g1 + v3)) @ graph converted from summ of graph and vertice
 
-g = g1 + g2 @ summ of graphs
-g = g1 * g2 @ let's change the label
-g = g1 - g2, e1 ``` and there is no label, as you see
+g = (g1 + g2) @ summ of graphs
+g = (g1 * g2) @ let's change the label
