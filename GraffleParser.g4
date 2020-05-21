@@ -158,6 +158,7 @@ integral_expr
 logical_expr
     : left=expr bin_op=bin_log_operator right=expr
     | un_op=unar_log_operator expr
+    | arithm_expr
     | expr
     ;
 bin_log_operator
@@ -178,7 +179,7 @@ unar_log_operator
     ;
 
 arithm_expr
-    : expr bin_arithm_operator expr
+    : expr (bin_arithm_operator expr)+
     ;
 bin_arithm_operator
     : MULT
@@ -219,7 +220,9 @@ label
     | ML_LABEL
     ;
 value
-    : expr
+    : logical_expr
+    | arithm_expr
+    | expr
     | STRING
     ;
 var
