@@ -156,6 +156,10 @@ func (v *BaseGraffleParserVisitor) VisitArithm_expr(ctx *Arithm_exprContext) int
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseGraffleParserVisitor) VisitArithm_expr_operand(ctx *Arithm_expr_operandContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseGraffleParserVisitor) VisitBin_arithm_operator(ctx *Bin_arithm_operatorContext) interface{} {
 	return v.VisitChildren(ctx)
 }

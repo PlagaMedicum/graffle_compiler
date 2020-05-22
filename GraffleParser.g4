@@ -178,7 +178,11 @@ unar_log_operator
     ;
 
 arithm_expr
-    : left=expr op=bin_arithm_operator (right=expr | arithm_expr)
+    : left=expr op=bin_arithm_operator right=arithm_expr_operand
+    ;
+arithm_expr_operand
+    : expr
+    | arithm_expr
     ;
 bin_arithm_operator
     : MULT

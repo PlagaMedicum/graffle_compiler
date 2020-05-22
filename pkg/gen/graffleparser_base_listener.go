@@ -257,6 +257,12 @@ func (s *BaseGraffleParserListener) EnterArithm_expr(ctx *Arithm_exprContext) {}
 // ExitArithm_expr is called when production arithm_expr is exited.
 func (s *BaseGraffleParserListener) ExitArithm_expr(ctx *Arithm_exprContext) {}
 
+// EnterArithm_expr_operand is called when production arithm_expr_operand is entered.
+func (s *BaseGraffleParserListener) EnterArithm_expr_operand(ctx *Arithm_expr_operandContext) {}
+
+// ExitArithm_expr_operand is called when production arithm_expr_operand is exited.
+func (s *BaseGraffleParserListener) ExitArithm_expr_operand(ctx *Arithm_expr_operandContext) {}
+
 // EnterBin_arithm_operator is called when production bin_arithm_operator is entered.
 func (s *BaseGraffleParserListener) EnterBin_arithm_operator(ctx *Bin_arithm_operatorContext) {}
 

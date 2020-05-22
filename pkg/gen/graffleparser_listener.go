@@ -119,6 +119,9 @@ type GraffleParserListener interface {
 	// EnterArithm_expr is called when entering the arithm_expr production.
 	EnterArithm_expr(c *Arithm_exprContext)
 
+	// EnterArithm_expr_operand is called when entering the arithm_expr_operand production.
+	EnterArithm_expr_operand(c *Arithm_expr_operandContext)
+
 	// EnterBin_arithm_operator is called when entering the bin_arithm_operator production.
 	EnterBin_arithm_operator(c *Bin_arithm_operatorContext)
 
@@ -256,6 +259,9 @@ type GraffleParserListener interface {
 
 	// ExitArithm_expr is called when exiting the arithm_expr production.
 	ExitArithm_expr(c *Arithm_exprContext)
+
+	// ExitArithm_expr_operand is called when exiting the arithm_expr_operand production.
+	ExitArithm_expr_operand(c *Arithm_expr_operandContext)
 
 	// ExitBin_arithm_operator is called when exiting the bin_arithm_operator production.
 	ExitBin_arithm_operator(c *Bin_arithm_operatorContext)

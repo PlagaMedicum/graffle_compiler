@@ -119,6 +119,9 @@ type GraffleParserVisitor interface {
 	// Visit a parse tree produced by GraffleParser#arithm_expr.
 	VisitArithm_expr(ctx *Arithm_exprContext) interface{}
 
+	// Visit a parse tree produced by GraffleParser#arithm_expr_operand.
+	VisitArithm_expr_operand(ctx *Arithm_expr_operandContext) interface{}
+
 	// Visit a parse tree produced by GraffleParser#bin_arithm_operator.
 	VisitBin_arithm_operator(ctx *Bin_arithm_operatorContext) interface{}
 
