@@ -2,7 +2,6 @@ parser grammar GraffleParser;
 
 options {
     tokenVocab=GraffleLexer;
-    //superClass=GraffleParserBase;
 }
 
 file
@@ -22,11 +21,11 @@ sequence_line
     : one_line_sequence_element (ACT_DELIM one_line_sequence_element)* ACT_DELIM?
     ;
 one_line_sequence_element
-    : action
+    : atom_action
     | one_line_stmnt
     ;
 
-action
+atom_action
     : var_declaration
     | function_call
     | builtin_function_call
@@ -65,9 +64,9 @@ until_stmnt
     : UNTIL cond=logical_expr DO?
     ;
 for_stmnt
-    : FOR cond=logical_expr DO?                                             #ForLogical
-    | FOR start=action ARG_DELIM cond=logical_expr ARG_DELIM end=action DO? #ForVar
-    | FOR var IN RANGE? FROM? from=expr TO to=expr DO?                      #ForRange
+    : FOR cond=logical_expr DO?                                                              #ForLogical
+    | FOR pre_act=atom_action ARG_DELIM cond=logical_expr ARG_DELIM post_act=atom_action DO? #ForVar
+    | FOR VAR IN RANGE? FROM? from=expr TO to=expr DO?                                       #ForRange
     ;
 from_to_stmnt
     : FROM from=expr TO to=expr DO?
@@ -88,7 +87,7 @@ mult_line_function_declaration
     : function_declaration_head sequence block_end
     ;
 function_declaration_head
-    : ID '(' (opd1=var (ARG_DELIM opd2=var)*)? ')' ASSIGN value (','? WHERE)?
+    : ID '(' (opd1=VAR (ARG_DELIM opd2=VAR)*)? ')' ASSIGN value (','? WHERE)?
     ;
 one_line_procedure_declaration
     : procedure_declaration_head sequence_line
@@ -97,12 +96,12 @@ mult_line_procedure_declaration
     : procedure_declaration_head NEWLINE sequence block_end
     ;
 procedure_declaration_head
-    : ID '(' (opd1=var (ARG_DELIM opd2=var)*)? ')' ASSIGN?
+    : ID '(' (opd1=VAR (ARG_DELIM opd2=VAR)*)? ')' ASSIGN?
     ;
 
 // vars
 var_declaration
-    : variable=ID ASSIGN val=var
+    : variable=ID ASSIGN val=VAR
     | variable=ID ASSIGN expr
     | arc_declaration
     | vertice_declaration
@@ -143,7 +142,7 @@ labeled_declaration
 
 // Expressions:
 expr
-    : var
+    : VAR
     | integral_expr
     ;
 
@@ -179,7 +178,7 @@ unar_log_operator
     ;
 
 arithm_expr
-    : expr (bin_arithm_operator expr)+
+    : left=expr bin_arithm_operator (right=expr | arithm_expr)
     ;
 bin_arithm_operator
     : MULT
@@ -197,16 +196,16 @@ arithm_assign_operator
 // Function calls:
 // built-in functions
 builtin_function_call
-    : print
-    | input
+    : built_func_print
+    | built_func_input
     ;
 
-print
-    : PRINTER var
+built_func_print
+    : PRINTER VAR
     | PRINTER value
     | PRINTER function_call
     ;
-input
+built_func_input
     : KEY_INPUT ID
     ;
 
@@ -224,9 +223,6 @@ value
     | arithm_expr
     | expr
     | STRING
-    ;
-var
-    : '-'? ID
     ;
 
 block_end
