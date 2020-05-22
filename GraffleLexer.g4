@@ -51,26 +51,26 @@ DIV         : '/' ;
 // - binary
 NEQ         : NOT Spaces '='
             | '=\\='
-            | NOT Spaces EQUALS
+            | Is? NOT Spaces EQUALS
             ;
 EQUALS      : '=='
             | [Ee]'quals' (Spaces [Tt]'o')?
             ;
 LESS_THAN   : '<'
-            | [Ll]'ess' (Spaces Than)?
-            | NOT Spaces GR_THAN_E
+            | Is? [Ll]'ess' (Spaces Than)?
+            | Is? NOT Spaces GR_THAN_E
             ;
 GR_THAN     : '>'
-            | [Gg]'reater' (Spaces Than)?
-            | NOT Spaces LESS_THAN_E
+            | Is? [Gg]'reater' (Spaces Than)?
+            | Is? NOT Spaces LESS_THAN_E
             ;
 LESS_THAN_E : '<='
-            | [Ll]'ess' (Spaces Than)? Spaces OR Spaces EQUALS
-            | NOT Spaces GR_THAN
+            | Is? [Ll]'ess' (Spaces Than)? Spaces OR Spaces EQUALS
+            | Is? NOT Spaces GR_THAN
             ;
 GR_THAN_E   : '>='
-            | [Gg]'reater' (Spaces Than)? Spaces OR Spaces EQUALS
-            | NOT Spaces LESS_THAN
+            | Is? [Gg]'reater' (Spaces Than)? Spaces OR Spaces EQUALS
+            | Is? NOT Spaces LESS_THAN
             ;
 AND         : '&'
             | [Aa]'nd'
@@ -174,7 +174,8 @@ fragment Digit      : [0-9] ;
 fragment True       : [Tt]'rue' | '1' ;
 fragment False      : [Ff]'alse' | '0' ;
 fragment Than       : [Tt]'han' ;
-fragment Spaces     : ' '*;
+fragment Is         : [Ii]'s' ;
+fragment Spaces     : ' '* ;
 fragment Letter
     : UnicodeLetter
     | '_'
