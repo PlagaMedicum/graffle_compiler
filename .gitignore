@@ -22,5 +22,6 @@ yarn-error.log*
 # others
 .idea
 bin
+.tmp
 
 .antlr
