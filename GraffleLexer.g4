@@ -4,8 +4,8 @@ lexer grammar GraffleLexer;
 NUMBER  : INT
         | FLOAT
         ;
-FLOAT   : INT ('.' | ',') Spaces Digit+ ;
-INT     : '-'? Digit+ ;
+FLOAT   : INT Spaces ('.' | ',') (Spaces Digit)+ ;
+INT     : '-'? (Spaces Digit)+ ;
 
 STRING      : '"'  ( '\\"' | '\\\\' | . )*? '"'
             | '\'' ( '\\\'' | '\\\\' | . )*? '\''
@@ -58,19 +58,19 @@ EQUALS      : '=='
             ;
 LESS_THAN   : '<'
             | [Ll]'ess' (Spaces Than)?
-            | NOT Spaces GR_THAN
+            | NOT Spaces GR_THAN_E
             ;
 GR_THAN     : '>'
             | [Gg]'reater' (Spaces Than)?
-            | NOT Spaces LESS_THAN
+            | NOT Spaces LESS_THAN_E
             ;
 LESS_THAN_E : '<='
             | [Ll]'ess' (Spaces Than)? Spaces OR Spaces EQUALS
-            | NOT Spaces GR_THAN_E
+            | NOT Spaces GR_THAN
             ;
 GR_THAN_E   : '>='
             | [Gg]'reater' (Spaces Than)? Spaces OR Spaces EQUALS
-            | NOT Spaces LESS_THAN_E
+            | NOT Spaces LESS_THAN
             ;
 AND         : '&'
             | [Aa]'nd'

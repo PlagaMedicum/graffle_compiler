@@ -2,7 +2,7 @@ parser grammar GraffleParser;
 
 options {
     tokenVocab=GraffleLexer;
-    superClass=GraffleParserBase;
+    //superClass=GraffleParserBase;
 }
 
 file
