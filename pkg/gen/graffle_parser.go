@@ -452,13 +452,20 @@ type IFileContext interface {
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
+	// GetMain_body returns the main_body rule contexts.
+	GetMain_body() ISequenceContext
+
+	// SetMain_body sets the main_body rule contexts.
+	SetMain_body(ISequenceContext)
+
 	// IsFileContext differentiates from other interfaces.
 	IsFileContext()
 }
 
 type FileContext struct {
 	*antlr.BaseParserRuleContext
-	parser antlr.Parser
+	parser    antlr.Parser
+	main_body ISequenceContext
 }
 
 func NewEmptyFileContext() *FileContext {
@@ -482,6 +489,10 @@ func NewFileContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokin
 }
 
 func (s *FileContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *FileContext) GetMain_body() ISequenceContext { return s.main_body }
+
+func (s *FileContext) SetMain_body(v ISequenceContext) { s.main_body = v }
 
 func (s *FileContext) Sequence() ISequenceContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISequenceContext)(nil)).Elem(), 0)
@@ -605,7 +616,10 @@ func (p *GraffleParser) File() (localctx IFileContext) {
 	}
 	{
 		p.SetState(97)
-		p.Sequence()
+
+		var _x = p.Sequence()
+
+		localctx.(*FileContext).main_body = _x
 	}
 	p.SetState(99)
 	p.GetErrorHandler().Sync(p)
@@ -6834,11 +6848,17 @@ type IArithm_exprContext interface {
 	// GetLeft returns the left rule contexts.
 	GetLeft() IExprContext
 
+	// GetOp returns the op rule contexts.
+	GetOp() IBin_arithm_operatorContext
+
 	// GetRight returns the right rule contexts.
 	GetRight() IExprContext
 
 	// SetLeft sets the left rule contexts.
 	SetLeft(IExprContext)
+
+	// SetOp sets the op rule contexts.
+	SetOp(IBin_arithm_operatorContext)
 
 	// SetRight sets the right rule contexts.
 	SetRight(IExprContext)
@@ -6851,6 +6871,7 @@ type Arithm_exprContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
 	left   IExprContext
+	op     IBin_arithm_operatorContext
 	right  IExprContext
 }
 
@@ -6878,21 +6899,15 @@ func (s *Arithm_exprContext) GetParser() antlr.Parser { return s.parser }
 
 func (s *Arithm_exprContext) GetLeft() IExprContext { return s.left }
 
+func (s *Arithm_exprContext) GetOp() IBin_arithm_operatorContext { return s.op }
+
 func (s *Arithm_exprContext) GetRight() IExprContext { return s.right }
 
 func (s *Arithm_exprContext) SetLeft(v IExprContext) { s.left = v }
 
+func (s *Arithm_exprContext) SetOp(v IBin_arithm_operatorContext) { s.op = v }
+
 func (s *Arithm_exprContext) SetRight(v IExprContext) { s.right = v }
-
-func (s *Arithm_exprContext) Bin_arithm_operator() IBin_arithm_operatorContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBin_arithm_operatorContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IBin_arithm_operatorContext)
-}
 
 func (s *Arithm_exprContext) AllExpr() []IExprContext {
 	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IExprContext)(nil)).Elem())
@@ -6915,6 +6930,16 @@ func (s *Arithm_exprContext) Expr(i int) IExprContext {
 	}
 
 	return t.(IExprContext)
+}
+
+func (s *Arithm_exprContext) Bin_arithm_operator() IBin_arithm_operatorContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBin_arithm_operatorContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IBin_arithm_operatorContext)
 }
 
 func (s *Arithm_exprContext) Arithm_expr() IArithm_exprContext {
@@ -6987,7 +7012,10 @@ func (p *GraffleParser) Arithm_expr() (localctx IArithm_exprContext) {
 	}
 	{
 		p.SetState(467)
-		p.Bin_arithm_operator()
+
+		var _x = p.Bin_arithm_operator()
+
+		localctx.(*Arithm_exprContext).op = _x
 	}
 	p.SetState(470)
 	p.GetErrorHandler().Sync(p)

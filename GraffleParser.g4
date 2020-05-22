@@ -5,7 +5,7 @@ options {
 }
 
 file
-    : NEWLINE? function_declaration* sequence EOF?
+    : NEWLINE? function_declaration* main_body=sequence EOF?
     ;
 
 sequence
@@ -178,7 +178,7 @@ unar_log_operator
     ;
 
 arithm_expr
-    : left=expr bin_arithm_operator (right=expr | arithm_expr)
+    : left=expr op=bin_arithm_operator (right=expr | arithm_expr)
     ;
 bin_arithm_operator
     : MULT
