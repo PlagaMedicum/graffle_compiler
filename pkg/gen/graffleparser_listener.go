@@ -158,6 +158,9 @@ type GraffleParserListener interface {
 	// EnterValue is called when entering the value production.
 	EnterValue(c *ValueContext)
 
+	// EnterVariable is called when entering the variable production.
+	EnterVariable(c *VariableContext)
+
 	// EnterBuiltin is called when entering the builtin production.
 	EnterBuiltin(c *BuiltinContext)
 
@@ -313,6 +316,9 @@ type GraffleParserListener interface {
 
 	// ExitValue is called when exiting the value production.
 	ExitValue(c *ValueContext)
+
+	// ExitVariable is called when exiting the variable production.
+	ExitVariable(c *VariableContext)
 
 	// ExitBuiltin is called when exiting the builtin production.
 	ExitBuiltin(c *BuiltinContext)

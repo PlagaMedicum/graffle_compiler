@@ -66,7 +66,7 @@ until_stmnt
 for_stmnt
     : FOR cond=logical_expr DO?                                                              #ForLogical
     | FOR pre_act=atom_action ARG_DELIM cond=logical_expr ARG_DELIM post_act=atom_action DO? #ForVar
-    | FOR VAR IN RANGE? FROM? from=expr TO to=expr DO?                                       #ForRange
+    | FOR variable IN RANGE? FROM? from=expr TO to=expr DO?                                       #ForRange
     ;
 from_to_stmnt
     : FROM from=expr TO to=expr DO?
@@ -87,7 +87,7 @@ mult_line_function_declaration
     : function_declaration_head sequence block_end
     ;
 function_declaration_head
-    : ID '(' (opd1=VAR (ARG_DELIM opd2=VAR)*)? ')' ASSIGN return_val=value (','? WHERE)?
+    : ID '(' (opd1=variable (ARG_DELIM opd2=variable)*)? ')' ASSIGN return_val=value (','? WHERE)?
     ;
 one_line_procedure_declaration
     : procedure_declaration_head sequence_line
@@ -96,13 +96,13 @@ mult_line_procedure_declaration
     : procedure_declaration_head NEWLINE sequence block_end
     ;
 procedure_declaration_head
-    : ID '(' (opd1=VAR (ARG_DELIM opd2=VAR)*)? ')' ASSIGN?
+    : ID '(' (opd1=variable (ARG_DELIM opd2=variable)*)? ')' ASSIGN?
     ;
 
 // vars
 var_assign
-    : variable=ID ASSIGN val=VAR
-    | variable=ID ASSIGN expr
+    : ID ASSIGN val=variable
+    | ID ASSIGN expr
     | arc_assign
     | vertice_assign
     | graph_assign
@@ -110,8 +110,8 @@ var_assign
     ;
 
 arc_assign
-    : variable=ID ASSIGN E_N '(' value ')'
-    | variable=ID ASSIGN value arc value
+    : ID ASSIGN E_N '(' value ')'
+    | ID ASSIGN value arc value
     ;
 arc
     : OR_ARC_LR
@@ -151,7 +151,7 @@ labeled_assign
 
 // Expressions:
 expr
-    : VAR
+    : variable
     | integral_expr
     ;
 
@@ -217,7 +217,7 @@ builtin_function_call
     ;
 
 built_func_print
-    : PRINTER VAR
+    : PRINTER variable
     | PRINTER value
     | PRINTER function_call
     ;
@@ -239,6 +239,9 @@ value
     | arithm_expr
     | expr
     | builtin
+    ;
+variable
+    : '-'? ID
     ;
 
 builtin

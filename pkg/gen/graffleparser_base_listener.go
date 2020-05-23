@@ -335,6 +335,12 @@ func (s *BaseGraffleParserListener) EnterValue(ctx *ValueContext) {}
 // ExitValue is called when production value is exited.
 func (s *BaseGraffleParserListener) ExitValue(ctx *ValueContext) {}
 
+// EnterVariable is called when production variable is entered.
+func (s *BaseGraffleParserListener) EnterVariable(ctx *VariableContext) {}
+
+// ExitVariable is called when production variable is exited.
+func (s *BaseGraffleParserListener) ExitVariable(ctx *VariableContext) {}
+
 // EnterBuiltin is called when production builtin is entered.
 func (s *BaseGraffleParserListener) EnterBuiltin(ctx *BuiltinContext) {}
 

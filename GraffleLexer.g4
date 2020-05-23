@@ -1,12 +1,10 @@
 lexer grammar GraffleLexer;
 
-// Types:
-NUMBER  : INT
-        | FLOAT
-        ;
-FLOAT   : INT Spaces ('.' | ',') (Spaces Digit)+ ;
-INT     : '-'? (Spaces Digit)+ ;
+//
+// Whitespace sensitive
+//
 
+// Types:
 STRING      : '"'  ( '\\"' | '\\\\' | . )*? '"'
             | '\'' ( '\\\'' | '\\\\' | . )*? '\''
             ;
@@ -18,14 +16,6 @@ BOOL    : True
         ;
 
 // Operators:
-// brackets
-L_PAREN                : '(';
-R_PAREN                : ')';
-L_CURLY                : '{';
-R_CURLY                : '}';
-L_BRACKET              : '[';
-R_BRACKET              : ']';
-
 // arcs
 OR_ARC_LR   : '->' ;
 OR_ARC_RL   : '<-' ;
@@ -38,36 +28,30 @@ SUB_ASSIGN      : '-=' ;
 MULT_ASSIGN     : '*=' ;
 DIV_ASSIGN      : '/=' ;
 
-// arithmetical operators
-ADD         : '+' ;
-SUB         : '-' ;
-MULT        : '*' ;
-DIV         : '/' ;
-
 // logical
 // - binary
 NEQ         : NOT Spaces '='
             | '=\\='
-            | Is? NOT Spaces EQUALS
+            | NOT Spaces EQUALS
             ;
 EQUALS      : '=='
             | [Ee]'quals' (Spaces [Tt]'o')?
             ;
 LESS_THAN   : '<'
-            | Is? [Ll]'ess' (Spaces Than)?
-            | Is? NOT Spaces GR_THAN_E
+            | Is? Spaces [Ll]'ess' (Spaces Than)?
+            | Is? Spaces NOT Spaces GR_THAN_E
             ;
 GR_THAN     : '>'
-            | Is? [Gg]'reater' (Spaces Than)?
-            | Is? NOT Spaces LESS_THAN_E
+            | Is? Spaces [Gg]'reater' (Spaces Than)?
+            | Is? Spaces NOT Spaces LESS_THAN_E
             ;
 LESS_THAN_E : '<='
-            | Is? [Ll]'ess' (Spaces Than)? Spaces OR Spaces EQUALS
-            | Is? NOT Spaces GR_THAN
+            | Is? Spaces [Ll]'ess' (Spaces Than)? Spaces OR Spaces EQUALS
+            | Is? Spaces NOT Spaces GR_THAN
             ;
 GR_THAN_E   : '>='
-            | Is? [Gg]'reater' (Spaces Than)? Spaces OR Spaces EQUALS
-            | Is? NOT Spaces LESS_THAN
+            | Is? Spaces [Gg]'reater' (Spaces Than)? Spaces OR Spaces EQUALS
+            | Is? Spaces NOT Spaces LESS_THAN
             ;
 AND         : '&'
             | [Aa]'nd'
@@ -119,12 +103,9 @@ SKIP_ITERATION  : [Ss]'kip' ((Spaces 'the')? Spaces 'iteration')?
                 ;
 BREAK           : [Bb]'reak' (Spaces 'out')?
                 | ([Gg]'o' Spaces)? [Oo]'ut'
-//                | [Ee]'nd'
                 ;
 
 // Delimiters and blocks:
-ACT_DELIM : '.' ;
-ARG_DELIM : ',' ;
 NEWLINE : [\n\r]+ ;
 
 BLOCK_BEGIN : 'BEGIN'
@@ -157,10 +138,43 @@ E_N : 'E'
 WHERE : [Ww]'here' ;
 
 ID : Letter (Letter | UnicodeDigit)* ;
-VAR : '-'? Spaces ID ;
 
 // Ignore:
 WS      : [ \t]+        -> skip ;
+
+fragment Spaces     : ' '* ;
+
+//
+// No whitespace:
+//
+
+// Types:
+NUMBER  : INT
+        | FLOAT
+        ;
+FLOAT   : INT ('.' | ',') Digit+ ;
+INT     : '-'? Digit+ ;
+
+// Operators:
+// brackets
+L_PAREN                : '(';
+R_PAREN                : ')';
+L_CURLY                : '{';
+R_CURLY                : '}';
+L_BRACKET              : '[';
+R_BRACKET              : ']';
+
+// arithmetical operators
+ADD         : '+' ;
+SUB         : '-' ;
+MULT        : '*' ;
+DIV         : '/' ;
+
+// Delimiters and blocks:
+ACT_DELIM : '.' ;
+ARG_DELIM : ',' ;
+
+// Ignore:
 //INDENT : [\n\r][ \t]+   -> skip;
 
 LINE_COMMENT   : '```' ~[\r\n]*             -> skip ;
@@ -172,7 +186,6 @@ fragment True       : [Tt]'rue' | '1' ;
 fragment False      : [Ff]'alse' | '0' ;
 fragment Than       : [Tt]'han' ;
 fragment Is         : [Ii]'s' ;
-fragment Spaces     : ' '* ;
 fragment Letter
     : UnicodeLetter
     | '_'

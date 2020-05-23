@@ -208,6 +208,10 @@ func (v *BaseGraffleParserVisitor) VisitValue(ctx *ValueContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseGraffleParserVisitor) VisitVariable(ctx *VariableContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseGraffleParserVisitor) VisitBuiltin(ctx *BuiltinContext) interface{} {
 	return v.VisitChildren(ctx)
 }

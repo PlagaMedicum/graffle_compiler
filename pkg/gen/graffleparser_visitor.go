@@ -158,6 +158,9 @@ type GraffleParserVisitor interface {
 	// Visit a parse tree produced by GraffleParser#value.
 	VisitValue(ctx *ValueContext) interface{}
 
+	// Visit a parse tree produced by GraffleParser#variable.
+	VisitVariable(ctx *VariableContext) interface{}
+
 	// Visit a parse tree produced by GraffleParser#builtin.
 	VisitBuiltin(ctx *BuiltinContext) interface{}
 
