@@ -1,17 +1,20 @@
 ### Compiler usage
 ```bash
+antlr4 -o ./pkg/gen -listener -visitor -Dlanguage=Go \
+  -lib . ./GraffleParser.g4 ./GraffleLexer.g4
+
 go run ./cmd/graffle/main.go [PATH TO SRC FILE]
 ```
 
 ### Syntax
 1. Comments
-```python
+```c++
     ``` One-line comment
     ` Multi-line
       comment `
 ```
 1. Function declaration
-```python
+```go
 factorial(value) = answer, where
     if value equals to 0, then
         answer = 1.
@@ -32,7 +35,7 @@ procedure()
 end
 ```
 1. Conditional statements
-```python
+```go
 if a
     <<< "OK"
 else
@@ -49,7 +52,7 @@ if a
 end
 ```
 1. Cycles
-```python
+```go
 for i = 0, i less than 10, i+=1
     print "Test for"
 end.
@@ -70,7 +73,7 @@ end
 from 0 to 10 print 'Test from to'
 ```
 1. Built-in types
-```python
+```go
 v1 = 12 @ int vertice
 v2 = true @ boolean s here
 v3 = "Why do we all must to wear those ridiculous ties?!" @[ This was
