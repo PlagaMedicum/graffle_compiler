@@ -6,15 +6,37 @@ import (
 	"github.com/PlagaMedicum/graffle/pkg/gen"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"log"
+	"strings"
 )
 
 type GraffleListener struct {
 	*parser.BaseGraffleParserListener
 	Buffer bytes.Buffer
+	paramStack []string
 }
 
-func (s *GraffleListener) writeBuf(str string, a ...interface{}) {
-	s.Buffer.WriteString(fmt.Sprintf(str, a...))
+func (s *GraffleListener) pushParam(p string) {
+	s.paramStack = append(s.paramStack, p)
+}
+
+func (s *GraffleListener) pushParamf(format string, a ...interface{}) {
+	s.paramStack = append(s.paramStack, fmt.Sprintf(format, a...))
+}
+
+func (s *GraffleListener) popParam() string {
+	if len(s.paramStack) < 1 {
+		log.Fatal("Parsing error! Getting param from empty stack!")
+	}
+
+	last := len(s.paramStack) - 1
+	res := s.paramStack[last]
+	s.paramStack = s.paramStack[:last]
+
+	return res
+}
+
+func (s *GraffleListener) writeBuf(format string, a ...interface{}) {
+	s.Buffer.WriteString(fmt.Sprintf(format, a...))
 }
 
 // VisitTerminal is called when a terminal node is visited.
@@ -240,13 +262,20 @@ func (s *GraffleListener) EnterLabeled_declaration(ctx *parser.Labeled_declarati
 func (s *GraffleListener) ExitLabeled_declaration(ctx *parser.Labeled_declarationContext) {}
 
 // EnterExpr is called when production expr is entered.
-func (s *GraffleListener) EnterExpr(ctx *parser.ExprContext) {}
+func (s *GraffleListener) EnterExpr(ctx *parser.ExprContext) {
+	v := ctx.GetTokens(parser.GraffleParserVAR)
+	if len(v) > 0 {
+		s.writeBuf(v[0].GetText())
+	}
+}
 
 // ExitExpr is called when production expr is exited.
 func (s *GraffleListener) ExitExpr(ctx *parser.ExprContext) {}
 
 // EnterIntegral_expr is called when production integral_expr is entered.
-func (s *GraffleListener) EnterIntegral_expr(ctx *parser.Integral_exprContext) {}
+func (s *GraffleListener) EnterIntegral_expr(ctx *parser.Integral_exprContext) {
+	ctx.GetToken(parser.GraffleLexerNUMBER, 0)
+}
 
 // ExitIntegral_expr is called when production integral_expr is exited.
 func (s *GraffleListener) ExitIntegral_expr(ctx *parser.Integral_exprContext) {}
@@ -271,12 +300,28 @@ func (s *GraffleListener) ExitUnar_log_operator(ctx *parser.Unar_log_operatorCon
 
 // EnterArithm_expr is called when production arithm_expr is entered.
 func (s *GraffleListener) EnterArithm_expr(ctx *parser.Arithm_exprContext) {
-	s.writeBuf(ctx.GetText())
-	ctx.ExitRule(s)
 }
 
 // ExitArithm_expr is called when production arithm_expr is exited.
-func (s *GraffleListener) ExitArithm_expr(ctx *parser.Arithm_exprContext) {}
+func (s *GraffleListener) ExitArithm_expr(ctx *parser.Arithm_exprContext) {
+	switch ctx.GetOp().GetStart().GetTokenType() {
+	case parser.GraffleParserADD:
+		s.pushParamf("Add(%s, %s)", s.popParam(), s.popParam())
+	case parser.GraffleParserSUB:
+		s.pushParamf("Subtract(%s, %s)", s.popParam(), s.popParam())
+	case parser.GraffleParserMULT:
+		s.pushParamf("Multiply(%s, %s)", s.popParam(), s.popParam())
+	case parser.GraffleParserDIV:
+		s.pushParamf("Divide(%s, %s)", s.popParam(), s.popParam())
+	}
+}
+
+// EnterArithm_expr_operand is called when production arithm_expr_operand is entered.
+func (s *GraffleListener) EnterArithm_expr_operand(ctx *parser.Arithm_expr_operandContext) {
+}
+
+// ExitArithm_expr_operand is called when production arithm_expr_operand is exited.
+func (s *GraffleListener) ExitArithm_expr_operand(ctx *parser.Arithm_expr_operandContext) {}
 
 // EnterBin_arithm_operator is called when production bin_arithm_operator is entered.
 func (s *GraffleListener) EnterBin_arithm_operator(ctx *parser.Bin_arithm_operatorContext) {}
@@ -297,13 +342,11 @@ func (s *GraffleListener) EnterBuiltin_function_call(ctx *parser.Builtin_functio
 func (s *GraffleListener) ExitBuiltin_function_call(ctx *parser.Builtin_function_callContext) {}
 
 // EnterBuilt_func_print is called when production built_func_print is entered.
-func (s *GraffleListener) EnterBuilt_func_print(ctx *parser.Built_func_printContext) {
-	s.writeBuf("\nPrint(")
-}
+func (s *GraffleListener) EnterBuilt_func_print(ctx *parser.Built_func_printContext) {}
 
 // ExitBuilt_func_print is called when production built_func_print is exited.
 func (s *GraffleListener) ExitBuilt_func_print(ctx *parser.Built_func_printContext) {
-	s.writeBuf(");")
+	s.writeBuf("\nPrint(%s);", s.popParam())
 }
 
 // EnterBuilt_func_input is called when production built_func_input is entered.
@@ -329,6 +372,29 @@ func (s *GraffleListener) EnterValue(ctx *parser.ValueContext) {}
 
 // ExitValue is called when production value is exited.
 func (s *GraffleListener) ExitValue(ctx *parser.ValueContext) {}
+
+// EnterBuiltin is called when production builtin is entered.
+func (s *GraffleListener) EnterBuiltin(ctx *parser.BuiltinContext) {
+	num := ctx.GetTokens(parser.GraffleParserNUMBER)
+	if len(num) > 0 {
+		numstr := strings.ReplaceAll(num[0].GetText(), ",", ".")
+		s.pushParamf("NewNumber(%s)", numstr)
+	}
+
+	str := ctx.GetTokens(parser.GraffleLexerSTRING)
+	if len(str) > 0 {
+		s.pushParamf("NewString(%s)", str[0].GetText())
+	}
+
+	b := ctx.GetTokens(parser.GraffleParserBOOL)
+	if len(b) > 0 {
+		bstr := strings.ToLower(b[0].GetText())
+		s.pushParamf("NewBool(%s)", bstr)
+	}
+}
+
+// ExitBuiltin is called when production builtin is exited.
+func (s *GraffleListener) ExitBuiltin(ctx *parser.BuiltinContext) {}
 
 // EnterBlock_end is called when production block_end is entered.
 func (s *GraffleListener) EnterBlock_end(ctx *parser.Block_endContext) {}
