@@ -2,10 +2,11 @@ package runtime
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 )
 
-type builtin interface {
+type Builtin interface {
 	Number() (Number, bool)
 	String() (String, bool)
 	Bool() (Bool, bool)
@@ -13,6 +14,18 @@ type builtin interface {
 
 type Number struct {
 	float64
+}
+
+func NewNumber(val float64) Number {
+	return Number{val}
+}
+
+func NewString(val string) String {
+	return String{val}
+}
+
+func NewBool(val bool) Bool {
+	return Bool{val}
 }
 
 func (n Number) Number() (Number, bool) {
@@ -28,30 +41,6 @@ func (n Number) Bool() (Bool, bool) {
 		return Bool{false}, true
 	}
 	return Bool{true}, true
-}
-
-func (n *Number) Add(i builtin) {
-	if in, b := i.Number(); b {
-		n.float64 += in.float64
-	}
-}
-
-func (n *Number) Subtract(i builtin) {
-	if in, b := i.Number(); b {
-		n.float64 -= in.float64
-	}
-}
-
-func (n *Number) Multiply(i builtin) {
-	if in, b := i.Number(); b {
-		n.float64 *= in.float64
-	}
-}
-
-func (n *Number) Divide(i builtin) {
-	if in, b := i.Number(); b {
-		n.float64 /= in.float64
-	}
 }
 
 type String struct {
@@ -99,8 +88,52 @@ func (b Bool) Bool() (Bool, bool) {
 	return b, true
 }
 
+func Add(l, r Builtin) Builtin {
+	ln, lb := l.Number()
+	rn, rb := r.Number()
+	if lb && rb {
+		ln.float64 += rn.float64
+		return ln
+	}
+	log.Fatalf("Error! Wrong types passed in Addition! left: %t, right: %t", l, r)
+	return Number{}
+}
+
+func Subtract(l, r Builtin) Builtin {
+	ln, lb := l.Number()
+	rn, rb := r.Number()
+	if lb && rb {
+		ln.float64 -= rn.float64
+		return ln
+	}
+	log.Fatalf("Error! Wrong types passed in Subtraction! left: %t, right: %t", l, r)
+	return Number{}
+}
+
+func Multiply(r, l Builtin) Builtin {
+	ln, lb := l.Number()
+	rn, rb := r.Number()
+	if lb && rb {
+		ln.float64 *= rn.float64
+		return ln
+	}
+	log.Fatalf("Error! Wrong types passed in Multiplication! left: %t, right: %t", l, r)
+	return Number{}
+}
+
+func Divide(r, l Builtin) Builtin {
+	ln, lb := l.Number()
+	rn, rb := r.Number()
+	if lb && rb {
+		ln.float64 /= rn.float64
+		return ln
+	}
+	log.Fatalf("Error! Wrong types passed in Dividing! left: %t, right: %t", l, r)
+	return Number{}
+}
+
 func Print(i interface{}) {
-	if bi, b := i.(builtin); b {
+	if bi, b := i.(Builtin); b {
 		str, t := bi.String()
 		if t {
 			fmt.Println(str.string)
