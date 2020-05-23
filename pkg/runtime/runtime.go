@@ -1,8 +1,10 @@
 package runtime
 
 import (
+	"bufio"
 	"fmt"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -66,7 +68,6 @@ func (n Number) Bool() Bool {
 
 func (s String) Number() (Number, bool) {
 	str := strings.ReplaceAll(s.string, ",", ".")
-	str = strings.ReplaceAll(str, " ", "")
 	f, err := strconv.ParseFloat(str, 64)
 	if err != nil {
 		return NewNumber(0), false
@@ -206,7 +207,7 @@ func (v *Vertice) Label(l string) {
 	v.label = l
 }
 
-func (v *Vertice) String() String {
+func (v Vertice) String() String {
 	str := v.val.String()
 	if v.label == "" {
 		return NewString(fmt.Sprintf("(%s)", str))
@@ -214,11 +215,15 @@ func (v *Vertice) String() String {
 	return NewString(fmt.Sprintf("(%s)@[%s]", str, v.label))
 }
 
+func (v Vertice) Bool() Bool {
+	return v.val.Bool()
+}
+
 func (e *Edge) Label(l string) {
 	e.label = l
 }
 
-func (e *Edge) String() String {
+func (e Edge) String() String {
 	v1 := e.v1.String()
 	str := fmt.Sprintf("%s -", v1)
 
@@ -241,11 +246,18 @@ func (e *Edge) String() String {
 	return NewString(str)
 }
 
+func (e Edge) Bool() Bool {
+	if e.v1.Bool().bool == false && e.v2.Bool().bool == false {
+		return NewBool(false)
+	}
+	return NewBool(true)
+}
+
 func (g *Graph) Label(l string) {
 	g.label = l
 }
 
-func (g *Graph) String() (String, bool) {
+func (g Graph) String() (String, bool) {
 	var str string
 	for _, v := range g.GetSingleVertices() {
 		str = fmt.Sprintf("%s\n\t%s;", str, v.String())
@@ -263,7 +275,7 @@ func (g *Graph) String() (String, bool) {
 }
 
 func (g Graph) Bool() Bool {
-	if g.label == "" && g.e == nil && g.v == nil {
+	if g.e == nil && g.v == nil {
 		return NewBool(false)
 	}
 	return NewBool(true)
@@ -409,4 +421,14 @@ func Print(i interface{}) {
 	}
 
 	fmt.Printf("%+v\n", i)
+}
+
+func Input() String {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print(">>> ")
+	text, err := reader.ReadString('\n')
+	if err != nil {
+		log.Panicf("Error scanning input: %v", err)
+	}
+	return NewString(text)
 }
