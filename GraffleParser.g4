@@ -87,7 +87,7 @@ mult_line_function_declaration
     : function_declaration_head sequence block_end
     ;
 function_declaration_head
-    : ID '(' (opd1=VAR (ARG_DELIM opd2=VAR)*)? ')' ASSIGN value (','? WHERE)?
+    : ID '(' (opd1=VAR (ARG_DELIM opd2=VAR)*)? ')' ASSIGN return_val=value (','? WHERE)?
     ;
 one_line_procedure_declaration
     : procedure_declaration_head sequence_line
@@ -147,18 +147,21 @@ expr
     ;
 
 integral_expr
-    : NUMBER
-    | function_call
-    | BOOL
+    : function_call
+    | builtin
     | '(' logical_expr ')'
     | '(' arithm_expr ')'
     ;
 
 logical_expr
-    : left=expr bin_op=bin_log_operator right=expr
-    | un_op=unar_log_operator expr
+    : left=expr bin_op=bin_log_operator right=log_expr_operand
+    | un_op=unar_log_operator log_expr_operand
     | arithm_expr
     | expr
+    ;
+log_expr_operand
+    : expr
+    | logical_expr
     ;
 bin_log_operator
     : EQUALS
@@ -226,7 +229,13 @@ value
     : logical_expr
     | arithm_expr
     | expr
-    | STRING
+    | builtin
+    ;
+
+builtin
+    : bi_num=NUMBER
+    | bi_str=STRING
+    | bi_bool=BOOL
     ;
 
 block_end

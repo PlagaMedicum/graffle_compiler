@@ -144,6 +144,10 @@ func (v *BaseGraffleParserVisitor) VisitLogical_expr(ctx *Logical_exprContext) i
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseGraffleParserVisitor) VisitLog_expr_operand(ctx *Log_expr_operandContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseGraffleParserVisitor) VisitBin_log_operator(ctx *Bin_log_operatorContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -189,6 +193,10 @@ func (v *BaseGraffleParserVisitor) VisitLabel(ctx *LabelContext) interface{} {
 }
 
 func (v *BaseGraffleParserVisitor) VisitValue(ctx *ValueContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGraffleParserVisitor) VisitBuiltin(ctx *BuiltinContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

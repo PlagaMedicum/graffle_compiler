@@ -239,6 +239,12 @@ func (s *BaseGraffleParserListener) EnterLogical_expr(ctx *Logical_exprContext) 
 // ExitLogical_expr is called when production logical_expr is exited.
 func (s *BaseGraffleParserListener) ExitLogical_expr(ctx *Logical_exprContext) {}
 
+// EnterLog_expr_operand is called when production log_expr_operand is entered.
+func (s *BaseGraffleParserListener) EnterLog_expr_operand(ctx *Log_expr_operandContext) {}
+
+// ExitLog_expr_operand is called when production log_expr_operand is exited.
+func (s *BaseGraffleParserListener) ExitLog_expr_operand(ctx *Log_expr_operandContext) {}
+
 // EnterBin_log_operator is called when production bin_log_operator is entered.
 func (s *BaseGraffleParserListener) EnterBin_log_operator(ctx *Bin_log_operatorContext) {}
 
@@ -310,6 +316,12 @@ func (s *BaseGraffleParserListener) EnterValue(ctx *ValueContext) {}
 
 // ExitValue is called when production value is exited.
 func (s *BaseGraffleParserListener) ExitValue(ctx *ValueContext) {}
+
+// EnterBuiltin is called when production builtin is entered.
+func (s *BaseGraffleParserListener) EnterBuiltin(ctx *BuiltinContext) {}
+
+// ExitBuiltin is called when production builtin is exited.
+func (s *BaseGraffleParserListener) ExitBuiltin(ctx *BuiltinContext) {}
 
 // EnterBlock_end is called when production block_end is entered.
 func (s *BaseGraffleParserListener) EnterBlock_end(ctx *Block_endContext) {}

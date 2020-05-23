@@ -110,6 +110,9 @@ type GraffleParserVisitor interface {
 	// Visit a parse tree produced by GraffleParser#logical_expr.
 	VisitLogical_expr(ctx *Logical_exprContext) interface{}
 
+	// Visit a parse tree produced by GraffleParser#log_expr_operand.
+	VisitLog_expr_operand(ctx *Log_expr_operandContext) interface{}
+
 	// Visit a parse tree produced by GraffleParser#bin_log_operator.
 	VisitBin_log_operator(ctx *Bin_log_operatorContext) interface{}
 
@@ -145,6 +148,9 @@ type GraffleParserVisitor interface {
 
 	// Visit a parse tree produced by GraffleParser#value.
 	VisitValue(ctx *ValueContext) interface{}
+
+	// Visit a parse tree produced by GraffleParser#builtin.
+	VisitBuiltin(ctx *BuiltinContext) interface{}
 
 	// Visit a parse tree produced by GraffleParser#block_end.
 	VisitBlock_end(ctx *Block_endContext) interface{}

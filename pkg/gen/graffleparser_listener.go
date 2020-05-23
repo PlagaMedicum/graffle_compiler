@@ -110,6 +110,9 @@ type GraffleParserListener interface {
 	// EnterLogical_expr is called when entering the logical_expr production.
 	EnterLogical_expr(c *Logical_exprContext)
 
+	// EnterLog_expr_operand is called when entering the log_expr_operand production.
+	EnterLog_expr_operand(c *Log_expr_operandContext)
+
 	// EnterBin_log_operator is called when entering the bin_log_operator production.
 	EnterBin_log_operator(c *Bin_log_operatorContext)
 
@@ -145,6 +148,9 @@ type GraffleParserListener interface {
 
 	// EnterValue is called when entering the value production.
 	EnterValue(c *ValueContext)
+
+	// EnterBuiltin is called when entering the builtin production.
+	EnterBuiltin(c *BuiltinContext)
 
 	// EnterBlock_end is called when entering the block_end production.
 	EnterBlock_end(c *Block_endContext)
@@ -251,6 +257,9 @@ type GraffleParserListener interface {
 	// ExitLogical_expr is called when exiting the logical_expr production.
 	ExitLogical_expr(c *Logical_exprContext)
 
+	// ExitLog_expr_operand is called when exiting the log_expr_operand production.
+	ExitLog_expr_operand(c *Log_expr_operandContext)
+
 	// ExitBin_log_operator is called when exiting the bin_log_operator production.
 	ExitBin_log_operator(c *Bin_log_operatorContext)
 
@@ -286,6 +295,9 @@ type GraffleParserListener interface {
 
 	// ExitValue is called when exiting the value production.
 	ExitValue(c *ValueContext)
+
+	// ExitBuiltin is called when exiting the builtin production.
+	ExitBuiltin(c *BuiltinContext)
 
 	// ExitBlock_end is called when exiting the block_end production.
 	ExitBlock_end(c *Block_endContext)
