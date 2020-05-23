@@ -108,11 +108,11 @@ func (v *BaseGraffleParserVisitor) VisitProcedure_declaration_head(ctx *Procedur
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGraffleParserVisitor) VisitVar_declaration(ctx *Var_declarationContext) interface{} {
+func (v *BaseGraffleParserVisitor) VisitVar_assign(ctx *Var_assignContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGraffleParserVisitor) VisitArc_declaration(ctx *Arc_declarationContext) interface{} {
+func (v *BaseGraffleParserVisitor) VisitArc_assign(ctx *Arc_assignContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -132,15 +132,15 @@ func (v *BaseGraffleParserVisitor) VisitUnor_w_arc(ctx *Unor_w_arcContext) inter
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGraffleParserVisitor) VisitVertice_declaration(ctx *Vertice_declarationContext) interface{} {
+func (v *BaseGraffleParserVisitor) VisitVertice_assign(ctx *Vertice_assignContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGraffleParserVisitor) VisitGraph_declaration(ctx *Graph_declarationContext) interface{} {
+func (v *BaseGraffleParserVisitor) VisitGraph_assign(ctx *Graph_assignContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGraffleParserVisitor) VisitLabeled_declaration(ctx *Labeled_declarationContext) interface{} {
+func (v *BaseGraffleParserVisitor) VisitLabeled_assign(ctx *Labeled_assignContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

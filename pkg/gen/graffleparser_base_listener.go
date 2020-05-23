@@ -185,17 +185,17 @@ func (s *BaseGraffleParserListener) EnterProcedure_declaration_head(ctx *Procedu
 func (s *BaseGraffleParserListener) ExitProcedure_declaration_head(ctx *Procedure_declaration_headContext) {
 }
 
-// EnterVar_declaration is called when production var_declaration is entered.
-func (s *BaseGraffleParserListener) EnterVar_declaration(ctx *Var_declarationContext) {}
+// EnterVar_assign is called when production var_assign is entered.
+func (s *BaseGraffleParserListener) EnterVar_assign(ctx *Var_assignContext) {}
 
-// ExitVar_declaration is called when production var_declaration is exited.
-func (s *BaseGraffleParserListener) ExitVar_declaration(ctx *Var_declarationContext) {}
+// ExitVar_assign is called when production var_assign is exited.
+func (s *BaseGraffleParserListener) ExitVar_assign(ctx *Var_assignContext) {}
 
-// EnterArc_declaration is called when production arc_declaration is entered.
-func (s *BaseGraffleParserListener) EnterArc_declaration(ctx *Arc_declarationContext) {}
+// EnterArc_assign is called when production arc_assign is entered.
+func (s *BaseGraffleParserListener) EnterArc_assign(ctx *Arc_assignContext) {}
 
-// ExitArc_declaration is called when production arc_declaration is exited.
-func (s *BaseGraffleParserListener) ExitArc_declaration(ctx *Arc_declarationContext) {}
+// ExitArc_assign is called when production arc_assign is exited.
+func (s *BaseGraffleParserListener) ExitArc_assign(ctx *Arc_assignContext) {}
 
 // EnterArc is called when production arc is entered.
 func (s *BaseGraffleParserListener) EnterArc(ctx *ArcContext) {}
@@ -221,23 +221,23 @@ func (s *BaseGraffleParserListener) EnterUnor_w_arc(ctx *Unor_w_arcContext) {}
 // ExitUnor_w_arc is called when production unor_w_arc is exited.
 func (s *BaseGraffleParserListener) ExitUnor_w_arc(ctx *Unor_w_arcContext) {}
 
-// EnterVertice_declaration is called when production vertice_declaration is entered.
-func (s *BaseGraffleParserListener) EnterVertice_declaration(ctx *Vertice_declarationContext) {}
+// EnterVertice_assign is called when production vertice_assign is entered.
+func (s *BaseGraffleParserListener) EnterVertice_assign(ctx *Vertice_assignContext) {}
 
-// ExitVertice_declaration is called when production vertice_declaration is exited.
-func (s *BaseGraffleParserListener) ExitVertice_declaration(ctx *Vertice_declarationContext) {}
+// ExitVertice_assign is called when production vertice_assign is exited.
+func (s *BaseGraffleParserListener) ExitVertice_assign(ctx *Vertice_assignContext) {}
 
-// EnterGraph_declaration is called when production graph_declaration is entered.
-func (s *BaseGraffleParserListener) EnterGraph_declaration(ctx *Graph_declarationContext) {}
+// EnterGraph_assign is called when production graph_assign is entered.
+func (s *BaseGraffleParserListener) EnterGraph_assign(ctx *Graph_assignContext) {}
 
-// ExitGraph_declaration is called when production graph_declaration is exited.
-func (s *BaseGraffleParserListener) ExitGraph_declaration(ctx *Graph_declarationContext) {}
+// ExitGraph_assign is called when production graph_assign is exited.
+func (s *BaseGraffleParserListener) ExitGraph_assign(ctx *Graph_assignContext) {}
 
-// EnterLabeled_declaration is called when production labeled_declaration is entered.
-func (s *BaseGraffleParserListener) EnterLabeled_declaration(ctx *Labeled_declarationContext) {}
+// EnterLabeled_assign is called when production labeled_assign is entered.
+func (s *BaseGraffleParserListener) EnterLabeled_assign(ctx *Labeled_assignContext) {}
 
-// ExitLabeled_declaration is called when production labeled_declaration is exited.
-func (s *BaseGraffleParserListener) ExitLabeled_declaration(ctx *Labeled_declarationContext) {}
+// ExitLabeled_assign is called when production labeled_assign is exited.
+func (s *BaseGraffleParserListener) ExitLabeled_assign(ctx *Labeled_assignContext) {}
 
 // EnterExpr is called when production expr is entered.
 func (s *BaseGraffleParserListener) EnterExpr(ctx *ExprContext) {}

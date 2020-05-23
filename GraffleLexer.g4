@@ -156,8 +156,8 @@ E_N : 'E'
 // Other:
 WHERE : [Ww]'here' ;
 
-VAR : '-'? Spaces ID ;
 ID : Letter (Letter | UnicodeDigit)* ;
+VAR : '-'? Spaces ID ;
 
 // Ignore:
 WS      : [ \t]+        -> skip ;

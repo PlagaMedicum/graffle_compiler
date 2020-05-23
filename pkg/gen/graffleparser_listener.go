@@ -83,11 +83,11 @@ type GraffleParserListener interface {
 	// EnterProcedure_declaration_head is called when entering the procedure_declaration_head production.
 	EnterProcedure_declaration_head(c *Procedure_declaration_headContext)
 
-	// EnterVar_declaration is called when entering the var_declaration production.
-	EnterVar_declaration(c *Var_declarationContext)
+	// EnterVar_assign is called when entering the var_assign production.
+	EnterVar_assign(c *Var_assignContext)
 
-	// EnterArc_declaration is called when entering the arc_declaration production.
-	EnterArc_declaration(c *Arc_declarationContext)
+	// EnterArc_assign is called when entering the arc_assign production.
+	EnterArc_assign(c *Arc_assignContext)
 
 	// EnterArc is called when entering the arc production.
 	EnterArc(c *ArcContext)
@@ -101,14 +101,14 @@ type GraffleParserListener interface {
 	// EnterUnor_w_arc is called when entering the unor_w_arc production.
 	EnterUnor_w_arc(c *Unor_w_arcContext)
 
-	// EnterVertice_declaration is called when entering the vertice_declaration production.
-	EnterVertice_declaration(c *Vertice_declarationContext)
+	// EnterVertice_assign is called when entering the vertice_assign production.
+	EnterVertice_assign(c *Vertice_assignContext)
 
-	// EnterGraph_declaration is called when entering the graph_declaration production.
-	EnterGraph_declaration(c *Graph_declarationContext)
+	// EnterGraph_assign is called when entering the graph_assign production.
+	EnterGraph_assign(c *Graph_assignContext)
 
-	// EnterLabeled_declaration is called when entering the labeled_declaration production.
-	EnterLabeled_declaration(c *Labeled_declarationContext)
+	// EnterLabeled_assign is called when entering the labeled_assign production.
+	EnterLabeled_assign(c *Labeled_assignContext)
 
 	// EnterExpr is called when entering the expr production.
 	EnterExpr(c *ExprContext)
@@ -239,11 +239,11 @@ type GraffleParserListener interface {
 	// ExitProcedure_declaration_head is called when exiting the procedure_declaration_head production.
 	ExitProcedure_declaration_head(c *Procedure_declaration_headContext)
 
-	// ExitVar_declaration is called when exiting the var_declaration production.
-	ExitVar_declaration(c *Var_declarationContext)
+	// ExitVar_assign is called when exiting the var_assign production.
+	ExitVar_assign(c *Var_assignContext)
 
-	// ExitArc_declaration is called when exiting the arc_declaration production.
-	ExitArc_declaration(c *Arc_declarationContext)
+	// ExitArc_assign is called when exiting the arc_assign production.
+	ExitArc_assign(c *Arc_assignContext)
 
 	// ExitArc is called when exiting the arc production.
 	ExitArc(c *ArcContext)
@@ -257,14 +257,14 @@ type GraffleParserListener interface {
 	// ExitUnor_w_arc is called when exiting the unor_w_arc production.
 	ExitUnor_w_arc(c *Unor_w_arcContext)
 
-	// ExitVertice_declaration is called when exiting the vertice_declaration production.
-	ExitVertice_declaration(c *Vertice_declarationContext)
+	// ExitVertice_assign is called when exiting the vertice_assign production.
+	ExitVertice_assign(c *Vertice_assignContext)
 
-	// ExitGraph_declaration is called when exiting the graph_declaration production.
-	ExitGraph_declaration(c *Graph_declarationContext)
+	// ExitGraph_assign is called when exiting the graph_assign production.
+	ExitGraph_assign(c *Graph_assignContext)
 
-	// ExitLabeled_declaration is called when exiting the labeled_declaration production.
-	ExitLabeled_declaration(c *Labeled_declarationContext)
+	// ExitLabeled_assign is called when exiting the labeled_assign production.
+	ExitLabeled_assign(c *Labeled_assignContext)
 
 	// ExitExpr is called when exiting the expr production.
 	ExitExpr(c *ExprContext)

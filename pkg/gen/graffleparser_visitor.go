@@ -83,11 +83,11 @@ type GraffleParserVisitor interface {
 	// Visit a parse tree produced by GraffleParser#procedure_declaration_head.
 	VisitProcedure_declaration_head(ctx *Procedure_declaration_headContext) interface{}
 
-	// Visit a parse tree produced by GraffleParser#var_declaration.
-	VisitVar_declaration(ctx *Var_declarationContext) interface{}
+	// Visit a parse tree produced by GraffleParser#var_assign.
+	VisitVar_assign(ctx *Var_assignContext) interface{}
 
-	// Visit a parse tree produced by GraffleParser#arc_declaration.
-	VisitArc_declaration(ctx *Arc_declarationContext) interface{}
+	// Visit a parse tree produced by GraffleParser#arc_assign.
+	VisitArc_assign(ctx *Arc_assignContext) interface{}
 
 	// Visit a parse tree produced by GraffleParser#arc.
 	VisitArc(ctx *ArcContext) interface{}
@@ -101,14 +101,14 @@ type GraffleParserVisitor interface {
 	// Visit a parse tree produced by GraffleParser#unor_w_arc.
 	VisitUnor_w_arc(ctx *Unor_w_arcContext) interface{}
 
-	// Visit a parse tree produced by GraffleParser#vertice_declaration.
-	VisitVertice_declaration(ctx *Vertice_declarationContext) interface{}
+	// Visit a parse tree produced by GraffleParser#vertice_assign.
+	VisitVertice_assign(ctx *Vertice_assignContext) interface{}
 
-	// Visit a parse tree produced by GraffleParser#graph_declaration.
-	VisitGraph_declaration(ctx *Graph_declarationContext) interface{}
+	// Visit a parse tree produced by GraffleParser#graph_assign.
+	VisitGraph_assign(ctx *Graph_assignContext) interface{}
 
-	// Visit a parse tree produced by GraffleParser#labeled_declaration.
-	VisitLabeled_declaration(ctx *Labeled_declarationContext) interface{}
+	// Visit a parse tree produced by GraffleParser#labeled_assign.
+	VisitLabeled_assign(ctx *Labeled_assignContext) interface{}
 
 	// Visit a parse tree produced by GraffleParser#expr.
 	VisitExpr(ctx *ExprContext) interface{}

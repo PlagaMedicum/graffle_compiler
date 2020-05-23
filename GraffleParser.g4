@@ -26,7 +26,7 @@ one_line_sequence_element
     ;
 
 atom_action
-    : var_declaration
+    : var_assign
     | function_call
     | builtin_function_call
     ;
@@ -100,16 +100,16 @@ procedure_declaration_head
     ;
 
 // vars
-var_declaration
+var_assign
     : variable=ID ASSIGN val=VAR
     | variable=ID ASSIGN expr
-    | arc_declaration
-    | vertice_declaration
-    | graph_declaration
-    | labeled_declaration
+    | arc_assign
+    | vertice_assign
+    | graph_assign
+    | labeled_assign
     ;
 
-arc_declaration
+arc_assign
     : variable=ID ASSIGN E_N '(' value ')'
     | variable=ID ASSIGN value arc value
     ;
@@ -131,22 +131,22 @@ unor_w_arc
     : '-' '[' weight=NUMBER ']' '-'
     ;
 
-vertice_declaration
+vertice_assign
     : ID ASSIGN '(' V_N ')' value
     | ID ASSIGN value
     | ID arithm_assign_operator value
     ;
 
-graph_declaration
+graph_assign
     : ID ASSIGN G_N '(' value ')'
     | ID ASSIGN value (ARG_DELIM value)*
     | ID arithm_assign_operator value
     ;
 
-labeled_declaration
-    : vertice_declaration label?
-    | arc_declaration label?
-    | graph_declaration label?
+labeled_assign
+    : vertice_assign label?
+    | arc_assign label?
+    | graph_assign label?
     ;
 
 // Expressions:
