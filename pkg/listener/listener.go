@@ -13,6 +13,7 @@ type GraffleListener struct {
 	*parser.BaseGraffleParserListener
 	Buffer bytes.Buffer
 	paramStack []string
+	nameStack NamespaceStack
 }
 
 func (s *GraffleListener) pushParam(p string) {
@@ -21,6 +22,38 @@ func (s *GraffleListener) pushParam(p string) {
 
 func (s *GraffleListener) pushParamf(format string, a ...interface{}) {
 	s.paramStack = append(s.paramStack, fmt.Sprintf(format, a...))
+}
+
+type Namespace map[string]struct{}
+
+type NamespaceStack []Namespace
+
+func (n *NamespaceStack) push() {
+	*n = append(*n, Namespace{})
+}
+
+func (n *NamespaceStack) pop() {
+	if len(*n) < 1 {
+		log.Fatal("Parsing error! Empty namespaces stack!")
+	}
+
+	last := len(*n) - 1
+	*n = (*n)[:last]
+}
+
+func (n NamespaceStack) find(name string) bool {
+	l := len(n)
+	for i := l - 1; i >= 0; i-- {
+		if _, b := n[i][name]; b {
+			return true
+		}
+	}
+	return false
+}
+
+func (n *NamespaceStack) add(name string) {
+	last := len(*n) - 1
+	(*n)[last][name] = struct{}{}
 }
 
 func (s *GraffleListener) popParam() string {
@@ -68,10 +101,14 @@ func (s *GraffleListener) ExitFile(ctx *parser.FileContext) {
 }
 
 // EnterSequence is called when production sequence is entered.
-func (s *GraffleListener) EnterSequence(ctx *parser.SequenceContext) {}
+func (s *GraffleListener) EnterSequence(ctx *parser.SequenceContext) {
+	s.nameStack.push()
+}
 
 // ExitSequence is called when production sequence is exited.
-func (s *GraffleListener) ExitSequence(ctx *parser.SequenceContext) {}
+func (s *GraffleListener) ExitSequence(ctx *parser.SequenceContext) {
+	s.nameStack.pop()
+}
 
 // EnterSequence_element is called when production sequence_element is entered.
 func (s *GraffleListener) EnterSequence_element(ctx *parser.Sequence_elementContext) {}
@@ -225,19 +262,48 @@ func (s *GraffleListener) EnterProcedure_declaration_head(ctx *parser.Procedure_
 func (s *GraffleListener) ExitProcedure_declaration_head(ctx *parser.Procedure_declaration_headContext) {
 }
 
-// EnterVar_declaration is called when production var_declaration is entered.
-func (s *GraffleListener) EnterVar_declaration(ctx *parser.Var_declarationContext) {
-
+// EnterVar_assign is called when production var_assign is entered.
+func (s *GraffleListener) EnterVar_assign(ctx *parser.Var_assignContext) {
 }
 
-// ExitVar_declaration is called when production var_declaration is exited.
-func (s *GraffleListener) ExitVar_declaration(ctx *parser.Var_declarationContext) {}
+// ExitVar_assign is called when production var_assign is exited.
+func (s *GraffleListener) ExitVar_assign(ctx *parser.Var_assignContext) {
+	start := ctx.GetStart()
+	if start.GetTokenType() == parser.GraffleParserID {
+		idstr := start.GetText()
+		a := s.popParam()
+		if s.nameStack.find(idstr){
+			s.writeBuf("\n%s = %s;", idstr, a)
+		} else {
+			s.nameStack.add(idstr)
+			s.writeBuf("\n%s := %s;", idstr, a)
+		}
+	}
+}
 
-// EnterArc_declaration is called when production arc_declaration is entered.
-func (s *GraffleListener) EnterArc_declaration(ctx *parser.Arc_declarationContext) {}
+// EnterArc_assign is called when production arc_assign is entered.
+func (s *GraffleListener) EnterArc_assign(ctx *parser.Arc_assignContext) {}
 
-// ExitArc_declaration is called when production arc_declaration is exited.
-func (s *GraffleListener) ExitArc_declaration(ctx *parser.Arc_declarationContext) {}
+// ExitArc_assign is called when production arc_assign is exited.
+func (s *GraffleListener) ExitArc_assign(ctx *parser.Arc_assignContext) {}
+
+// EnterOr_w_arc_lr is called when production or_w_arc_lr is entered.
+func (s *GraffleListener) EnterOr_w_arc_lr(ctx *parser.Or_w_arc_lrContext) {}
+
+// ExitOr_w_arc_lr is called when production or_w_arc_lr is exited.
+func (s *GraffleListener) ExitOr_w_arc_lr(ctx *parser.Or_w_arc_lrContext) {}
+
+// EnterOr_w_arc_rl is called when production or_w_arc_rl is entered.
+func (s *GraffleListener) EnterOr_w_arc_rl(ctx *parser.Or_w_arc_rlContext) {}
+
+// ExitOr_w_arc_rl is called when production or_w_arc_rl is exited.
+func (s *GraffleListener) ExitOr_w_arc_rl(ctx *parser.Or_w_arc_rlContext) {}
+
+// EnterUnor_w_arc is called when production unor_w_arc is entered.
+func (s *GraffleListener) EnterUnor_w_arc(ctx *parser.Unor_w_arcContext) {}
+
+// ExitUnor_w_arc is called when production unor_w_arc is exited.
+func (s *GraffleListener) ExitUnor_w_arc(ctx *parser.Unor_w_arcContext) {}
 
 // EnterArc is called when production arc is entered.
 func (s *GraffleListener) EnterArc(ctx *parser.ArcContext) {}
@@ -245,30 +311,26 @@ func (s *GraffleListener) EnterArc(ctx *parser.ArcContext) {}
 // ExitArc is called when production arc is exited.
 func (s *GraffleListener) ExitArc(ctx *parser.ArcContext) {}
 
-// EnterVertice_declaration is called when production vertice_declaration is entered.
-func (s *GraffleListener) EnterVertice_declaration(ctx *parser.Vertice_declarationContext) {}
+// EnterVertice_assign is called when production vertice_assign is entered.
+func (s *GraffleListener) EnterVertice_assign(ctx *parser.Vertice_assignContext) {}
 
-// ExitVertice_declaration is called when production vertice_declaration is exited.
-func (s *GraffleListener) ExitVertice_declaration(ctx *parser.Vertice_declarationContext) {}
+// ExitVertice_assign is called when production vertice_assign is exited.
+func (s *GraffleListener) ExitVertice_assign(ctx *parser.Vertice_assignContext) {}
 
-// EnterGraph_declaration is called when production graph_declaration is entered.
-func (s *GraffleListener) EnterGraph_declaration(ctx *parser.Graph_declarationContext) {}
+// EnterGraph_assign is called when production graph_assign is entered.
+func (s *GraffleListener) EnterGraph_assign(ctx *parser.Graph_assignContext) {}
 
-// ExitGraph_declaration is called when production graph_declaration is exited.
-func (s *GraffleListener) ExitGraph_declaration(ctx *parser.Graph_declarationContext) {}
+// ExitGraph_assign is called when production graph_assign is exited.
+func (s *GraffleListener) ExitGraph_assign(ctx *parser.Graph_assignContext) {}
 
-// EnterLabeled_declaration is called when production labeled_declaration is entered.
-func (s *GraffleListener) EnterLabeled_declaration(ctx *parser.Labeled_declarationContext) {}
+// EnterLabeled_assign is called when production labeled_assign is entered.
+func (s *GraffleListener) EnterLabeled_assign(ctx *parser.Labeled_assignContext) {}
 
-// ExitLabeled_declaration is called when production labeled_declaration is exited.
-func (s *GraffleListener) ExitLabeled_declaration(ctx *parser.Labeled_declarationContext) {}
+// ExitLabeled_assign is called when production labeled_assign is exited.
+func (s *GraffleListener) ExitLabeled_assign(ctx *parser.Labeled_assignContext) {}
 
 // EnterExpr is called when production expr is entered.
 func (s *GraffleListener) EnterExpr(ctx *parser.ExprContext) {
-	v := ctx.GetTokens(parser.GraffleParserVAR)
-	if len(v) > 0 {
-		s.writeBuf(v[0].GetText())
-	}
 }
 
 // ExitExpr is called when production expr is exited.
@@ -286,7 +348,33 @@ func (s *GraffleListener) ExitIntegral_expr(ctx *parser.Integral_exprContext) {}
 func (s *GraffleListener) EnterLogical_expr(ctx *parser.Logical_exprContext) {}
 
 // ExitLogical_expr is called when production logical_expr is exited.
-func (s *GraffleListener) ExitLogical_expr(ctx *parser.Logical_exprContext) {}
+func (s *GraffleListener) ExitLogical_expr(ctx *parser.Logical_exprContext) {
+	if ctx.GetBin_op() != nil {
+		r := s.popParam()
+		l := s.popParam()
+		switch ctx.GetBin_op().GetStart().GetTokenType() {
+		case parser.GraffleParserAND:
+			s.pushParamf("And(%s, %s)", l, r)
+		case parser.GraffleParserOR:
+			s.pushParamf("Or(%s, %s)", l, r)
+		case parser.GraffleParserEQUALS:
+			s.pushParamf("Equals(%s, %s)", l, r)
+		case parser.GraffleParserLESS_THAN:
+			s.pushParamf("Less(%s, %s)", l, r)
+		case parser.GraffleParserGR_THAN:
+			s.pushParamf("Greater(%s, %s)", l, r)
+		case parser.GraffleParserLESS_THAN_E:
+			s.pushParamf("LessOrEquals(%s, %s)", l, r)
+		case parser.GraffleParserGR_THAN_E:
+			s.pushParamf("GreaterOrEquals(%s, %s)", l, r)
+		}
+	}
+
+	if ctx.GetUn_op() != nil && ctx.GetUn_op().GetStart().GetTokenType() == parser.GraffleParserNOT {
+		a := s.popParam()
+		s.pushParamf("Not(%s)", a)
+	}
+}
 
 // EnterBin_log_operator is called when production bin_log_operator is entered.
 func (s *GraffleListener) EnterBin_log_operator(ctx *parser.Bin_log_operatorContext) {}
@@ -354,7 +442,18 @@ func (s *GraffleListener) ExitBuilt_func_print(ctx *parser.Built_func_printConte
 }
 
 // EnterBuilt_func_input is called when production built_func_input is entered.
-func (s *GraffleListener) EnterBuilt_func_input(ctx *parser.Built_func_inputContext) {}
+func (s *GraffleListener) EnterBuilt_func_input(ctx *parser.Built_func_inputContext) {
+	stop := ctx.GetStop()
+	if stop.GetTokenType() == parser.GraffleParserID {
+		idstr := stop.GetText()
+		if s.nameStack.find(idstr){
+			s.writeBuf("\n%s = Input();", idstr)
+		} else {
+			s.nameStack.add(idstr)
+			s.writeBuf("\n%s := Input();", idstr)
+		}
+	}
+}
 
 // ExitBuilt_func_input is called when production built_func_input is exited.
 func (s *GraffleListener) ExitBuilt_func_input(ctx *parser.Built_func_inputContext) {}
@@ -376,6 +475,22 @@ func (s *GraffleListener) EnterValue(ctx *parser.ValueContext) {}
 
 // ExitValue is called when production value is exited.
 func (s *GraffleListener) ExitValue(ctx *parser.ValueContext) {}
+
+// EnterVariable is called when production variable is entered.
+func (s *GraffleListener) EnterVariable(ctx *parser.VariableContext) {
+	id := ctx.ID()
+	if id != nil {
+		vname := id.GetText()
+		if s.nameStack.find(vname) {
+			s.pushParam(ctx.GetText())
+		} else {
+			log.Fatalf("Parsing error! Undefined variable \"%s\"!", vname)
+		}
+	}
+}
+
+// ExitVariable is called when production variable is exited.
+func (s *GraffleListener) ExitVariable(ctx *parser.VariableContext) {}
 
 // EnterBuiltin is called when production builtin is entered.
 func (s *GraffleListener) EnterBuiltin(ctx *parser.BuiltinContext) {
