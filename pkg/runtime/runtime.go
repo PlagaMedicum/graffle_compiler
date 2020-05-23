@@ -281,7 +281,7 @@ func (g Graph) Bool() Bool {
 	return NewBool(true)
 }
 
-func Add(l, r BuiltinType) BuiltinType {
+func Add(l, r interface{}) BuiltinType {
 	li, lb := l.(NumericType)
 	ri, rb := r.(NumericType)
 	if lb && rb {
@@ -296,7 +296,7 @@ func Add(l, r BuiltinType) BuiltinType {
 	return NewNumber(0)
 }
 
-func Subtract(l, r BuiltinType) BuiltinType {
+func Subtract(l, r interface{}) BuiltinType {
 	li, lb := l.(NumericType)
 	ri, rb := r.(NumericType)
 	if lb && rb {
@@ -341,75 +341,122 @@ func Divide(l, r interface{}) interface{} {
 	return NewNumber(0)
 }
 
-func Not(a LogicalType) Bool {
-	v := a.Bool()
-	return NewBool(!v.bool)
-}
-
-func And(l, r LogicalType) Bool {
-	lv := l.Bool()
-	rv := r.Bool()
-	return NewBool(lv.bool && rv.bool)
-}
-
-func Or(l, r LogicalType) Bool {
-	lv := l.Bool()
-	rv := r.Bool()
-	return NewBool(lv.bool || rv.bool)
-}
-
-func Equals(l, r BuiltinType) Bool {
-	lv, lb := l.Number()
-	rv, rb := r.Number()
-	if lb && rb {
-		return NewBool(lv.float64 == rv.float64)
+func Not(a interface{}) Bool {
+	i, b := a.(LogicalType)
+	if b {
+		v := i.Bool()
+		return NewBool(!v.bool)
 	}
-
-	log.Fatalf("Error! Wrong operands, cannot evaluate \"Equals\" operation! left: %t %s, right: %t %s", l, l.String(), r, r.String())
+	log.Fatalf("Error! Wrong type passed in \"Not\" operation! type: %t", a)
 	return NewBool(false)
 }
 
-func Less(l, r BuiltinType) Bool {
-	lv, lb := l.Number()
-	rv, rb := r.Number()
+func And(l, r interface{}) Bool {
+	li, lb := l.(LogicalType)
+	ri, rb := r.(LogicalType)
 	if lb && rb {
-		return NewBool(lv.float64 < rv.float64)
+		lv := li.Bool()
+		rv := ri.Bool()
+		return NewBool(lv.bool && rv.bool)
 	}
-
-	log.Fatalf("Error! Wrong operands, cannot evaluate \"Less than\" operation! left: %t %s, right: %t %s", l, l.String(), r, r.String())
+	log.Fatalf("Error! Wrong types passed in \"And\" operation! left: %t, right: %t", l, r)
 	return NewBool(false)
 }
 
-func Greater(l, r BuiltinType) Bool {
-	lv, lb := l.Number()
-	rv, rb := r.Number()
+func Or(l, r interface{}) Bool {
+	li, lb := l.(LogicalType)
+	ri, rb := r.(LogicalType)
 	if lb && rb {
-		return NewBool(lv.float64 > rv.float64)
+		lv := li.Bool()
+		rv := ri.Bool()
+		return NewBool(lv.bool || rv.bool)
 	}
-
-	log.Fatalf("Error! Wrong operands, cannot evaluate \"Greater than\" operation! left: %t %s, right: %t %s", l, l.String(), r, r.String())
+	log.Fatalf("Error! Wrong types passed in \"Or\" operation! left: %t, right: %t", l, r)
 	return NewBool(false)
 }
 
-func LessOrEquals(l, r BuiltinType) Bool {
-	lv, lb := l.Number()
-	rv, rb := r.Number()
+func Equals(l, r interface{}) Bool {
+	li, lb := l.(BuiltinType)
+	ri, rb := r.(BuiltinType)
 	if lb && rb {
-		return NewBool(lv.float64 <= rv.float64)
-	}
+		lv, lb := li.Number()
+		rv, rb := ri.Number()
+		if lb && rb {
+			return NewBool(lv.float64 == rv.float64)
+		}
 
-	log.Fatalf("Error! Wrong operands, cannot evaluate \"Less than or equals\" operation! left: %t %s, right: %t %s", l, l.String(), r, r.String())
+		log.Fatalf("Error! Wrong operands, cannot evaluate \"Equals\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
+		return NewBool(false)
+	}
+	log.Fatalf("Error! Wrong types passed in \"Equals\" operation! left: %t, right: %t", l, r)
 	return NewBool(false)
 }
 
-func GreaterOrEquals(l, r BuiltinType) Bool {
-	lv, lb := l.Number()
-	rv, rb := r.Number()
+func Less(l, r interface{}) Bool {
+	li, lb := l.(BuiltinType)
+	ri, rb := r.(BuiltinType)
 	if lb && rb {
-		return NewBool(lv.float64 >= rv.float64)
-	}
+		lv, lb := li.Number()
+		rv, rb := ri.Number()
+		if lb && rb {
+			return NewBool(lv.float64 < rv.float64)
+		}
 
-	log.Fatalf("Error! Wrong operands, cannot evaluate \"Greater than or equals\" operation! left: %t %s, right: %t %s", l, l.String(), r, r.String())
+		log.Fatalf("Error! Wrong operands, cannot evaluate \"Less than\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
+		return NewBool(false)
+	}
+	log.Fatalf("Error! Wrong types passed in \"Less than\" operation! left: %t, right: %t", l, r)
+	return NewBool(false)
+}
+
+func Greater(l, r interface{}) Bool {
+	li, lb := l.(BuiltinType)
+	ri, rb := r.(BuiltinType)
+	if lb && rb {
+		lv, lb := li.Number()
+		rv, rb := ri.Number()
+		if lb && rb {
+			return NewBool(lv.float64 > rv.float64)
+		}
+
+		log.Fatalf("Error! Wrong operands, cannot evaluate \"Greater than\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
+		return NewBool(false)
+	}
+	log.Fatalf("Error! Wrong types passed in \"Greater than\" operation! left: %t, right: %t", l, r)
+	return NewBool(false)
+}
+
+func LessOrEquals(l, r interface{}) Bool {
+	li, lb := l.(BuiltinType)
+	ri, rb := r.(BuiltinType)
+	if lb && rb {
+		lv, lb := li.Number()
+		rv, rb := ri.Number()
+		if lb && rb {
+			return NewBool(lv.float64 <= rv.float64)
+		}
+
+		log.Fatalf("Error! Wrong operands, cannot evaluate \"Less than or equals\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
+		return NewBool(false)
+	}
+	log.Fatalf("Error! Wrong types passed in \"Less than or equals\" operation! left: %t, right: %t", l, r)
+	return NewBool(false)
+}
+
+func GreaterOrEquals(l, r interface{}) Bool {
+	li, lb := l.(BuiltinType)
+	ri, rb := r.(BuiltinType)
+	if lb && rb {
+		lv, lb := li.Number()
+		rv, rb := ri.Number()
+		if lb && rb {
+			return NewBool(lv.float64 >= rv.float64)
+		}
+
+		log.Fatalf("Error! Wrong operands, cannot evaluate \"Greater than or equals\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
+		return NewBool(false)
+	}
+	log.Fatalf("Error! Wrong types passed in \"Greater than or equals\" operation! left: %t, right: %t", l, r)
 	return NewBool(false)
 }
 
