@@ -115,11 +115,20 @@ arc_declaration
     ;
 arc
     : OR_ARC_LR
-    | OR_W_ARC_LR
+    | or_w_arc_lr
     | OR_ARC_RL
-    | OR_W_ARC_RL
+    | or_w_arc_rl
     | UNOR_ARC
-    | UNOR_W_ARC
+    | unor_w_arc
+    ;
+or_w_arc_lr
+    : '-' '[' weight=NUMBER ']' OR_ARC_LR
+    ;
+or_w_arc_rl
+    : OR_ARC_RL '[' weight=NUMBER ']' '-'
+    ;
+unor_w_arc
+    : '-' '[' weight=NUMBER ']' '-'
     ;
 
 vertice_declaration

@@ -92,6 +92,15 @@ type GraffleParserListener interface {
 	// EnterArc is called when entering the arc production.
 	EnterArc(c *ArcContext)
 
+	// EnterOr_w_arc_lr is called when entering the or_w_arc_lr production.
+	EnterOr_w_arc_lr(c *Or_w_arc_lrContext)
+
+	// EnterOr_w_arc_rl is called when entering the or_w_arc_rl production.
+	EnterOr_w_arc_rl(c *Or_w_arc_rlContext)
+
+	// EnterUnor_w_arc is called when entering the unor_w_arc production.
+	EnterUnor_w_arc(c *Unor_w_arcContext)
+
 	// EnterVertice_declaration is called when entering the vertice_declaration production.
 	EnterVertice_declaration(c *Vertice_declarationContext)
 
@@ -238,6 +247,15 @@ type GraffleParserListener interface {
 
 	// ExitArc is called when exiting the arc production.
 	ExitArc(c *ArcContext)
+
+	// ExitOr_w_arc_lr is called when exiting the or_w_arc_lr production.
+	ExitOr_w_arc_lr(c *Or_w_arc_lrContext)
+
+	// ExitOr_w_arc_rl is called when exiting the or_w_arc_rl production.
+	ExitOr_w_arc_rl(c *Or_w_arc_rlContext)
+
+	// ExitUnor_w_arc is called when exiting the unor_w_arc production.
+	ExitUnor_w_arc(c *Unor_w_arcContext)
 
 	// ExitVertice_declaration is called when exiting the vertice_declaration production.
 	ExitVertice_declaration(c *Vertice_declarationContext)

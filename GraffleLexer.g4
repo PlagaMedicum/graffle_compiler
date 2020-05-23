@@ -29,10 +29,7 @@ R_BRACKET              : ']';
 // arcs
 OR_ARC_LR   : '->' ;
 OR_ARC_RL   : '<-' ;
-OR_W_ARC_LR : '-[' NUMBER ']' OR_ARC_LR ;
-OR_W_ARC_RL : OR_ARC_RL '[' NUMBER ']-' ;
 UNOR_ARC    : '--' ;
-UNOR_W_ARC  : '-[' NUMBER ']-' ;
 
 // assignements
 ASSIGN          : '=' ;

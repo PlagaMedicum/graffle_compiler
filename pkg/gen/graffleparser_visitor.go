@@ -92,6 +92,15 @@ type GraffleParserVisitor interface {
 	// Visit a parse tree produced by GraffleParser#arc.
 	VisitArc(ctx *ArcContext) interface{}
 
+	// Visit a parse tree produced by GraffleParser#or_w_arc_lr.
+	VisitOr_w_arc_lr(ctx *Or_w_arc_lrContext) interface{}
+
+	// Visit a parse tree produced by GraffleParser#or_w_arc_rl.
+	VisitOr_w_arc_rl(ctx *Or_w_arc_rlContext) interface{}
+
+	// Visit a parse tree produced by GraffleParser#unor_w_arc.
+	VisitUnor_w_arc(ctx *Unor_w_arcContext) interface{}
+
 	// Visit a parse tree produced by GraffleParser#vertice_declaration.
 	VisitVertice_declaration(ctx *Vertice_declarationContext) interface{}
 

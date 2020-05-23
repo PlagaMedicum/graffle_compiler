@@ -203,6 +203,24 @@ func (s *BaseGraffleParserListener) EnterArc(ctx *ArcContext) {}
 // ExitArc is called when production arc is exited.
 func (s *BaseGraffleParserListener) ExitArc(ctx *ArcContext) {}
 
+// EnterOr_w_arc_lr is called when production or_w_arc_lr is entered.
+func (s *BaseGraffleParserListener) EnterOr_w_arc_lr(ctx *Or_w_arc_lrContext) {}
+
+// ExitOr_w_arc_lr is called when production or_w_arc_lr is exited.
+func (s *BaseGraffleParserListener) ExitOr_w_arc_lr(ctx *Or_w_arc_lrContext) {}
+
+// EnterOr_w_arc_rl is called when production or_w_arc_rl is entered.
+func (s *BaseGraffleParserListener) EnterOr_w_arc_rl(ctx *Or_w_arc_rlContext) {}
+
+// ExitOr_w_arc_rl is called when production or_w_arc_rl is exited.
+func (s *BaseGraffleParserListener) ExitOr_w_arc_rl(ctx *Or_w_arc_rlContext) {}
+
+// EnterUnor_w_arc is called when production unor_w_arc is entered.
+func (s *BaseGraffleParserListener) EnterUnor_w_arc(ctx *Unor_w_arcContext) {}
+
+// ExitUnor_w_arc is called when production unor_w_arc is exited.
+func (s *BaseGraffleParserListener) ExitUnor_w_arc(ctx *Unor_w_arcContext) {}
+
 // EnterVertice_declaration is called when production vertice_declaration is entered.
 func (s *BaseGraffleParserListener) EnterVertice_declaration(ctx *Vertice_declarationContext) {}
 

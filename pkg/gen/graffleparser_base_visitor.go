@@ -120,6 +120,18 @@ func (v *BaseGraffleParserVisitor) VisitArc(ctx *ArcContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseGraffleParserVisitor) VisitOr_w_arc_lr(ctx *Or_w_arc_lrContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGraffleParserVisitor) VisitOr_w_arc_rl(ctx *Or_w_arc_rlContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGraffleParserVisitor) VisitUnor_w_arc(ctx *Unor_w_arcContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseGraffleParserVisitor) VisitVertice_declaration(ctx *Vertice_declarationContext) interface{} {
 	return v.VisitChildren(ctx)
 }
