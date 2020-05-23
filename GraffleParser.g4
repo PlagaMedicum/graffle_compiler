@@ -233,9 +233,9 @@ value
     ;
 
 builtin
-    : bi_num=NUMBER
-    | bi_str=STRING
-    | bi_bool=BOOL
+    : NUMBER
+    | STRING
+    | BOOL
     ;
 
 block_end

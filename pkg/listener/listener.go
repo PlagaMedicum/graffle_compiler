@@ -226,7 +226,9 @@ func (s *GraffleListener) ExitProcedure_declaration_head(ctx *parser.Procedure_d
 }
 
 // EnterVar_declaration is called when production var_declaration is entered.
-func (s *GraffleListener) EnterVar_declaration(ctx *parser.Var_declarationContext) {}
+func (s *GraffleListener) EnterVar_declaration(ctx *parser.Var_declarationContext) {
+
+}
 
 // ExitVar_declaration is called when production var_declaration is exited.
 func (s *GraffleListener) ExitVar_declaration(ctx *parser.Var_declarationContext) {}
@@ -304,15 +306,17 @@ func (s *GraffleListener) EnterArithm_expr(ctx *parser.Arithm_exprContext) {
 
 // ExitArithm_expr is called when production arithm_expr is exited.
 func (s *GraffleListener) ExitArithm_expr(ctx *parser.Arithm_exprContext) {
+	r := s.popParam()
+	l := s.popParam()
 	switch ctx.GetOp().GetStart().GetTokenType() {
 	case parser.GraffleParserADD:
-		s.pushParamf("Add(%s, %s)", s.popParam(), s.popParam())
+		s.pushParamf("Add(%s, %s)", l, r)
 	case parser.GraffleParserSUB:
-		s.pushParamf("Subtract(%s, %s)", s.popParam(), s.popParam())
+		s.pushParamf("Subtract(%s, %s)", l, r)
 	case parser.GraffleParserMULT:
-		s.pushParamf("Multiply(%s, %s)", s.popParam(), s.popParam())
+		s.pushParamf("Multiply(%s, %s)", l, r)
 	case parser.GraffleParserDIV:
-		s.pushParamf("Divide(%s, %s)", s.popParam(), s.popParam())
+		s.pushParamf("Divide(%s, %s)", l, r)
 	}
 }
 
@@ -375,21 +379,15 @@ func (s *GraffleListener) ExitValue(ctx *parser.ValueContext) {}
 
 // EnterBuiltin is called when production builtin is entered.
 func (s *GraffleListener) EnterBuiltin(ctx *parser.BuiltinContext) {
-	num := ctx.GetTokens(parser.GraffleParserNUMBER)
-	if len(num) > 0 {
-		numstr := strings.ReplaceAll(num[0].GetText(), ",", ".")
-		s.pushParamf("NewNumber(%s)", numstr)
-	}
-
-	str := ctx.GetTokens(parser.GraffleLexerSTRING)
-	if len(str) > 0 {
-		s.pushParamf("NewString(%s)", str[0].GetText())
-	}
-
-	b := ctx.GetTokens(parser.GraffleParserBOOL)
-	if len(b) > 0 {
-		bstr := strings.ToLower(b[0].GetText())
-		s.pushParamf("NewBool(%s)", bstr)
+	switch ctx.GetStart().GetTokenType() {
+	case parser.GraffleParserNUMBER:
+		v := strings.ReplaceAll(ctx.GetText(), ",", ".")
+		s.pushParamf("NewNumber(%s)", v)
+	case parser.GraffleLexerSTRING:
+		s.pushParamf("NewString(%s)", ctx.GetText())
+	case parser.GraffleParserBOOL:
+		v := strings.ToLower(ctx.GetText())
+		s.pushParamf("NewBool(%s)", v)
 	}
 }
 
