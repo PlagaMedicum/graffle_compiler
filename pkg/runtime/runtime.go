@@ -189,8 +189,24 @@ func (g *Graph) GetSingleVertices() []Vertice {
 	return sv
 }
 
-func NewVertice(val BuiltinType) Vertice {
-	return Vertice{val: val}
+func NewVertice(val interface{}) Vertice {
+	bo, b := val.(bool)
+	if b {
+		return Vertice{val: NewBool(bo)}
+	}
+
+	bi, b := val.(BuiltinType)
+	if b {
+		return Vertice{val: bi}
+	}
+
+	v, b := val.(Vertice)
+	if b {
+		return v
+	}
+
+	log.Fatalf("Assignement error! Cannot create vertice from type: %t", val)
+	return NewVertice(false)
 }
 
 func NewEdge(v1, v2 Vertice, w Number, d bool) Edge {
@@ -201,6 +217,9 @@ func NewGraph(args ...interface{}) Graph {
 	var g Graph
 
 	for _, a := range args {
+		if v, b := a.(BuiltinType); b {
+			g.AddVertice(NewVertice(v))
+		}
 		if v, b := a.(Vertice); b {
 			g.AddVertice(v)
 		}
