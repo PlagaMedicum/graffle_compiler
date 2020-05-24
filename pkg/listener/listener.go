@@ -220,31 +220,41 @@ func (s *GraffleListener) ExitDefault_stmnt(ctx *parser.Default_stmntContext) {}
 func (s *GraffleListener) EnterOne_line_stmnt(ctx *parser.One_line_stmntContext) {}
 
 // ExitOne_line_stmnt is called when production one_line_stmnt is exited.
-func (s *GraffleListener) ExitOne_line_stmnt(ctx *parser.One_line_stmntContext) {}
+func (s *GraffleListener) ExitOne_line_stmnt(ctx *parser.One_line_stmntContext) {
+	s.pushParamf("for %s {%s\n}", s.popParam(), s.popParam())
+}
 
 // EnterMult_line_stmnt is called when production mult_line_stmnt is entered.
 func (s *GraffleListener) EnterMult_line_stmnt(ctx *parser.Mult_line_stmntContext) {}
 
 // ExitMult_line_stmnt is called when production mult_line_stmnt is exited.
-func (s *GraffleListener) ExitMult_line_stmnt(ctx *parser.Mult_line_stmntContext) {}
+func (s *GraffleListener) ExitMult_line_stmnt(ctx *parser.Mult_line_stmntContext) {
+	forsq := s.popParam()
+	cond := s.popParam()
+	s.pushParamf("for %s.Val() {%s\n}", cond, forsq)
+}
 
-// EnterStmnt is called when production stmnt is entered.
-func (s *GraffleListener) EnterStmnt(ctx *parser.StmntContext) {}
+// EnterCycle_stmnt is called when production cycle_stmnt is entered.
+func (s *GraffleListener) EnterCycle_stmnt(ctx *parser.Cycle_stmntContext) {}
 
-// ExitStmnt is called when production stmnt is exited.
-func (s *GraffleListener) ExitStmnt(ctx *parser.StmntContext) {}
+// ExitCycle_stmnt is called when production cycle_stmnt is exited.
+func (s *GraffleListener) ExitCycle_stmnt(ctx *parser.Cycle_stmntContext) {
+}
 
 // EnterWhile_stmnt is called when production while_stmnt is entered.
 func (s *GraffleListener) EnterWhile_stmnt(ctx *parser.While_stmntContext) {}
 
 // ExitWhile_stmnt is called when production while_stmnt is exited.
-func (s *GraffleListener) ExitWhile_stmnt(ctx *parser.While_stmntContext) {}
+func (s *GraffleListener) ExitWhile_stmnt(ctx *parser.While_stmntContext) {
+}
 
 // EnterUntil_stmnt is called when production until_stmnt is entered.
 func (s *GraffleListener) EnterUntil_stmnt(ctx *parser.Until_stmntContext) {}
 
 // ExitUntil_stmnt is called when production until_stmnt is exited.
-func (s *GraffleListener) ExitUntil_stmnt(ctx *parser.Until_stmntContext) {}
+func (s *GraffleListener) ExitUntil_stmnt(ctx *parser.Until_stmntContext) {
+	s.pushParamf("Not(%s)", s.popParam())
+}
 
 // EnterForLogical is called when production ForLogical is entered.
 func (s *GraffleListener) EnterForLogical(ctx *parser.ForLogicalContext) {}
@@ -262,7 +272,8 @@ func (s *GraffleListener) ExitForVar(ctx *parser.ForVarContext) {}
 func (s *GraffleListener) EnterForRange(ctx *parser.ForRangeContext) {}
 
 // ExitForRange is called when production ForRange is exited.
-func (s *GraffleListener) ExitForRange(ctx *parser.ForRangeContext) {}
+func (s *GraffleListener) ExitForRange(ctx *parser.ForRangeContext) {
+}
 
 // EnterFrom_to_stmnt is called when production from_to_stmnt is entered.
 func (s *GraffleListener) EnterFrom_to_stmnt(ctx *parser.From_to_stmntContext) {}
@@ -315,7 +326,7 @@ func (s *GraffleListener) EnterFunction_declaration_head(ctx *parser.Function_de
 		if i > 0 {
 			s.writeBuf(", ")
 		}
-		s.writeBuf(str+nsPostfix)
+		s.writeBuf(str + nsPostfix)
 		s.nameStack.add(str)
 	}
 	s.writeBuf(" interface{}) interface{} {\n")
@@ -394,10 +405,10 @@ func (s *GraffleListener) EnterProcedure_declaration_head(ctx *parser.Procedure_
 		if i > 0 {
 			s.writeBuf(", ")
 		}
-		s.writeBuf(str+nsPostfix)
+		s.writeBuf(str + nsPostfix)
 		s.nameStack.add(str)
 	}
-	s.writeBuf(" interface{}) interface{} {\n")
+	s.writeBuf(" interface{}) {\n")
 }
 
 // ExitProcedure_declaration_head is called when production procedure_declaration_head is exited.
@@ -584,10 +595,18 @@ func (s *GraffleListener) ExitLogical_expr(ctx *parser.Logical_exprContext) {
 		switch ctx.GetBin_op().GetStart().GetTokenType() {
 		case parser.GraffleParserAND:
 			s.pushParamf("And(%s, %s)", l, r)
+		case parser.GraffleParserNAND:
+			s.pushParamf("Not(And(%s, %s))", l, r)
 		case parser.GraffleParserOR:
 			s.pushParamf("Or(%s, %s)", l, r)
+		case parser.GraffleParserNOR:
+			s.pushParamf("Not(Or(%s, %s))", l, r)
+		case parser.GraffleParserXOR:
+			s.pushParamf("ExclusiveOr(%s, %s)", l, r)
 		case parser.GraffleParserEQUALS:
 			s.pushParamf("Equals(%s, %s)", l, r)
+		case parser.GraffleParserNEQ:
+			s.pushParamf("Not(Equals(%s, %s))", l, r)
 		case parser.GraffleParserLESS_THAN:
 			s.pushParamf("Less(%s, %s)", l, r)
 		case parser.GraffleParserGR_THAN:
@@ -672,9 +691,9 @@ func (s *GraffleListener) ExitBuilt_func_print(ctx *parser.Built_func_printConte
 
 // EnterBuilt_func_input is called when production built_func_input is entered.
 func (s *GraffleListener) EnterBuilt_func_input(ctx *parser.Built_func_inputContext) {
-	stop := ctx.GetStop()
-	if stop.GetTokenType() == parser.GraffleParserID {
-		idstr := stop.GetText()
+	id := ctx.ID()
+	if id != nil {
+		idstr := id.GetText()
 		if s.nameStack.find(idstr) {
 			s.pushParamf("Assign(&%s, Input())", idstr+nsPostfix)
 		} else {
@@ -685,7 +704,8 @@ func (s *GraffleListener) EnterBuilt_func_input(ctx *parser.Built_func_inputCont
 }
 
 // ExitBuilt_func_input is called when production built_func_input is exited.
-func (s *GraffleListener) ExitBuilt_func_input(ctx *parser.Built_func_inputContext) {}
+func (s *GraffleListener) ExitBuilt_func_input(ctx *parser.Built_func_inputContext) {
+}
 
 // EnterFunction_call is called when production function_call is entered.
 func (s *GraffleListener) EnterFunction_call(ctx *parser.Function_callContext) {}
