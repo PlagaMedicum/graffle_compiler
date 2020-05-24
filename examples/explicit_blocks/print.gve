@@ -1,10 +1,31 @@
-f(v) = g
-    <<< v
+f(v) = g+1
+    if true
+        <<< v
+    else <<< "Else what?"
+    end
     g = v + 1
 end.
 
+v = V("SAS")
+<<< v
+
+e = "Start" -[50]-> "End"
+<<< e
+
+g = G("OK.", v, e, (v -- v))
+g = g + ((v <- "2"), false)
+<<< g
+
 a = 3 * "2" + 6. <<< a
->>> b. <<< b
+>>> b
+if b
+    is "1"
+        <<< b + 11
+    is '2'
+        <<< 11 + b
+    default
+        <<< b
+end
 
 <<< f(a)
 
