@@ -108,11 +108,16 @@ procedure_declaration_head
 // vars
 var_assign
     : ID ASSIGN variable
-    | ID ASSIGN expr
-    | arc_assign
+    | ID ASSIGN value
+    | ID arithm_assign_operator value
     | vertice_assign
+    | arc_assign
     | graph_assign
     | labeled_assign
+    ;
+
+vertice_assign
+    : ID ASSIGN V_N '(' value ')'
     ;
 
 arc_assign
@@ -137,16 +142,10 @@ unor_w_arc
     : '-' '[' weight=NUMBER ']' '-'
     ;
 
-vertice_assign
-    : ID ASSIGN '(' V_N ')' value
-    | ID ASSIGN value
-    | ID arithm_assign_operator value
-    ;
-
 graph_assign
-    : ID ASSIGN G_N '(' value ')'
-    | ID ASSIGN value (ARG_DELIM value)*
-    | ID arithm_assign_operator value
+    : ID ASSIGN G_N '(' value (ARG_DELIM value)* ')'
+    | ID ASSIGN value (ARG_DELIM value)+
+    | ID arithm_assign_operator value (ARG_DELIM value)+
     ;
 
 labeled_assign

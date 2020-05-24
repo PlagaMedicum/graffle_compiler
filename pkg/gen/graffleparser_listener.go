@@ -92,6 +92,9 @@ type GraffleParserListener interface {
 	// EnterVar_assign is called when entering the var_assign production.
 	EnterVar_assign(c *Var_assignContext)
 
+	// EnterVertice_assign is called when entering the vertice_assign production.
+	EnterVertice_assign(c *Vertice_assignContext)
+
 	// EnterArc_assign is called when entering the arc_assign production.
 	EnterArc_assign(c *Arc_assignContext)
 
@@ -106,9 +109,6 @@ type GraffleParserListener interface {
 
 	// EnterUnor_w_arc is called when entering the unor_w_arc production.
 	EnterUnor_w_arc(c *Unor_w_arcContext)
-
-	// EnterVertice_assign is called when entering the vertice_assign production.
-	EnterVertice_assign(c *Vertice_assignContext)
 
 	// EnterGraph_assign is called when entering the graph_assign production.
 	EnterGraph_assign(c *Graph_assignContext)
@@ -257,6 +257,9 @@ type GraffleParserListener interface {
 	// ExitVar_assign is called when exiting the var_assign production.
 	ExitVar_assign(c *Var_assignContext)
 
+	// ExitVertice_assign is called when exiting the vertice_assign production.
+	ExitVertice_assign(c *Vertice_assignContext)
+
 	// ExitArc_assign is called when exiting the arc_assign production.
 	ExitArc_assign(c *Arc_assignContext)
 
@@ -271,9 +274,6 @@ type GraffleParserListener interface {
 
 	// ExitUnor_w_arc is called when exiting the unor_w_arc production.
 	ExitUnor_w_arc(c *Unor_w_arcContext)
-
-	// ExitVertice_assign is called when exiting the vertice_assign production.
-	ExitVertice_assign(c *Vertice_assignContext)
 
 	// ExitGraph_assign is called when exiting the graph_assign production.
 	ExitGraph_assign(c *Graph_assignContext)

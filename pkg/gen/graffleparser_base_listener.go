@@ -203,6 +203,12 @@ func (s *BaseGraffleParserListener) EnterVar_assign(ctx *Var_assignContext) {}
 // ExitVar_assign is called when production var_assign is exited.
 func (s *BaseGraffleParserListener) ExitVar_assign(ctx *Var_assignContext) {}
 
+// EnterVertice_assign is called when production vertice_assign is entered.
+func (s *BaseGraffleParserListener) EnterVertice_assign(ctx *Vertice_assignContext) {}
+
+// ExitVertice_assign is called when production vertice_assign is exited.
+func (s *BaseGraffleParserListener) ExitVertice_assign(ctx *Vertice_assignContext) {}
+
 // EnterArc_assign is called when production arc_assign is entered.
 func (s *BaseGraffleParserListener) EnterArc_assign(ctx *Arc_assignContext) {}
 
@@ -232,12 +238,6 @@ func (s *BaseGraffleParserListener) EnterUnor_w_arc(ctx *Unor_w_arcContext) {}
 
 // ExitUnor_w_arc is called when production unor_w_arc is exited.
 func (s *BaseGraffleParserListener) ExitUnor_w_arc(ctx *Unor_w_arcContext) {}
-
-// EnterVertice_assign is called when production vertice_assign is entered.
-func (s *BaseGraffleParserListener) EnterVertice_assign(ctx *Vertice_assignContext) {}
-
-// ExitVertice_assign is called when production vertice_assign is exited.
-func (s *BaseGraffleParserListener) ExitVertice_assign(ctx *Vertice_assignContext) {}
 
 // EnterGraph_assign is called when production graph_assign is entered.
 func (s *BaseGraffleParserListener) EnterGraph_assign(ctx *Graph_assignContext) {}

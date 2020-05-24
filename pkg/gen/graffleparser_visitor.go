@@ -92,6 +92,9 @@ type GraffleParserVisitor interface {
 	// Visit a parse tree produced by GraffleParser#var_assign.
 	VisitVar_assign(ctx *Var_assignContext) interface{}
 
+	// Visit a parse tree produced by GraffleParser#vertice_assign.
+	VisitVertice_assign(ctx *Vertice_assignContext) interface{}
+
 	// Visit a parse tree produced by GraffleParser#arc_assign.
 	VisitArc_assign(ctx *Arc_assignContext) interface{}
 
@@ -106,9 +109,6 @@ type GraffleParserVisitor interface {
 
 	// Visit a parse tree produced by GraffleParser#unor_w_arc.
 	VisitUnor_w_arc(ctx *Unor_w_arcContext) interface{}
-
-	// Visit a parse tree produced by GraffleParser#vertice_assign.
-	VisitVertice_assign(ctx *Vertice_assignContext) interface{}
 
 	// Visit a parse tree produced by GraffleParser#graph_assign.
 	VisitGraph_assign(ctx *Graph_assignContext) interface{}
