@@ -158,7 +158,7 @@ graph_type
     ;
 
 labeled_assign
-    | edge_assign label?
+    : edge_assign label?
     | graph_assign label?
     ;
 
