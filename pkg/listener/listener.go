@@ -305,6 +305,7 @@ func (s *GraffleListener) EnterFunction_declaration_head(ctx *parser.Function_de
 		log.Fatalf("Parsing error! Cannot declare function \"%s\" multiple times!", id)
 	}
 	s.nameStack.add(id)
+	s.nameStack.push()
 	s.writeBuf("\n%s := func(", id+nsPostfix)
 	var args []string
 	for i, v := range ctx.AllVariable() {
@@ -319,7 +320,6 @@ func (s *GraffleListener) EnterFunction_declaration_head(ctx *parser.Function_de
 	}
 	s.writeBuf(" interface{}) interface{} {\n")
 
-	s.nameStack.push()
 	re, err := regexp.Compile("\\w[\\w0-9]*")
 	if err != nil {
 		log.Fatalf("Error compiling regexp: %v", err)
@@ -342,7 +342,7 @@ func (s *GraffleListener) ExitFunction_declaration_head(ctx *parser.Function_dec
 	s.pushParam(args[last])
 	args = args[:last]
 	for _, a := range args {
-		s.writeBuf("%s = %s;", strings.TrimPrefix(a, "-"), a)
+		s.writeBuf("Assign(&%s, %s);", strings.TrimPrefix(a, "-"), a)
 	}
 
 	re, err := regexp.Compile("\\w[\\w0-9]*")
@@ -384,6 +384,7 @@ func (s *GraffleListener) EnterProcedure_declaration_head(ctx *parser.Procedure_
 		log.Fatalf("Parsing error! Cannot declare function \"%s\" multiple times!", id)
 	}
 	s.nameStack.add(id)
+	s.nameStack.push()
 	s.writeBuf("\n%s := func(", id+nsPostfix)
 	var args []string
 	for i, v := range ctx.AllVariable() {
@@ -397,15 +398,13 @@ func (s *GraffleListener) EnterProcedure_declaration_head(ctx *parser.Procedure_
 		s.nameStack.add(str)
 	}
 	s.writeBuf(" interface{}) interface{} {\n")
-
-	s.nameStack.push()
 }
 
 // ExitProcedure_declaration_head is called when production procedure_declaration_head is exited.
 func (s *GraffleListener) ExitProcedure_declaration_head(ctx *parser.Procedure_declaration_headContext) {
 	for len(s.paramStack) >= 1 {
 		a := s.popParam()
-		s.writeBuf("%s = %s;", strings.TrimPrefix(a, "-"), a)
+		s.writeBuf("Assign(&%s, %s);", strings.TrimPrefix(a, "-"), a)
 	}
 }
 
@@ -415,48 +414,18 @@ func (s *GraffleListener) EnterVar_assign(ctx *parser.Var_assignContext) {
 
 // ExitVar_assign is called when production var_assign is exited.
 func (s *GraffleListener) ExitVar_assign(ctx *parser.Var_assignContext) {
-	start := ctx.GetStart()
-	if start.GetTokenType() == parser.GraffleParserID {
-		idstr := start.GetText()
+	id := ctx.ID()
+	if id != nil {
+		idstr := id.GetText()
 		a := s.popParam()
 		if s.nameStack.find(idstr) {
-			s.pushParamf("%s = %s", idstr+nsPostfix, a)
+			s.pushParamf("Assign(&%s, %s)", idstr+nsPostfix, a)
 		} else {
 			s.nameStack.add(idstr)
-			s.pushParamf("%s := %s", idstr+nsPostfix, a)
+			s.pushParamf("var %s interface{}; Assign(&%s, %s)", idstr+nsPostfix, idstr+nsPostfix, a)
 		}
 	}
 }
-
-// EnterArc_assign is called when production arc_assign is entered.
-func (s *GraffleListener) EnterArc_assign(ctx *parser.Arc_assignContext) {}
-
-// ExitArc_assign is called when production arc_assign is exited.
-func (s *GraffleListener) ExitArc_assign(ctx *parser.Arc_assignContext) {}
-
-// EnterOr_w_arc_lr is called when production or_w_arc_lr is entered.
-func (s *GraffleListener) EnterOr_w_arc_lr(ctx *parser.Or_w_arc_lrContext) {}
-
-// ExitOr_w_arc_lr is called when production or_w_arc_lr is exited.
-func (s *GraffleListener) ExitOr_w_arc_lr(ctx *parser.Or_w_arc_lrContext) {}
-
-// EnterOr_w_arc_rl is called when production or_w_arc_rl is entered.
-func (s *GraffleListener) EnterOr_w_arc_rl(ctx *parser.Or_w_arc_rlContext) {}
-
-// ExitOr_w_arc_rl is called when production or_w_arc_rl is exited.
-func (s *GraffleListener) ExitOr_w_arc_rl(ctx *parser.Or_w_arc_rlContext) {}
-
-// EnterUnor_w_arc is called when production unor_w_arc is entered.
-func (s *GraffleListener) EnterUnor_w_arc(ctx *parser.Unor_w_arcContext) {}
-
-// ExitUnor_w_arc is called when production unor_w_arc is exited.
-func (s *GraffleListener) ExitUnor_w_arc(ctx *parser.Unor_w_arcContext) {}
-
-// EnterArc is called when production arc is entered.
-func (s *GraffleListener) EnterArc(ctx *parser.ArcContext) {}
-
-// ExitArc is called when production arc is exited.
-func (s *GraffleListener) ExitArc(ctx *parser.ArcContext) {}
 
 // EnterVertice_assign is called when production vertice_assign is entered.
 func (s *GraffleListener) EnterVertice_assign(ctx *parser.Vertice_assignContext) {}
@@ -466,9 +435,93 @@ func (s *GraffleListener) ExitVertice_assign(ctx *parser.Vertice_assignContext) 
 	val := s.popParam()
 	idstr := ctx.ID().GetText()
 	if s.nameStack.find(idstr) {
-		s.pushParamf("%s = NewVertice(%s)", idstr+nsPostfix, val)
+		s.pushParamf("Assign(&%s, %s)", idstr+nsPostfix, val)
 	} else {
-		s.pushParamf("%s := %s")
+		s.nameStack.add(idstr)
+		s.pushParamf("var %s interface{}; Assign(&%s, %s)", idstr+nsPostfix, idstr+nsPostfix, val)
+	}
+}
+
+// EnterVertice_type is called when production vertice_type is entered.
+func (s *GraffleListener) EnterVertice_type(ctx *parser.Vertice_typeContext) {}
+
+// ExitVertice_type is called when production vertice_type is exited.
+func (s *GraffleListener) ExitVertice_type(ctx *parser.Vertice_typeContext) {
+	s.pushParamf("NewVertice(%s)", s.popParam())
+}
+
+// EnterEdge_assign is called when production edge_assign is entered.
+func (s *GraffleListener) EnterEdge_assign(ctx *parser.Edge_assignContext) {}
+
+// ExitEdge_assign is called when production edge_assign is exited.
+func (s *GraffleListener) ExitEdge_assign(ctx *parser.Edge_assignContext) {
+	val := s.popParam()
+	idstr := ctx.ID().GetText()
+	if s.nameStack.find(idstr) {
+		s.pushParamf("Assign(&%s, %s)", idstr+nsPostfix, val)
+	} else {
+		s.nameStack.add(idstr)
+		s.pushParamf("var %s interface{}; Assign(&%s, %s)", idstr+nsPostfix, idstr+nsPostfix, val)
+	}
+}
+
+// EnterOr_w_edge_lr is called when production or_w_edge_lr is entered.
+func (s *GraffleListener) EnterOr_w_edge_lr(ctx *parser.Or_w_edge_lrContext) {}
+
+// ExitOr_w_edge_lr is called when production or_w_edge_lr is exited.
+func (s *GraffleListener) ExitOr_w_edge_lr(ctx *parser.Or_w_edge_lrContext) {
+	s.pushParam(ctx.GetWeight().GetText())
+}
+
+// EnterOr_w_edge_rl is called when production or_w_edge_rl is entered.
+func (s *GraffleListener) EnterOr_w_edge_rl(ctx *parser.Or_w_edge_rlContext) {}
+
+// ExitOr_w_edge_rl is called when production or_w_edge_rl is exited.
+func (s *GraffleListener) ExitOr_w_edge_rl(ctx *parser.Or_w_edge_rlContext) {
+	s.pushParam(ctx.GetWeight().GetText())
+}
+
+// EnterUnor_w_edge is called when production unor_w_edge is entered.
+func (s *GraffleListener) EnterUnor_w_edge(ctx *parser.Unor_w_edgeContext) {}
+
+// ExitUnor_w_edge is called when production unor_w_edge is exited.
+func (s *GraffleListener) ExitUnor_w_edge(ctx *parser.Unor_w_edgeContext) {
+	s.pushParam(ctx.GetWeight().GetText())
+}
+
+// EnterEdge is called when production edge is entered.
+func (s *GraffleListener) EnterEdge(ctx *parser.EdgeContext) {}
+
+// ExitEdge is called when production edge is exited.
+func (s *GraffleListener) ExitEdge(ctx *parser.EdgeContext) {
+	w := "0"
+	if ctx.Or_w_edge_lr() != nil || ctx.Or_w_edge_rl() != nil || ctx.Unor_w_edge() != nil {
+		w = s.popParam()
+	}
+	d := "0"
+	if ctx.Or_w_edge_lr() != nil || ctx.OR_EDGE_LR() != nil {
+		d = "1"
+	}
+	if ctx.Or_w_edge_rl() != nil || ctx.OR_EDGE_RL() != nil {
+		d = "-1"
+	}
+
+	s.pushParamf("NewNumber(%s), %s", w, d)
+}
+
+// EnterEdge_type is called when production edge_type is entered.
+func (s *GraffleListener) EnterEdge_type(ctx *parser.Edge_typeContext) {}
+
+// ExitEdge_type is called when production edge_type is exited.
+func (s *GraffleListener) ExitEdge_type(ctx *parser.Edge_typeContext) {
+	if ctx.Edge() != nil {
+		v2 := s.popParam()
+		edge := s.popParam()
+		v1 := s.popParam()
+		s.pushParamf("NewEdge(%s, %s, %s)", v1, v2, edge)
+	} else {
+		v := s.popParam()
+		s.pushParamf("ToEdge(%s)", v)
 	}
 }
 
@@ -476,7 +529,28 @@ func (s *GraffleListener) ExitVertice_assign(ctx *parser.Vertice_assignContext) 
 func (s *GraffleListener) EnterGraph_assign(ctx *parser.Graph_assignContext) {}
 
 // ExitGraph_assign is called when production graph_assign is exited.
-func (s *GraffleListener) ExitGraph_assign(ctx *parser.Graph_assignContext) {}
+func (s *GraffleListener) ExitGraph_assign(ctx *parser.Graph_assignContext) {
+	val := s.popParam()
+	idstr := ctx.ID().GetText()
+	if s.nameStack.find(idstr) {
+		s.pushParamf("Assign(&%s, %s)", idstr+nsPostfix, val)
+	} else {
+		s.nameStack.add(idstr)
+		s.pushParamf("var %s interface{}; Assign(&%s, %s)", idstr+nsPostfix, idstr+nsPostfix, val)
+	}
+}
+
+// EnterGraph_type is called when production graph_type is entered.
+func (s *GraffleListener) EnterGraph_type(ctx *parser.Graph_typeContext) {}
+
+// ExitGraph_type is called when production graph_type is exited.
+func (s *GraffleListener) ExitGraph_type(ctx *parser.Graph_typeContext) {
+	var vals []string
+	for i := 0; i < len(ctx.AllValue()); i++ {
+		vals = sprepend(vals, s.popParam())
+	}
+	s.pushParamf("NewGraph(%s)", strings.Join(vals, ", "))
+}
 
 // EnterLabeled_assign is called when production labeled_assign is entered.
 func (s *GraffleListener) EnterLabeled_assign(ctx *parser.Labeled_assignContext) {}
@@ -602,10 +676,10 @@ func (s *GraffleListener) EnterBuilt_func_input(ctx *parser.Built_func_inputCont
 	if stop.GetTokenType() == parser.GraffleParserID {
 		idstr := stop.GetText()
 		if s.nameStack.find(idstr) {
-			s.pushParamf("%s = Input()", idstr+nsPostfix)
+			s.pushParamf("Assign(&%s, Input())", idstr+nsPostfix)
 		} else {
 			s.nameStack.add(idstr)
-			s.pushParamf("%s := Input()", idstr+nsPostfix)
+			s.pushParamf("var %s interface{}; Assign(&%s, Input())", idstr+nsPostfix, idstr+nsPostfix)
 		}
 	}
 }
