@@ -6,6 +6,13 @@ f(v) = g+1
     g = v + 1
 end.
 
+cycle_test(a)
+    while a not equals to 0
+        print a
+        input a
+    end
+end
+
 v = V("SAS")
 <<< v
 
@@ -15,6 +22,8 @@ e = "Start" -[50]-> "End"
 g = G("OK.", v, e, (v -- v))
 g = g + ((v <- "2"), false)
 <<< g
+
+cycle_test(1)
 
 a = 3 * "2" + 6. <<< a
 >>> b
