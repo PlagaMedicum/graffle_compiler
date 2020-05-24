@@ -341,11 +341,11 @@ func (s *BaseGraffleParserListener) EnterVariable(ctx *VariableContext) {}
 // ExitVariable is called when production variable is exited.
 func (s *BaseGraffleParserListener) ExitVariable(ctx *VariableContext) {}
 
-// EnterBuiltin is called when production builtin is entered.
-func (s *BaseGraffleParserListener) EnterBuiltin(ctx *BuiltinContext) {}
+// EnterBuiltin_type is called when production builtin_type is entered.
+func (s *BaseGraffleParserListener) EnterBuiltin_type(ctx *Builtin_typeContext) {}
 
-// ExitBuiltin is called when production builtin is exited.
-func (s *BaseGraffleParserListener) ExitBuiltin(ctx *BuiltinContext) {}
+// ExitBuiltin_type is called when production builtin_type is exited.
+func (s *BaseGraffleParserListener) ExitBuiltin_type(ctx *Builtin_typeContext) {}
 
 // EnterBlock_end is called when production block_end is entered.
 func (s *BaseGraffleParserListener) EnterBlock_end(ctx *Block_endContext) {}

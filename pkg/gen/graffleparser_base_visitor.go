@@ -212,7 +212,7 @@ func (v *BaseGraffleParserVisitor) VisitVariable(ctx *VariableContext) interface
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGraffleParserVisitor) VisitBuiltin(ctx *BuiltinContext) interface{} {
+func (v *BaseGraffleParserVisitor) VisitBuiltin_type(ctx *Builtin_typeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

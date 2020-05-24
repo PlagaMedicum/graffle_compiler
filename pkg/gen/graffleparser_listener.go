@@ -161,8 +161,8 @@ type GraffleParserListener interface {
 	// EnterVariable is called when entering the variable production.
 	EnterVariable(c *VariableContext)
 
-	// EnterBuiltin is called when entering the builtin production.
-	EnterBuiltin(c *BuiltinContext)
+	// EnterBuiltin_type is called when entering the builtin_type production.
+	EnterBuiltin_type(c *Builtin_typeContext)
 
 	// EnterBlock_end is called when entering the block_end production.
 	EnterBlock_end(c *Block_endContext)
@@ -320,8 +320,8 @@ type GraffleParserListener interface {
 	// ExitVariable is called when exiting the variable production.
 	ExitVariable(c *VariableContext)
 
-	// ExitBuiltin is called when exiting the builtin production.
-	ExitBuiltin(c *BuiltinContext)
+	// ExitBuiltin_type is called when exiting the builtin_type production.
+	ExitBuiltin_type(c *Builtin_typeContext)
 
 	// ExitBlock_end is called when exiting the block_end production.
 	ExitBlock_end(c *Block_endContext)

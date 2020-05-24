@@ -5,7 +5,7 @@ options {
 }
 
 file
-    : NEWLINE? function_declaration* main_body=sequence EOF?
+    : (NEWLINE? function_declaration)* sequence EOF?
     ;
 
 sequence
@@ -66,7 +66,7 @@ until_stmnt
 for_stmnt
     : FOR cond=logical_expr DO?                                                              #ForLogical
     | FOR pre_act=atom_action ARG_DELIM cond=logical_expr ARG_DELIM post_act=atom_action DO? #ForVar
-    | FOR variable IN RANGE? FROM? from=expr TO to=expr DO?                                       #ForRange
+    | FOR variable IN RANGE? FROM? from=expr TO to=expr DO?                                  #ForRange
     ;
 from_to_stmnt
     : FROM from=expr TO to=expr DO?
@@ -75,10 +75,10 @@ from_to_stmnt
 // Declarations:
 // functions
 function_declaration
-    : NEWLINE? one_line_function_declaration
-    | NEWLINE? mult_line_function_declaration
-    | NEWLINE? one_line_procedure_declaration
-    | NEWLINE? mult_line_procedure_declaration
+    : one_line_function_declaration
+    | mult_line_function_declaration
+    | one_line_procedure_declaration
+    | mult_line_procedure_declaration
     ;
 one_line_function_declaration
     : function_declaration_head sequence_line
@@ -87,7 +87,7 @@ mult_line_function_declaration
     : function_declaration_head sequence block_end
     ;
 function_declaration_head
-    : ID '(' (opd1=variable (ARG_DELIM opd2=variable)*)? ')' ASSIGN return_val=value (','? WHERE)?
+    : ID '(' (variable (ARG_DELIM variable)*)? ')' ASSIGN return_val=value (','? WHERE)?
     ;
 one_line_procedure_declaration
     : procedure_declaration_head sequence_line
@@ -96,12 +96,12 @@ mult_line_procedure_declaration
     : procedure_declaration_head NEWLINE sequence block_end
     ;
 procedure_declaration_head
-    : ID '(' (opd1=variable (ARG_DELIM opd2=variable)*)? ')' ASSIGN?
+    : ID '(' (variable (ARG_DELIM variable)*)? ')' ASSIGN?
     ;
 
 // vars
 var_assign
-    : ID ASSIGN val=variable
+    : ID ASSIGN variable
     | ID ASSIGN expr
     | arc_assign
     | vertice_assign
@@ -157,7 +157,7 @@ expr
 
 integral_expr
     : function_call
-    | builtin
+    | builtin_type
     | '(' logical_expr ')'
     | '(' arithm_expr ')'
     ;
@@ -238,18 +238,18 @@ value
     : logical_expr
     | arithm_expr
     | expr
-    | builtin
+    | builtin_type
     ;
 variable
     : '-'? ID
     ;
 
-builtin
+builtin_type
     : NUMBER
     | STRING
     | BOOL
     ;
 
 block_end
-    : NEWLINE? BLOCK_END NEWLINE?
+    : NEWLINE? BLOCK_END ACT_DELIM* NEWLINE?
     ;
