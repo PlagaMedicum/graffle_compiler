@@ -103,6 +103,10 @@ func main() {`)
 
 // ExitFile is called when production file is exited.
 func (s *GraffleListener) ExitFile(ctx *parser.FileContext) {
+	for len(s.paramStack) >= 1 {
+		s.writeBuf(s.paramStack[0])
+		s.paramStack = append([]string{}, s.paramStack[1:]...)
+	}
 	s.writeBuf("\n}")
 	s.nameStack.pop()
 }
@@ -118,7 +122,7 @@ func (s *GraffleListener) ExitSequence(ctx *parser.SequenceContext) {
 	for i := 0; i < len(ctx.AllSequence_element()); i++ {
 		els = sprepend(els, s.popParam())
 	}
-	s.writeBuf("\n%s", strings.Join(els, ";\n"))
+	s.pushParamf("\n%s", strings.Join(els, ";\n"))
 	s.nameStack.pop()
 }
 
@@ -157,10 +161,25 @@ func (s *GraffleListener) EnterAtom_action(ctx *parser.Atom_actionContext) {}
 func (s *GraffleListener) ExitAtom_action(ctx *parser.Atom_actionContext) {}
 
 // EnterIf_stmnt is called when production if_stmnt is entered.
-func (s *GraffleListener) EnterIf_stmnt(ctx *parser.If_stmntContext) {}
+func (s *GraffleListener) EnterIf_stmnt(ctx *parser.If_stmntContext) {
+}
 
 // ExitIf_stmnt is called when production if_stmnt is exited.
-func (s *GraffleListener) ExitIf_stmnt(ctx *parser.If_stmntContext) {}
+func (s *GraffleListener) ExitIf_stmnt(ctx *parser.If_stmntContext) {
+	else_sq := ""
+	if ctx.Else_stmnt() != nil {
+		else_sq = fmt.Sprintf("%s\n", s.popParam())
+	}
+	if_sq := s.popParam()
+	cond := s.popParam()
+	s.pushParamf("if %s.Val() {%s\n} else {%s}", cond, if_sq, else_sq)
+}
+
+// EnterElse_stmnt is called when production else_stmnt is entered.
+func (s *GraffleListener) EnterElse_stmnt(ctx *parser.Else_stmntContext) {}
+
+// ExitElse_stmnt is called when production else_stmnt is exited.
+func (s *GraffleListener) ExitElse_stmnt(ctx *parser.Else_stmntContext) {}
 
 // EnterIf_is_stmnt is called when production if_is_stmnt is entered.
 func (s *GraffleListener) EnterIf_is_stmnt(ctx *parser.If_is_stmntContext) {}
@@ -173,6 +192,12 @@ func (s *GraffleListener) EnterCase_stmnt(ctx *parser.Case_stmntContext) {}
 
 // ExitCase_stmnt is called when production case_stmnt is exited.
 func (s *GraffleListener) ExitCase_stmnt(ctx *parser.Case_stmntContext) {}
+
+// EnterDefault_stmnt is called when production default_stmnt is entered.
+func (s *GraffleListener) EnterDefault_stmnt(ctx *parser.Default_stmntContext) {}
+
+// ExitDefault_stmnt is called when production default_stmnt is exited.
+func (s *GraffleListener) ExitDefault_stmnt(ctx *parser.Default_stmntContext) {}
 
 // EnterOne_line_stmnt is called when production one_line_stmnt is entered.
 func (s *GraffleListener) EnterOne_line_stmnt(ctx *parser.One_line_stmntContext) {}
@@ -242,8 +267,7 @@ func (s *GraffleListener) EnterOne_line_function_declaration(ctx *parser.One_lin
 
 // ExitOne_line_function_declaration is called when production one_line_function_declaration is exited.
 func (s *GraffleListener) ExitOne_line_function_declaration(ctx *parser.One_line_function_declarationContext) {
-	s.writeBuf("\nreturn %s", s.popParam())
-	s.writeBuf("\n}")
+	s.writeBuf("%s\nreturn %s\n}", s.popParam(), s.popParam())
 	s.nameStack.pop()
 }
 
@@ -253,8 +277,7 @@ func (s *GraffleListener) EnterMult_line_function_declaration(ctx *parser.Mult_l
 
 // ExitMult_line_function_declaration is called when production mult_line_function_declaration is exited.
 func (s *GraffleListener) ExitMult_line_function_declaration(ctx *parser.Mult_line_function_declarationContext) {
-	s.writeBuf("\nreturn %s", s.popParam())
-	s.writeBuf("\n}")
+	s.writeBuf("%s\nreturn %s\n}", s.popParam(), s.popParam())
 	s.nameStack.pop()
 }
 
@@ -323,7 +346,7 @@ func (s *GraffleListener) EnterOne_line_procedure_declaration(ctx *parser.One_li
 
 // ExitOne_line_procedure_declaration is called when production one_line_procedure_declaration is exited.
 func (s *GraffleListener) ExitOne_line_procedure_declaration(ctx *parser.One_line_procedure_declarationContext) {
-	s.writeBuf("\n}")
+	s.writeBuf("%s\n}", s.popParam())
 	s.nameStack.pop()
 }
 
@@ -333,15 +356,18 @@ func (s *GraffleListener) EnterMult_line_procedure_declaration(ctx *parser.Mult_
 
 // ExitMult_line_procedure_declaration is called when production mult_line_procedure_declaration is exited.
 func (s *GraffleListener) ExitMult_line_procedure_declaration(ctx *parser.Mult_line_procedure_declarationContext) {
-	s.writeBuf("\n}")
+	s.writeBuf("%s\n}", s.popParam())
 	s.nameStack.pop()
 }
 
 // EnterProcedure_declaration_head is called when production procedure_declaration_head is entered.
 func (s *GraffleListener) EnterProcedure_declaration_head(ctx *parser.Procedure_declaration_headContext) {
-	id := ctx.ID()
-	s.nameStack.add(id.GetText())
-	s.writeBuf("%s := func(", id.GetText())
+	id := ctx.ID().GetText()
+	if s.nameStack.find(id) {
+		log.Fatalf("Parsing error! Cannot declare function \"%s\" multiple times!", id)
+	}
+	s.nameStack.add(id)
+	s.writeBuf("\n%s := func(", id)
 	var args []string
 	for i, v := range ctx.AllVariable() {
 		str := v.GetText()
@@ -354,15 +380,16 @@ func (s *GraffleListener) EnterProcedure_declaration_head(ctx *parser.Procedure_
 		s.nameStack.add(str)
 	}
 	s.writeBuf(" interface{}) interface{} {\n")
-	for _, a := range args {
-		s.writeBuf("%s = %s;", strings.TrimPrefix(a, "-"), a)
-	}
 
 	s.nameStack.push()
 }
 
 // ExitProcedure_declaration_head is called when production procedure_declaration_head is exited.
 func (s *GraffleListener) ExitProcedure_declaration_head(ctx *parser.Procedure_declaration_headContext) {
+	for len(s.paramStack) >= 1 {
+		a := s.popParam()
+		s.writeBuf("%s = %s;", strings.TrimPrefix(a, "-"), a)
+	}
 }
 
 // EnterVar_assign is called when production var_assign is entered.
