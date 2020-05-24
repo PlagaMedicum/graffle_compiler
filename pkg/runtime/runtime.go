@@ -51,23 +51,35 @@ func NewBool(val bool) Bool {
 	return Bool{val}
 }
 
+func (n Number) Val() float64 {
+	return n.float64
+}
+
+func (s String) Val() string {
+	return s.string
+}
+
+func (b Bool) Val() bool {
+	return b.bool
+}
+
 func (n Number) Number() (Number, bool) {
 	return n, true
 }
 
 func (n Number) String() String {
-	return NewString(fmt.Sprintf("%f", n.float64))
+	return NewString(fmt.Sprintf("%f", n.Val()))
 }
 
 func (n Number) Bool() Bool {
-	if n.float64 == 0 {
+	if n.Val() == 0 {
 		return NewBool(false)
 	}
 	return NewBool(true)
 }
 
 func (s String) Number() (Number, bool) {
-	str := strings.ReplaceAll(s.string, ",", ".")
+	str := strings.ReplaceAll(s.Val(), ",", ".")
 	f, err := strconv.ParseFloat(str, 64)
 	if err != nil {
 		return NewNumber(0), false
@@ -80,7 +92,7 @@ func (s String) String() String {
 }
 
 func (s String) Bool() Bool {
-	str := strings.ToLower(s.string)
+	str := strings.ToLower(s.Val())
 	str = strings.ReplaceAll(str, " ", "")
 	if str == "" || str == "false" || str == "nottrue" || str == "0" {
 		return NewBool(false)
@@ -89,14 +101,14 @@ func (s String) Bool() Bool {
 }
 
 func (b Bool) Number() (Number, bool) {
-	if b.bool {
+	if b.Val() {
 		return NewNumber(1), true
 	}
 	return NewNumber(0), true
 }
 
 func (b Bool) String() String {
-	if b.bool {
+	if b.Val() {
 		return NewString("True")
 	}
 	return NewString("False")
