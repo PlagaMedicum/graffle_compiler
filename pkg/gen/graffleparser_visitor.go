@@ -29,11 +29,17 @@ type GraffleParserVisitor interface {
 	// Visit a parse tree produced by GraffleParser#if_stmnt.
 	VisitIf_stmnt(ctx *If_stmntContext) interface{}
 
+	// Visit a parse tree produced by GraffleParser#else_stmnt.
+	VisitElse_stmnt(ctx *Else_stmntContext) interface{}
+
 	// Visit a parse tree produced by GraffleParser#if_is_stmnt.
 	VisitIf_is_stmnt(ctx *If_is_stmntContext) interface{}
 
 	// Visit a parse tree produced by GraffleParser#case_stmnt.
 	VisitCase_stmnt(ctx *Case_stmntContext) interface{}
+
+	// Visit a parse tree produced by GraffleParser#default_stmnt.
+	VisitDefault_stmnt(ctx *Default_stmntContext) interface{}
 
 	// Visit a parse tree produced by GraffleParser#one_line_stmnt.
 	VisitOne_line_stmnt(ctx *One_line_stmntContext) interface{}

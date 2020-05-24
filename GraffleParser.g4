@@ -33,14 +33,20 @@ atom_action
 
 // Statements:
 if_stmnt
-    : IF cond=logical_expr ( ','? (THEN | DO | THEN DO) )? sequence+ NEWLINE? (ELSE DO? sequence+)? block_end
+    : IF logical_expr ( ','? (THEN | DO | THEN DO) )? sequence else_stmnt? block_end
+    ;
+else_stmnt
+    : NEWLINE? ELSE DO? sequence
     ;
 
 if_is_stmnt
-    : IF value case_stmnt* NEWLINE? (DEFAULT DO? sequence+)? block_end
+    : IF value case_stmnt* default_stmnt? block_end
     ;
 case_stmnt
-    : NEWLINE? IS value ( ','? (THEN | DO | THEN DO) )? sequence+
+    : NEWLINE? IS value ( ','? (THEN | DO | THEN DO) )? sequence
+    ;
+default_stmnt
+    : NEWLINE? DEFAULT DO? sequence
     ;
 
 one_line_stmnt

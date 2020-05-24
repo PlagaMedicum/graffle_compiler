@@ -29,11 +29,17 @@ type GraffleParserListener interface {
 	// EnterIf_stmnt is called when entering the if_stmnt production.
 	EnterIf_stmnt(c *If_stmntContext)
 
+	// EnterElse_stmnt is called when entering the else_stmnt production.
+	EnterElse_stmnt(c *Else_stmntContext)
+
 	// EnterIf_is_stmnt is called when entering the if_is_stmnt production.
 	EnterIf_is_stmnt(c *If_is_stmntContext)
 
 	// EnterCase_stmnt is called when entering the case_stmnt production.
 	EnterCase_stmnt(c *Case_stmntContext)
+
+	// EnterDefault_stmnt is called when entering the default_stmnt production.
+	EnterDefault_stmnt(c *Default_stmntContext)
 
 	// EnterOne_line_stmnt is called when entering the one_line_stmnt production.
 	EnterOne_line_stmnt(c *One_line_stmntContext)
@@ -188,11 +194,17 @@ type GraffleParserListener interface {
 	// ExitIf_stmnt is called when exiting the if_stmnt production.
 	ExitIf_stmnt(c *If_stmntContext)
 
+	// ExitElse_stmnt is called when exiting the else_stmnt production.
+	ExitElse_stmnt(c *Else_stmntContext)
+
 	// ExitIf_is_stmnt is called when exiting the if_is_stmnt production.
 	ExitIf_is_stmnt(c *If_is_stmntContext)
 
 	// ExitCase_stmnt is called when exiting the case_stmnt production.
 	ExitCase_stmnt(c *Case_stmntContext)
+
+	// ExitDefault_stmnt is called when exiting the default_stmnt production.
+	ExitDefault_stmnt(c *Default_stmntContext)
 
 	// ExitOne_line_stmnt is called when exiting the one_line_stmnt production.
 	ExitOne_line_stmnt(c *One_line_stmntContext)

@@ -36,11 +36,19 @@ func (v *BaseGraffleParserVisitor) VisitIf_stmnt(ctx *If_stmntContext) interface
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseGraffleParserVisitor) VisitElse_stmnt(ctx *Else_stmntContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseGraffleParserVisitor) VisitIf_is_stmnt(ctx *If_is_stmntContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
 func (v *BaseGraffleParserVisitor) VisitCase_stmnt(ctx *Case_stmntContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGraffleParserVisitor) VisitDefault_stmnt(ctx *Default_stmntContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

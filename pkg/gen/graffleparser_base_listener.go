@@ -65,6 +65,12 @@ func (s *BaseGraffleParserListener) EnterIf_stmnt(ctx *If_stmntContext) {}
 // ExitIf_stmnt is called when production if_stmnt is exited.
 func (s *BaseGraffleParserListener) ExitIf_stmnt(ctx *If_stmntContext) {}
 
+// EnterElse_stmnt is called when production else_stmnt is entered.
+func (s *BaseGraffleParserListener) EnterElse_stmnt(ctx *Else_stmntContext) {}
+
+// ExitElse_stmnt is called when production else_stmnt is exited.
+func (s *BaseGraffleParserListener) ExitElse_stmnt(ctx *Else_stmntContext) {}
+
 // EnterIf_is_stmnt is called when production if_is_stmnt is entered.
 func (s *BaseGraffleParserListener) EnterIf_is_stmnt(ctx *If_is_stmntContext) {}
 
@@ -76,6 +82,12 @@ func (s *BaseGraffleParserListener) EnterCase_stmnt(ctx *Case_stmntContext) {}
 
 // ExitCase_stmnt is called when production case_stmnt is exited.
 func (s *BaseGraffleParserListener) ExitCase_stmnt(ctx *Case_stmntContext) {}
+
+// EnterDefault_stmnt is called when production default_stmnt is entered.
+func (s *BaseGraffleParserListener) EnterDefault_stmnt(ctx *Default_stmntContext) {}
+
+// ExitDefault_stmnt is called when production default_stmnt is exited.
+func (s *BaseGraffleParserListener) ExitDefault_stmnt(ctx *Default_stmntContext) {}
 
 // EnterOne_line_stmnt is called when production one_line_stmnt is entered.
 func (s *BaseGraffleParserListener) EnterOne_line_stmnt(ctx *One_line_stmntContext) {}
