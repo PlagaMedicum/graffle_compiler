@@ -59,6 +59,7 @@ func NewNumber(val interface{}) Number {
 	if v, b := val.(float64); b {
 		return Number{v}
 	}
+
 	if vi, bi := val.(NumericType); bi {
 		if v, b := vi.Number(); b {
 			return v
@@ -122,6 +123,8 @@ func (n Number) Bool() Bool {
 
 func (s String) Number() (Number, bool) {
 	str := strings.ReplaceAll(s.Val(), ",", ".")
+	str = strings.ReplaceAll(str, "\n", "")
+	str = strings.ReplaceAll(str, " ", "")
 	f, err := strconv.ParseFloat(str, 64)
 	if err != nil {
 		return NewNumber(0), false
@@ -431,10 +434,10 @@ func Add(l, r interface{}) interface{} {
 	}
 
 	log.Fatalf("Error! Wrong types passed in Addition! left: %t, right: %t", l, r)
-	return NewNumber(0)
+	return nil
 }
 
-func Subtract(l, r interface{}) BuiltinType {
+func Subtract(l, r interface{}) interface{} {
 	li, lb := l.(NumericType)
 	ri, rb := r.(NumericType)
 	if lb && rb {
@@ -445,11 +448,12 @@ func Subtract(l, r interface{}) BuiltinType {
 			return ln
 		}
 	}
+
 	log.Fatalf("Error! Wrong types passed in Subtraction! left: %t, right: %t", l, r)
-	return NewNumber(0)
+	return nil
 }
 
-func Multiply(l, r interface{}) BuiltinType {
+func Multiply(l, r interface{}) interface{} {
 	li, lb := l.(NumericType)
 	ri, rb := r.(NumericType)
 	if lb && rb {
@@ -460,8 +464,9 @@ func Multiply(l, r interface{}) BuiltinType {
 			return ln
 		}
 	}
+
 	log.Fatalf("Error! Wrong types passed in Multiplication! left: %t, right: %t", l, r)
-	return NewNumber(0)
+	return nil
 }
 
 func Divide(l, r interface{}) interface{} {
@@ -475,8 +480,9 @@ func Divide(l, r interface{}) interface{} {
 			return ln
 		}
 	}
+
 	log.Fatalf("Error! Wrong types passed in Dividing! left: %t, right: %t", l, r)
-	return NewNumber(0)
+	return nil
 }
 
 func Not(a interface{}) Bool {
@@ -485,6 +491,7 @@ func Not(a interface{}) Bool {
 		v := i.Bool()
 		return NewBool(!v.bool)
 	}
+
 	log.Fatalf("Error! Wrong type passed in \"Not\" operation! type: %t", a)
 	return NewBool(false)
 }
@@ -497,6 +504,7 @@ func And(l, r interface{}) Bool {
 		rv := ri.Bool()
 		return NewBool(lv.bool && rv.bool)
 	}
+
 	log.Fatalf("Error! Wrong types passed in \"And\" operation! left: %t, right: %t", l, r)
 	return NewBool(false)
 }
@@ -509,6 +517,20 @@ func Or(l, r interface{}) Bool {
 		rv := ri.Bool()
 		return NewBool(lv.bool || rv.bool)
 	}
+
+	log.Fatalf("Error! Wrong types passed in \"Or\" operation! left: %t, right: %t", l, r)
+	return NewBool(false)
+}
+
+func ExclusiveOr(l, r interface{}) Bool {
+	li, lb := l.(LogicalType)
+	ri, rb := r.(LogicalType)
+	if lb && rb {
+		lv := li.Bool()
+		rv := ri.Bool()
+		return NewBool((lv.bool && !rv.bool) || (!lv.bool && rv.bool))
+	}
+
 	log.Fatalf("Error! Wrong types passed in \"Or\" operation! left: %t, right: %t", l, r)
 	return NewBool(false)
 }
@@ -526,6 +548,7 @@ func Equals(l, r interface{}) Bool {
 		log.Fatalf("Error! Wrong operands, cannot evaluate \"Equals\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
 		return NewBool(false)
 	}
+
 	log.Fatalf("Error! Wrong types passed in \"Equals\" operation! left: %t, right: %t", l, r)
 	return NewBool(false)
 }
@@ -543,6 +566,7 @@ func Less(l, r interface{}) Bool {
 		log.Fatalf("Error! Wrong operands, cannot evaluate \"Less than\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
 		return NewBool(false)
 	}
+
 	log.Fatalf("Error! Wrong types passed in \"Less than\" operation! left: %t, right: %t", l, r)
 	return NewBool(false)
 }
@@ -560,6 +584,7 @@ func Greater(l, r interface{}) Bool {
 		log.Fatalf("Error! Wrong operands, cannot evaluate \"Greater than\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
 		return NewBool(false)
 	}
+
 	log.Fatalf("Error! Wrong types passed in \"Greater than\" operation! left: %t, right: %t", l, r)
 	return NewBool(false)
 }
@@ -577,6 +602,7 @@ func LessOrEquals(l, r interface{}) Bool {
 		log.Fatalf("Error! Wrong operands, cannot evaluate \"Less than or equals\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
 		return NewBool(false)
 	}
+
 	log.Fatalf("Error! Wrong types passed in \"Less than or equals\" operation! left: %t, right: %t", l, r)
 	return NewBool(false)
 }
@@ -594,6 +620,7 @@ func GreaterOrEquals(l, r interface{}) Bool {
 		log.Fatalf("Error! Wrong operands, cannot evaluate \"Greater than or equals\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
 		return NewBool(false)
 	}
+
 	log.Fatalf("Error! Wrong types passed in \"Greater than or equals\" operation! left: %t, right: %t", l, r)
 	return NewBool(false)
 }
