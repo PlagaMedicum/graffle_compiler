@@ -50,13 +50,13 @@ default_stmnt
     ;
 
 one_line_stmnt
-    : stmnt sequence_line
+    : cycle_stmnt sequence_line
     ;
 mult_line_stmnt
-    : stmnt sequence block_end
+    : cycle_stmnt sequence block_end
     ;
 
-stmnt
+cycle_stmnt
     : while_stmnt
     | until_stmnt
     | for_stmnt
@@ -64,18 +64,18 @@ stmnt
     ;
 
 while_stmnt
-    : WHILE cond=logical_expr DO?
+    : WHILE logical_expr DO?
     ;
 until_stmnt
-    : UNTIL cond=logical_expr DO?
+    : UNTIL logical_expr DO?
     ;
 for_stmnt
-    : FOR cond=logical_expr DO?                                                              #ForLogical
-    | FOR pre_act=atom_action ARG_DELIM cond=logical_expr ARG_DELIM post_act=atom_action DO? #ForVar
-    | FOR variable IN RANGE? FROM? from=expr TO to=expr DO?                                  #ForRange
+    : FOR logical_expr DO?                                             #ForLogical
+    | FOR atom_action ARG_DELIM logical_expr ARG_DELIM atom_action DO? #ForVar
+    | FOR variable IN RANGE? FROM? expr TO expr DO?                    #ForRange
     ;
 from_to_stmnt
-    : FROM from=expr TO to=expr DO?
+    : FROM expr TO expr DO?
     ;
 
 // Declarations:

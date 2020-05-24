@@ -101,11 +101,11 @@ func (s *BaseGraffleParserListener) EnterMult_line_stmnt(ctx *Mult_line_stmntCon
 // ExitMult_line_stmnt is called when production mult_line_stmnt is exited.
 func (s *BaseGraffleParserListener) ExitMult_line_stmnt(ctx *Mult_line_stmntContext) {}
 
-// EnterStmnt is called when production stmnt is entered.
-func (s *BaseGraffleParserListener) EnterStmnt(ctx *StmntContext) {}
+// EnterCycle_stmnt is called when production cycle_stmnt is entered.
+func (s *BaseGraffleParserListener) EnterCycle_stmnt(ctx *Cycle_stmntContext) {}
 
-// ExitStmnt is called when production stmnt is exited.
-func (s *BaseGraffleParserListener) ExitStmnt(ctx *StmntContext) {}
+// ExitCycle_stmnt is called when production cycle_stmnt is exited.
+func (s *BaseGraffleParserListener) ExitCycle_stmnt(ctx *Cycle_stmntContext) {}
 
 // EnterWhile_stmnt is called when production while_stmnt is entered.
 func (s *BaseGraffleParserListener) EnterWhile_stmnt(ctx *While_stmntContext) {}

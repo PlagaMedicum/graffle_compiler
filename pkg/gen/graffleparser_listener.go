@@ -47,8 +47,8 @@ type GraffleParserListener interface {
 	// EnterMult_line_stmnt is called when entering the mult_line_stmnt production.
 	EnterMult_line_stmnt(c *Mult_line_stmntContext)
 
-	// EnterStmnt is called when entering the stmnt production.
-	EnterStmnt(c *StmntContext)
+	// EnterCycle_stmnt is called when entering the cycle_stmnt production.
+	EnterCycle_stmnt(c *Cycle_stmntContext)
 
 	// EnterWhile_stmnt is called when entering the while_stmnt production.
 	EnterWhile_stmnt(c *While_stmntContext)
@@ -221,8 +221,8 @@ type GraffleParserListener interface {
 	// ExitMult_line_stmnt is called when exiting the mult_line_stmnt production.
 	ExitMult_line_stmnt(c *Mult_line_stmntContext)
 
-	// ExitStmnt is called when exiting the stmnt production.
-	ExitStmnt(c *StmntContext)
+	// ExitCycle_stmnt is called when exiting the cycle_stmnt production.
+	ExitCycle_stmnt(c *Cycle_stmntContext)
 
 	// ExitWhile_stmnt is called when exiting the while_stmnt production.
 	ExitWhile_stmnt(c *While_stmntContext)

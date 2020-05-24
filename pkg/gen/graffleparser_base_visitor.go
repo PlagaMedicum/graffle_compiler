@@ -60,7 +60,7 @@ func (v *BaseGraffleParserVisitor) VisitMult_line_stmnt(ctx *Mult_line_stmntCont
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGraffleParserVisitor) VisitStmnt(ctx *StmntContext) interface{} {
+func (v *BaseGraffleParserVisitor) VisitCycle_stmnt(ctx *Cycle_stmntContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

@@ -82,13 +82,13 @@ var parserATN = []uint16{
 	16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50,
 	52, 54, 56, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86,
 	88, 90, 92, 94, 96, 98, 100, 102, 104, 106, 108, 110, 112, 2, 8, 4, 2,
-	42, 42, 66, 66, 3, 2, 15, 25, 3, 2, 62, 65, 3, 2, 11, 14, 3, 2, 4, 5, 5,
-	2, 3, 3, 6, 6, 53, 53, 2, 622, 2, 120, 3, 2, 2, 2, 4, 128, 3, 2, 2, 2,
-	6, 147, 3, 2, 2, 2, 8, 149, 3, 2, 2, 2, 10, 162, 3, 2, 2, 2, 12, 167, 3,
-	2, 2, 2, 14, 169, 3, 2, 2, 2, 16, 189, 3, 2, 2, 2, 18, 197, 3, 2, 2, 2,
-	20, 211, 3, 2, 2, 2, 22, 229, 3, 2, 2, 2, 24, 237, 3, 2, 2, 2, 26, 240,
-	3, 2, 2, 2, 28, 248, 3, 2, 2, 2, 30, 250, 3, 2, 2, 2, 32, 255, 3, 2, 2,
-	2, 34, 289, 3, 2, 2, 2, 36, 291, 3, 2, 2, 2, 38, 302, 3, 2, 2, 2, 40, 304,
+	45, 45, 66, 66, 3, 2, 18, 28, 3, 2, 62, 65, 3, 2, 14, 17, 3, 2, 7, 8, 5,
+	2, 3, 3, 6, 6, 9, 9, 2, 622, 2, 120, 3, 2, 2, 2, 4, 128, 3, 2, 2, 2, 6,
+	147, 3, 2, 2, 2, 8, 149, 3, 2, 2, 2, 10, 162, 3, 2, 2, 2, 12, 167, 3, 2,
+	2, 2, 14, 169, 3, 2, 2, 2, 16, 189, 3, 2, 2, 2, 18, 197, 3, 2, 2, 2, 20,
+	211, 3, 2, 2, 2, 22, 229, 3, 2, 2, 2, 24, 237, 3, 2, 2, 2, 26, 240, 3,
+	2, 2, 2, 28, 248, 3, 2, 2, 2, 30, 250, 3, 2, 2, 2, 32, 255, 3, 2, 2, 2,
+	34, 289, 3, 2, 2, 2, 36, 291, 3, 2, 2, 2, 38, 302, 3, 2, 2, 2, 40, 304,
 	3, 2, 2, 2, 42, 307, 3, 2, 2, 2, 44, 311, 3, 2, 2, 2, 46, 332, 3, 2, 2,
 	2, 48, 335, 3, 2, 2, 2, 50, 340, 3, 2, 2, 2, 52, 370, 3, 2, 2, 2, 54, 372,
 	3, 2, 2, 2, 56, 376, 3, 2, 2, 2, 58, 381, 3, 2, 2, 2, 60, 394, 3, 2, 2,
@@ -99,12 +99,12 @@ var parserATN = []uint16{
 	2, 90, 518, 3, 2, 2, 2, 92, 520, 3, 2, 2, 2, 94, 522, 3, 2, 2, 2, 96, 526,
 	3, 2, 2, 2, 98, 534, 3, 2, 2, 2, 100, 536, 3, 2, 2, 2, 102, 539, 3, 2,
 	2, 2, 104, 553, 3, 2, 2, 2, 106, 558, 3, 2, 2, 2, 108, 561, 3, 2, 2, 2,
-	110, 565, 3, 2, 2, 2, 112, 568, 3, 2, 2, 2, 114, 116, 7, 42, 2, 2, 115,
+	110, 565, 3, 2, 2, 2, 112, 568, 3, 2, 2, 2, 114, 116, 7, 45, 2, 2, 115,
 	114, 3, 2, 2, 2, 115, 116, 3, 2, 2, 2, 116, 117, 3, 2, 2, 2, 117, 119,
 	5, 38, 20, 2, 118, 115, 3, 2, 2, 2, 119, 122, 3, 2, 2, 2, 120, 118, 3,
 	2, 2, 2, 120, 121, 3, 2, 2, 2, 121, 123, 3, 2, 2, 2, 122, 120, 3, 2, 2,
 	2, 123, 125, 5, 4, 3, 2, 124, 126, 7, 2, 2, 3, 125, 124, 3, 2, 2, 2, 125,
-	126, 3, 2, 2, 2, 126, 3, 3, 2, 2, 2, 127, 129, 7, 42, 2, 2, 128, 127, 3,
+	126, 3, 2, 2, 2, 126, 3, 3, 2, 2, 2, 127, 129, 7, 45, 2, 2, 128, 127, 3,
 	2, 2, 2, 128, 129, 3, 2, 2, 2, 129, 139, 3, 2, 2, 2, 130, 137, 5, 6, 4,
 	2, 131, 133, 9, 2, 2, 2, 132, 131, 3, 2, 2, 2, 133, 134, 3, 2, 2, 2, 134,
 	132, 3, 2, 2, 2, 134, 135, 3, 2, 2, 2, 135, 138, 3, 2, 2, 2, 136, 138,
@@ -121,107 +121,107 @@ var parserATN = []uint16{
 	160, 3, 2, 2, 2, 162, 161, 3, 2, 2, 2, 163, 11, 3, 2, 2, 2, 164, 168, 5,
 	52, 27, 2, 165, 168, 5, 102, 52, 2, 166, 168, 5, 96, 49, 2, 167, 164, 3,
 	2, 2, 2, 167, 165, 3, 2, 2, 2, 167, 166, 3, 2, 2, 2, 168, 13, 3, 2, 2,
-	2, 169, 170, 7, 27, 2, 2, 170, 180, 5, 80, 41, 2, 171, 173, 7, 67, 2, 2,
+	2, 169, 170, 7, 30, 2, 2, 170, 180, 5, 80, 41, 2, 171, 173, 7, 67, 2, 2,
 	172, 171, 3, 2, 2, 2, 172, 173, 3, 2, 2, 2, 173, 178, 3, 2, 2, 2, 174,
-	179, 7, 28, 2, 2, 175, 179, 7, 39, 2, 2, 176, 177, 7, 28, 2, 2, 177, 179,
-	7, 39, 2, 2, 178, 174, 3, 2, 2, 2, 178, 175, 3, 2, 2, 2, 178, 176, 3, 2,
+	179, 7, 31, 2, 2, 175, 179, 7, 42, 2, 2, 176, 177, 7, 31, 2, 2, 177, 179,
+	7, 42, 2, 2, 178, 174, 3, 2, 2, 2, 178, 175, 3, 2, 2, 2, 178, 176, 3, 2,
 	2, 2, 179, 181, 3, 2, 2, 2, 180, 172, 3, 2, 2, 2, 180, 181, 3, 2, 2, 2,
 	181, 182, 3, 2, 2, 2, 182, 184, 5, 4, 3, 2, 183, 185, 5, 16, 9, 2, 184,
 	183, 3, 2, 2, 2, 184, 185, 3, 2, 2, 2, 185, 186, 3, 2, 2, 2, 186, 187,
-	5, 112, 57, 2, 187, 15, 3, 2, 2, 2, 188, 190, 7, 42, 2, 2, 189, 188, 3,
-	2, 2, 2, 189, 190, 3, 2, 2, 2, 190, 191, 3, 2, 2, 2, 191, 193, 7, 29, 2,
-	2, 192, 194, 7, 39, 2, 2, 193, 192, 3, 2, 2, 2, 193, 194, 3, 2, 2, 2, 194,
+	5, 112, 57, 2, 187, 15, 3, 2, 2, 2, 188, 190, 7, 45, 2, 2, 189, 188, 3,
+	2, 2, 2, 189, 190, 3, 2, 2, 2, 190, 191, 3, 2, 2, 2, 191, 193, 7, 32, 2,
+	2, 192, 194, 7, 42, 2, 2, 193, 192, 3, 2, 2, 2, 193, 194, 3, 2, 2, 2, 194,
 	195, 3, 2, 2, 2, 195, 196, 5, 4, 3, 2, 196, 17, 3, 2, 2, 2, 197, 198, 7,
-	27, 2, 2, 198, 202, 5, 106, 54, 2, 199, 201, 5, 20, 11, 2, 200, 199, 3,
+	30, 2, 2, 198, 202, 5, 106, 54, 2, 199, 201, 5, 20, 11, 2, 200, 199, 3,
 	2, 2, 2, 201, 204, 3, 2, 2, 2, 202, 200, 3, 2, 2, 2, 202, 203, 3, 2, 2,
 	2, 203, 206, 3, 2, 2, 2, 204, 202, 3, 2, 2, 2, 205, 207, 5, 22, 12, 2,
 	206, 205, 3, 2, 2, 2, 206, 207, 3, 2, 2, 2, 207, 208, 3, 2, 2, 2, 208,
-	209, 5, 112, 57, 2, 209, 19, 3, 2, 2, 2, 210, 212, 7, 42, 2, 2, 211, 210,
-	3, 2, 2, 2, 211, 212, 3, 2, 2, 2, 212, 213, 3, 2, 2, 2, 213, 214, 7, 30,
+	209, 5, 112, 57, 2, 209, 19, 3, 2, 2, 2, 210, 212, 7, 45, 2, 2, 211, 210,
+	3, 2, 2, 2, 211, 212, 3, 2, 2, 2, 212, 213, 3, 2, 2, 2, 213, 214, 7, 33,
 	2, 2, 214, 224, 5, 106, 54, 2, 215, 217, 7, 67, 2, 2, 216, 215, 3, 2, 2,
-	2, 216, 217, 3, 2, 2, 2, 217, 222, 3, 2, 2, 2, 218, 223, 7, 28, 2, 2, 219,
-	223, 7, 39, 2, 2, 220, 221, 7, 28, 2, 2, 221, 223, 7, 39, 2, 2, 222, 218,
+	2, 216, 217, 3, 2, 2, 2, 217, 222, 3, 2, 2, 2, 218, 223, 7, 31, 2, 2, 219,
+	223, 7, 42, 2, 2, 220, 221, 7, 31, 2, 2, 221, 223, 7, 42, 2, 2, 222, 218,
 	3, 2, 2, 2, 222, 219, 3, 2, 2, 2, 222, 220, 3, 2, 2, 2, 223, 225, 3, 2,
 	2, 2, 224, 216, 3, 2, 2, 2, 224, 225, 3, 2, 2, 2, 225, 226, 3, 2, 2, 2,
-	226, 227, 5, 4, 3, 2, 227, 21, 3, 2, 2, 2, 228, 230, 7, 42, 2, 2, 229,
+	226, 227, 5, 4, 3, 2, 227, 21, 3, 2, 2, 2, 228, 230, 7, 45, 2, 2, 229,
 	228, 3, 2, 2, 2, 229, 230, 3, 2, 2, 2, 230, 231, 3, 2, 2, 2, 231, 233,
-	7, 31, 2, 2, 232, 234, 7, 39, 2, 2, 233, 232, 3, 2, 2, 2, 233, 234, 3,
+	7, 34, 2, 2, 232, 234, 7, 42, 2, 2, 233, 232, 3, 2, 2, 2, 233, 234, 3,
 	2, 2, 2, 234, 235, 3, 2, 2, 2, 235, 236, 5, 4, 3, 2, 236, 23, 3, 2, 2,
 	2, 237, 238, 5, 28, 15, 2, 238, 239, 5, 8, 5, 2, 239, 25, 3, 2, 2, 2, 240,
 	241, 5, 28, 15, 2, 241, 242, 5, 4, 3, 2, 242, 243, 5, 112, 57, 2, 243,
 	27, 3, 2, 2, 2, 244, 249, 5, 30, 16, 2, 245, 249, 5, 32, 17, 2, 246, 249,
 	5, 34, 18, 2, 247, 249, 5, 36, 19, 2, 248, 244, 3, 2, 2, 2, 248, 245, 3,
 	2, 2, 2, 248, 246, 3, 2, 2, 2, 248, 247, 3, 2, 2, 2, 249, 29, 3, 2, 2,
-	2, 250, 251, 7, 32, 2, 2, 251, 253, 5, 80, 41, 2, 252, 254, 7, 39, 2, 2,
+	2, 250, 251, 7, 35, 2, 2, 251, 253, 5, 80, 41, 2, 252, 254, 7, 42, 2, 2,
 	253, 252, 3, 2, 2, 2, 253, 254, 3, 2, 2, 2, 254, 31, 3, 2, 2, 2, 255, 256,
-	7, 33, 2, 2, 256, 258, 5, 80, 41, 2, 257, 259, 7, 39, 2, 2, 258, 257, 3,
-	2, 2, 2, 258, 259, 3, 2, 2, 2, 259, 33, 3, 2, 2, 2, 260, 261, 7, 34, 2,
-	2, 261, 263, 5, 80, 41, 2, 262, 264, 7, 39, 2, 2, 263, 262, 3, 2, 2, 2,
-	263, 264, 3, 2, 2, 2, 264, 290, 3, 2, 2, 2, 265, 266, 7, 34, 2, 2, 266,
+	7, 36, 2, 2, 256, 258, 5, 80, 41, 2, 257, 259, 7, 42, 2, 2, 258, 257, 3,
+	2, 2, 2, 258, 259, 3, 2, 2, 2, 259, 33, 3, 2, 2, 2, 260, 261, 7, 37, 2,
+	2, 261, 263, 5, 80, 41, 2, 262, 264, 7, 42, 2, 2, 263, 262, 3, 2, 2, 2,
+	263, 264, 3, 2, 2, 2, 264, 290, 3, 2, 2, 2, 265, 266, 7, 37, 2, 2, 266,
 	267, 5, 12, 7, 2, 267, 268, 7, 67, 2, 2, 268, 269, 5, 80, 41, 2, 269, 270,
-	7, 67, 2, 2, 270, 272, 5, 12, 7, 2, 271, 273, 7, 39, 2, 2, 272, 271, 3,
-	2, 2, 2, 272, 273, 3, 2, 2, 2, 273, 290, 3, 2, 2, 2, 274, 275, 7, 34, 2,
-	2, 275, 276, 5, 108, 55, 2, 276, 278, 7, 35, 2, 2, 277, 279, 7, 36, 2,
+	7, 67, 2, 2, 270, 272, 5, 12, 7, 2, 271, 273, 7, 42, 2, 2, 272, 271, 3,
+	2, 2, 2, 272, 273, 3, 2, 2, 2, 273, 290, 3, 2, 2, 2, 274, 275, 7, 37, 2,
+	2, 275, 276, 5, 108, 55, 2, 276, 278, 7, 38, 2, 2, 277, 279, 7, 39, 2,
 	2, 278, 277, 3, 2, 2, 2, 278, 279, 3, 2, 2, 2, 279, 281, 3, 2, 2, 2, 280,
-	282, 7, 37, 2, 2, 281, 280, 3, 2, 2, 2, 281, 282, 3, 2, 2, 2, 282, 283,
-	3, 2, 2, 2, 283, 284, 5, 76, 39, 2, 284, 285, 7, 38, 2, 2, 285, 287, 5,
-	76, 39, 2, 286, 288, 7, 39, 2, 2, 287, 286, 3, 2, 2, 2, 287, 288, 3, 2,
+	282, 7, 40, 2, 2, 281, 280, 3, 2, 2, 2, 281, 282, 3, 2, 2, 2, 282, 283,
+	3, 2, 2, 2, 283, 284, 5, 76, 39, 2, 284, 285, 7, 41, 2, 2, 285, 287, 5,
+	76, 39, 2, 286, 288, 7, 42, 2, 2, 287, 286, 3, 2, 2, 2, 287, 288, 3, 2,
 	2, 2, 288, 290, 3, 2, 2, 2, 289, 260, 3, 2, 2, 2, 289, 265, 3, 2, 2, 2,
-	289, 274, 3, 2, 2, 2, 290, 35, 3, 2, 2, 2, 291, 292, 7, 37, 2, 2, 292,
-	293, 5, 76, 39, 2, 293, 294, 7, 38, 2, 2, 294, 296, 5, 76, 39, 2, 295,
-	297, 7, 39, 2, 2, 296, 295, 3, 2, 2, 2, 296, 297, 3, 2, 2, 2, 297, 37,
+	289, 274, 3, 2, 2, 2, 290, 35, 3, 2, 2, 2, 291, 292, 7, 40, 2, 2, 292,
+	293, 5, 76, 39, 2, 293, 294, 7, 41, 2, 2, 294, 296, 5, 76, 39, 2, 295,
+	297, 7, 42, 2, 2, 296, 295, 3, 2, 2, 2, 296, 297, 3, 2, 2, 2, 297, 37,
 	3, 2, 2, 2, 298, 303, 5, 40, 21, 2, 299, 303, 5, 42, 22, 2, 300, 303, 5,
 	46, 24, 2, 301, 303, 5, 48, 25, 2, 302, 298, 3, 2, 2, 2, 302, 299, 3, 2,
 	2, 2, 302, 300, 3, 2, 2, 2, 302, 301, 3, 2, 2, 2, 303, 39, 3, 2, 2, 2,
 	304, 305, 5, 44, 23, 2, 305, 306, 5, 8, 5, 2, 306, 41, 3, 2, 2, 2, 307,
 	308, 5, 44, 23, 2, 308, 309, 5, 4, 3, 2, 309, 310, 5, 112, 57, 2, 310,
-	43, 3, 2, 2, 2, 311, 312, 7, 51, 2, 2, 312, 321, 7, 56, 2, 2, 313, 318,
+	43, 3, 2, 2, 2, 311, 312, 7, 54, 2, 2, 312, 321, 7, 56, 2, 2, 313, 318,
 	5, 108, 55, 2, 314, 315, 7, 67, 2, 2, 315, 317, 5, 108, 55, 2, 316, 314,
 	3, 2, 2, 2, 317, 320, 3, 2, 2, 2, 318, 316, 3, 2, 2, 2, 318, 319, 3, 2,
 	2, 2, 319, 322, 3, 2, 2, 2, 320, 318, 3, 2, 2, 2, 321, 313, 3, 2, 2, 2,
 	321, 322, 3, 2, 2, 2, 322, 323, 3, 2, 2, 2, 323, 324, 7, 57, 2, 2, 324,
-	325, 7, 10, 2, 2, 325, 330, 5, 106, 54, 2, 326, 328, 7, 67, 2, 2, 327,
+	325, 7, 13, 2, 2, 325, 330, 5, 106, 54, 2, 326, 328, 7, 67, 2, 2, 327,
 	326, 3, 2, 2, 2, 327, 328, 3, 2, 2, 2, 328, 329, 3, 2, 2, 2, 329, 331,
-	7, 50, 2, 2, 330, 327, 3, 2, 2, 2, 330, 331, 3, 2, 2, 2, 331, 45, 3, 2,
+	7, 53, 2, 2, 330, 327, 3, 2, 2, 2, 330, 331, 3, 2, 2, 2, 331, 45, 3, 2,
 	2, 2, 332, 333, 5, 50, 26, 2, 333, 334, 5, 8, 5, 2, 334, 47, 3, 2, 2, 2,
-	335, 336, 5, 50, 26, 2, 336, 337, 7, 42, 2, 2, 337, 338, 5, 4, 3, 2, 338,
-	339, 5, 112, 57, 2, 339, 49, 3, 2, 2, 2, 340, 341, 7, 51, 2, 2, 341, 350,
+	335, 336, 5, 50, 26, 2, 336, 337, 7, 45, 2, 2, 337, 338, 5, 4, 3, 2, 338,
+	339, 5, 112, 57, 2, 339, 49, 3, 2, 2, 2, 340, 341, 7, 54, 2, 2, 341, 350,
 	7, 56, 2, 2, 342, 347, 5, 108, 55, 2, 343, 344, 7, 67, 2, 2, 344, 346,
 	5, 108, 55, 2, 345, 343, 3, 2, 2, 2, 346, 349, 3, 2, 2, 2, 347, 345, 3,
 	2, 2, 2, 347, 348, 3, 2, 2, 2, 348, 351, 3, 2, 2, 2, 349, 347, 3, 2, 2,
 	2, 350, 342, 3, 2, 2, 2, 350, 351, 3, 2, 2, 2, 351, 352, 3, 2, 2, 2, 352,
-	354, 7, 57, 2, 2, 353, 355, 7, 10, 2, 2, 354, 353, 3, 2, 2, 2, 354, 355,
+	354, 7, 57, 2, 2, 353, 355, 7, 13, 2, 2, 354, 353, 3, 2, 2, 2, 354, 355,
 	3, 2, 2, 2, 355, 51, 3, 2, 2, 2, 356, 371, 5, 54, 28, 2, 357, 371, 5, 58,
-	30, 2, 358, 371, 5, 70, 36, 2, 359, 360, 7, 51, 2, 2, 360, 361, 7, 10,
-	2, 2, 361, 371, 5, 108, 55, 2, 362, 363, 7, 51, 2, 2, 363, 364, 7, 10,
-	2, 2, 364, 371, 5, 106, 54, 2, 365, 366, 7, 51, 2, 2, 366, 367, 5, 94,
+	30, 2, 358, 371, 5, 70, 36, 2, 359, 360, 7, 54, 2, 2, 360, 361, 7, 13,
+	2, 2, 361, 371, 5, 108, 55, 2, 362, 363, 7, 54, 2, 2, 363, 364, 7, 13,
+	2, 2, 364, 371, 5, 106, 54, 2, 365, 366, 7, 54, 2, 2, 366, 367, 5, 94,
 	48, 2, 367, 368, 5, 106, 54, 2, 368, 371, 3, 2, 2, 2, 369, 371, 5, 74,
 	38, 2, 370, 356, 3, 2, 2, 2, 370, 357, 3, 2, 2, 2, 370, 358, 3, 2, 2, 2,
 	370, 359, 3, 2, 2, 2, 370, 362, 3, 2, 2, 2, 370, 365, 3, 2, 2, 2, 370,
-	369, 3, 2, 2, 2, 371, 53, 3, 2, 2, 2, 372, 373, 7, 51, 2, 2, 373, 374,
-	7, 10, 2, 2, 374, 375, 5, 56, 29, 2, 375, 55, 3, 2, 2, 2, 376, 377, 7,
-	48, 2, 2, 377, 378, 7, 56, 2, 2, 378, 379, 5, 106, 54, 2, 379, 380, 7,
-	57, 2, 2, 380, 57, 3, 2, 2, 2, 381, 382, 7, 51, 2, 2, 382, 383, 7, 10,
+	369, 3, 2, 2, 2, 371, 53, 3, 2, 2, 2, 372, 373, 7, 54, 2, 2, 373, 374,
+	7, 13, 2, 2, 374, 375, 5, 56, 29, 2, 375, 55, 3, 2, 2, 2, 376, 377, 7,
+	51, 2, 2, 377, 378, 7, 56, 2, 2, 378, 379, 5, 106, 54, 2, 379, 380, 7,
+	57, 2, 2, 380, 57, 3, 2, 2, 2, 381, 382, 7, 54, 2, 2, 382, 383, 7, 13,
 	2, 2, 383, 384, 5, 60, 31, 2, 384, 59, 3, 2, 2, 2, 385, 386, 5, 106, 54,
 	2, 386, 387, 5, 62, 32, 2, 387, 388, 5, 106, 54, 2, 388, 395, 3, 2, 2,
-	2, 389, 390, 7, 49, 2, 2, 390, 391, 7, 56, 2, 2, 391, 392, 5, 106, 54,
+	2, 389, 390, 7, 52, 2, 2, 390, 391, 7, 56, 2, 2, 391, 392, 5, 106, 54,
 	2, 392, 393, 7, 57, 2, 2, 393, 395, 3, 2, 2, 2, 394, 385, 3, 2, 2, 2, 394,
-	389, 3, 2, 2, 2, 395, 61, 3, 2, 2, 2, 396, 403, 7, 7, 2, 2, 397, 403, 5,
-	64, 33, 2, 398, 403, 7, 8, 2, 2, 399, 403, 5, 66, 34, 2, 400, 403, 7, 9,
-	2, 2, 401, 403, 5, 68, 35, 2, 402, 396, 3, 2, 2, 2, 402, 397, 3, 2, 2,
-	2, 402, 398, 3, 2, 2, 2, 402, 399, 3, 2, 2, 2, 402, 400, 3, 2, 2, 2, 402,
-	401, 3, 2, 2, 2, 403, 63, 3, 2, 2, 2, 404, 405, 7, 63, 2, 2, 405, 406,
-	7, 60, 2, 2, 406, 407, 7, 53, 2, 2, 407, 408, 7, 61, 2, 2, 408, 409, 7,
-	7, 2, 2, 409, 65, 3, 2, 2, 2, 410, 411, 7, 8, 2, 2, 411, 412, 7, 60, 2,
-	2, 412, 413, 7, 53, 2, 2, 413, 414, 7, 61, 2, 2, 414, 415, 7, 63, 2, 2,
-	415, 67, 3, 2, 2, 2, 416, 417, 7, 63, 2, 2, 417, 418, 7, 60, 2, 2, 418,
-	419, 7, 53, 2, 2, 419, 420, 7, 61, 2, 2, 420, 421, 7, 63, 2, 2, 421, 69,
-	3, 2, 2, 2, 422, 423, 7, 51, 2, 2, 423, 424, 7, 10, 2, 2, 424, 435, 5,
-	72, 37, 2, 425, 426, 7, 51, 2, 2, 426, 427, 5, 94, 48, 2, 427, 430, 5,
+	389, 3, 2, 2, 2, 395, 61, 3, 2, 2, 2, 396, 403, 7, 10, 2, 2, 397, 403,
+	5, 64, 33, 2, 398, 403, 7, 11, 2, 2, 399, 403, 5, 66, 34, 2, 400, 403,
+	7, 12, 2, 2, 401, 403, 5, 68, 35, 2, 402, 396, 3, 2, 2, 2, 402, 397, 3,
+	2, 2, 2, 402, 398, 3, 2, 2, 2, 402, 399, 3, 2, 2, 2, 402, 400, 3, 2, 2,
+	2, 402, 401, 3, 2, 2, 2, 403, 63, 3, 2, 2, 2, 404, 405, 7, 63, 2, 2, 405,
+	406, 7, 60, 2, 2, 406, 407, 7, 3, 2, 2, 407, 408, 7, 61, 2, 2, 408, 409,
+	7, 10, 2, 2, 409, 65, 3, 2, 2, 2, 410, 411, 7, 11, 2, 2, 411, 412, 7, 60,
+	2, 2, 412, 413, 7, 3, 2, 2, 413, 414, 7, 61, 2, 2, 414, 415, 7, 63, 2,
+	2, 415, 67, 3, 2, 2, 2, 416, 417, 7, 63, 2, 2, 417, 418, 7, 60, 2, 2, 418,
+	419, 7, 3, 2, 2, 419, 420, 7, 61, 2, 2, 420, 421, 7, 63, 2, 2, 421, 69,
+	3, 2, 2, 2, 422, 423, 7, 54, 2, 2, 423, 424, 7, 13, 2, 2, 424, 435, 5,
+	72, 37, 2, 425, 426, 7, 54, 2, 2, 426, 427, 5, 94, 48, 2, 427, 430, 5,
 	106, 54, 2, 428, 429, 7, 67, 2, 2, 429, 431, 5, 106, 54, 2, 430, 428, 3,
 	2, 2, 2, 431, 432, 3, 2, 2, 2, 432, 430, 3, 2, 2, 2, 432, 433, 3, 2, 2,
 	2, 433, 435, 3, 2, 2, 2, 434, 422, 3, 2, 2, 2, 434, 425, 3, 2, 2, 2, 435,
-	71, 3, 2, 2, 2, 436, 437, 7, 47, 2, 2, 437, 438, 7, 56, 2, 2, 438, 443,
+	71, 3, 2, 2, 2, 436, 437, 7, 50, 2, 2, 437, 438, 7, 56, 2, 2, 438, 443,
 	5, 106, 54, 2, 439, 440, 7, 67, 2, 2, 440, 442, 5, 106, 54, 2, 441, 439,
 	3, 2, 2, 2, 442, 445, 3, 2, 2, 2, 443, 441, 3, 2, 2, 2, 443, 444, 3, 2,
 	2, 2, 444, 446, 3, 2, 2, 2, 445, 443, 3, 2, 2, 2, 446, 447, 7, 57, 2, 2,
@@ -250,17 +250,17 @@ var parserATN = []uint16{
 	2, 502, 500, 3, 2, 2, 2, 502, 501, 3, 2, 2, 2, 503, 81, 3, 2, 2, 2, 504,
 	507, 5, 76, 39, 2, 505, 507, 5, 80, 41, 2, 506, 504, 3, 2, 2, 2, 506, 505,
 	3, 2, 2, 2, 507, 83, 3, 2, 2, 2, 508, 509, 9, 3, 2, 2, 509, 85, 3, 2, 2,
-	2, 510, 511, 7, 26, 2, 2, 511, 87, 3, 2, 2, 2, 512, 513, 5, 76, 39, 2,
+	2, 510, 511, 7, 29, 2, 2, 511, 87, 3, 2, 2, 2, 512, 513, 5, 76, 39, 2,
 	513, 514, 5, 92, 47, 2, 514, 515, 5, 90, 46, 2, 515, 89, 3, 2, 2, 2, 516,
 	519, 5, 76, 39, 2, 517, 519, 5, 88, 45, 2, 518, 516, 3, 2, 2, 2, 518, 517,
 	3, 2, 2, 2, 519, 91, 3, 2, 2, 2, 520, 521, 9, 4, 2, 2, 521, 93, 3, 2, 2,
 	2, 522, 523, 9, 5, 2, 2, 523, 95, 3, 2, 2, 2, 524, 527, 5, 98, 50, 2, 525,
 	527, 5, 100, 51, 2, 526, 524, 3, 2, 2, 2, 526, 525, 3, 2, 2, 2, 527, 97,
-	3, 2, 2, 2, 528, 529, 7, 45, 2, 2, 529, 535, 5, 108, 55, 2, 530, 531, 7,
-	45, 2, 2, 531, 535, 5, 106, 54, 2, 532, 533, 7, 45, 2, 2, 533, 535, 5,
+	3, 2, 2, 2, 528, 529, 7, 48, 2, 2, 529, 535, 5, 108, 55, 2, 530, 531, 7,
+	48, 2, 2, 531, 535, 5, 106, 54, 2, 532, 533, 7, 48, 2, 2, 533, 535, 5,
 	102, 52, 2, 534, 528, 3, 2, 2, 2, 534, 530, 3, 2, 2, 2, 534, 532, 3, 2,
-	2, 2, 535, 99, 3, 2, 2, 2, 536, 537, 7, 46, 2, 2, 537, 538, 7, 51, 2, 2,
-	538, 101, 3, 2, 2, 2, 539, 540, 7, 51, 2, 2, 540, 549, 7, 56, 2, 2, 541,
+	2, 2, 535, 99, 3, 2, 2, 2, 536, 537, 7, 49, 2, 2, 537, 538, 7, 54, 2, 2,
+	538, 101, 3, 2, 2, 2, 539, 540, 7, 54, 2, 2, 540, 549, 7, 56, 2, 2, 541,
 	546, 5, 106, 54, 2, 542, 543, 7, 67, 2, 2, 543, 545, 5, 106, 54, 2, 544,
 	542, 3, 2, 2, 2, 545, 548, 3, 2, 2, 2, 546, 544, 3, 2, 2, 2, 546, 547,
 	3, 2, 2, 2, 547, 550, 3, 2, 2, 2, 548, 546, 3, 2, 2, 2, 549, 541, 3, 2,
@@ -269,12 +269,12 @@ var parserATN = []uint16{
 	559, 5, 80, 41, 2, 556, 559, 5, 88, 45, 2, 557, 559, 5, 76, 39, 2, 558,
 	555, 3, 2, 2, 2, 558, 556, 3, 2, 2, 2, 558, 557, 3, 2, 2, 2, 559, 107,
 	3, 2, 2, 2, 560, 562, 7, 63, 2, 2, 561, 560, 3, 2, 2, 2, 561, 562, 3, 2,
-	2, 2, 562, 563, 3, 2, 2, 2, 563, 564, 7, 51, 2, 2, 564, 109, 3, 2, 2, 2,
-	565, 566, 9, 7, 2, 2, 566, 111, 3, 2, 2, 2, 567, 569, 7, 42, 2, 2, 568,
+	2, 2, 562, 563, 3, 2, 2, 2, 563, 564, 7, 54, 2, 2, 564, 109, 3, 2, 2, 2,
+	565, 566, 9, 7, 2, 2, 566, 111, 3, 2, 2, 2, 567, 569, 7, 45, 2, 2, 568,
 	567, 3, 2, 2, 2, 568, 569, 3, 2, 2, 2, 569, 570, 3, 2, 2, 2, 570, 574,
-	7, 44, 2, 2, 571, 573, 7, 66, 2, 2, 572, 571, 3, 2, 2, 2, 573, 576, 3,
+	7, 47, 2, 2, 571, 573, 7, 66, 2, 2, 572, 571, 3, 2, 2, 2, 573, 576, 3,
 	2, 2, 2, 574, 572, 3, 2, 2, 2, 574, 575, 3, 2, 2, 2, 575, 578, 3, 2, 2,
-	2, 576, 574, 3, 2, 2, 2, 577, 579, 7, 42, 2, 2, 578, 577, 3, 2, 2, 2, 578,
+	2, 576, 574, 3, 2, 2, 2, 577, 579, 7, 45, 2, 2, 578, 577, 3, 2, 2, 2, 578,
 	579, 3, 2, 2, 2, 579, 113, 3, 2, 2, 2, 71, 115, 120, 125, 128, 134, 137,
 	141, 147, 154, 158, 162, 167, 172, 178, 180, 184, 189, 193, 202, 206, 211,
 	216, 222, 224, 229, 233, 248, 253, 258, 263, 272, 278, 281, 287, 289, 296,
@@ -286,28 +286,28 @@ var deserializer = antlr.NewATNDeserializer(nil)
 var deserializedATN = deserializer.DeserializeFromUInt16(parserATN)
 
 var literalNames = []string{
-	"", "", "", "", "", "'->'", "'<-'", "'--'", "'='", "'+='", "'-='", "'*='",
-	"'/='", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+	"", "", "", "", "", "", "", "", "'->'", "'<-'", "'--'", "'='", "'+='",
+	"'-='", "'*='", "'/='", "", "", "", "", "", "", "", "", "", "", "", "",
 	"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-	"", "", "", "", "", "", "", "'('", "')'", "'{'", "'}'", "'['", "']'", "'+'",
-	"'-'", "'*'", "'/'", "'.'", "','",
+	"", "", "", "", "", "", "", "", "'('", "')'", "'{'", "'}'", "'['", "']'",
+	"'+'", "'-'", "'*'", "'/'", "'.'", "','",
 }
 var symbolicNames = []string{
-	"", "STRING", "LABEL", "ML_LABEL", "BOOL", "OR_EDGE_LR", "OR_EDGE_RL",
-	"UNOR_EDGE", "ASSIGN", "ADD_ASSIGN", "SUB_ASSIGN", "MULT_ASSIGN", "DIV_ASSIGN",
-	"NEQ", "EQUALS", "LESS_THAN", "GR_THAN", "LESS_THAN_E", "GR_THAN_E", "AND",
-	"OR", "XOR", "NOR", "NAND", "NOT", "IF", "THEN", "ELSE", "IS", "DEFAULT",
+	"", "NUMBER", "FLOAT", "INT", "STRING", "LABEL", "ML_LABEL", "BOOL", "OR_EDGE_LR",
+	"OR_EDGE_RL", "UNOR_EDGE", "ASSIGN", "ADD_ASSIGN", "SUB_ASSIGN", "MULT_ASSIGN",
+	"DIV_ASSIGN", "NEQ", "EQUALS", "LESS_THAN", "GR_THAN", "LESS_THAN_E", "GR_THAN_E",
+	"AND", "OR", "XOR", "NOR", "NAND", "NOT", "IF", "THEN", "ELSE", "IS", "DEFAULT",
 	"WHILE", "UNTIL", "FOR", "IN", "RANGE", "FROM", "TO", "DO", "SKIP_ITERATION",
 	"BREAK", "NEWLINE", "BLOCK_BEGIN", "BLOCK_END", "PRINTER", "KEY_INPUT",
-	"G_N", "V_N", "E_N", "WHERE", "ID", "WS", "NUMBER", "FLOAT", "INT", "L_PAREN",
-	"R_PAREN", "L_CURLY", "R_CURLY", "L_BRACKET", "R_BRACKET", "ADD", "SUB",
-	"MULT", "DIV", "ACT_DELIM", "ARG_DELIM", "LINE_COMMENT", "M_LINE_COMMENT",
+	"G_N", "V_N", "E_N", "WHERE", "ID", "WS", "L_PAREN", "R_PAREN", "L_CURLY",
+	"R_CURLY", "L_BRACKET", "R_BRACKET", "ADD", "SUB", "MULT", "DIV", "ACT_DELIM",
+	"ARG_DELIM", "LINE_COMMENT", "M_LINE_COMMENT",
 }
 
 var ruleNames = []string{
 	"file", "sequence", "sequence_element", "sequence_line", "one_line_sequence_element",
 	"atom_action", "if_stmnt", "else_stmnt", "if_is_stmnt", "case_stmnt", "default_stmnt",
-	"one_line_stmnt", "mult_line_stmnt", "stmnt", "while_stmnt", "until_stmnt",
+	"one_line_stmnt", "mult_line_stmnt", "cycle_stmnt", "while_stmnt", "until_stmnt",
 	"for_stmnt", "from_to_stmnt", "function_declaration", "one_line_function_declaration",
 	"mult_line_function_declaration", "function_declaration_head", "one_line_procedure_declaration",
 	"mult_line_procedure_declaration", "procedure_declaration_head", "var_assign",
@@ -348,59 +348,59 @@ func NewGraffleParser(input antlr.TokenStream) *GraffleParser {
 // GraffleParser tokens.
 const (
 	GraffleParserEOF            = antlr.TokenEOF
-	GraffleParserSTRING         = 1
-	GraffleParserLABEL          = 2
-	GraffleParserML_LABEL       = 3
-	GraffleParserBOOL           = 4
-	GraffleParserOR_EDGE_LR     = 5
-	GraffleParserOR_EDGE_RL     = 6
-	GraffleParserUNOR_EDGE      = 7
-	GraffleParserASSIGN         = 8
-	GraffleParserADD_ASSIGN     = 9
-	GraffleParserSUB_ASSIGN     = 10
-	GraffleParserMULT_ASSIGN    = 11
-	GraffleParserDIV_ASSIGN     = 12
-	GraffleParserNEQ            = 13
-	GraffleParserEQUALS         = 14
-	GraffleParserLESS_THAN      = 15
-	GraffleParserGR_THAN        = 16
-	GraffleParserLESS_THAN_E    = 17
-	GraffleParserGR_THAN_E      = 18
-	GraffleParserAND            = 19
-	GraffleParserOR             = 20
-	GraffleParserXOR            = 21
-	GraffleParserNOR            = 22
-	GraffleParserNAND           = 23
-	GraffleParserNOT            = 24
-	GraffleParserIF             = 25
-	GraffleParserTHEN           = 26
-	GraffleParserELSE           = 27
-	GraffleParserIS             = 28
-	GraffleParserDEFAULT        = 29
-	GraffleParserWHILE          = 30
-	GraffleParserUNTIL          = 31
-	GraffleParserFOR            = 32
-	GraffleParserIN             = 33
-	GraffleParserRANGE          = 34
-	GraffleParserFROM           = 35
-	GraffleParserTO             = 36
-	GraffleParserDO             = 37
-	GraffleParserSKIP_ITERATION = 38
-	GraffleParserBREAK          = 39
-	GraffleParserNEWLINE        = 40
-	GraffleParserBLOCK_BEGIN    = 41
-	GraffleParserBLOCK_END      = 42
-	GraffleParserPRINTER        = 43
-	GraffleParserKEY_INPUT      = 44
-	GraffleParserG_N            = 45
-	GraffleParserV_N            = 46
-	GraffleParserE_N            = 47
-	GraffleParserWHERE          = 48
-	GraffleParserID             = 49
-	GraffleParserWS             = 50
-	GraffleParserNUMBER         = 51
-	GraffleParserFLOAT          = 52
-	GraffleParserINT            = 53
+	GraffleParserNUMBER         = 1
+	GraffleParserFLOAT          = 2
+	GraffleParserINT            = 3
+	GraffleParserSTRING         = 4
+	GraffleParserLABEL          = 5
+	GraffleParserML_LABEL       = 6
+	GraffleParserBOOL           = 7
+	GraffleParserOR_EDGE_LR     = 8
+	GraffleParserOR_EDGE_RL     = 9
+	GraffleParserUNOR_EDGE      = 10
+	GraffleParserASSIGN         = 11
+	GraffleParserADD_ASSIGN     = 12
+	GraffleParserSUB_ASSIGN     = 13
+	GraffleParserMULT_ASSIGN    = 14
+	GraffleParserDIV_ASSIGN     = 15
+	GraffleParserNEQ            = 16
+	GraffleParserEQUALS         = 17
+	GraffleParserLESS_THAN      = 18
+	GraffleParserGR_THAN        = 19
+	GraffleParserLESS_THAN_E    = 20
+	GraffleParserGR_THAN_E      = 21
+	GraffleParserAND            = 22
+	GraffleParserOR             = 23
+	GraffleParserXOR            = 24
+	GraffleParserNOR            = 25
+	GraffleParserNAND           = 26
+	GraffleParserNOT            = 27
+	GraffleParserIF             = 28
+	GraffleParserTHEN           = 29
+	GraffleParserELSE           = 30
+	GraffleParserIS             = 31
+	GraffleParserDEFAULT        = 32
+	GraffleParserWHILE          = 33
+	GraffleParserUNTIL          = 34
+	GraffleParserFOR            = 35
+	GraffleParserIN             = 36
+	GraffleParserRANGE          = 37
+	GraffleParserFROM           = 38
+	GraffleParserTO             = 39
+	GraffleParserDO             = 40
+	GraffleParserSKIP_ITERATION = 41
+	GraffleParserBREAK          = 42
+	GraffleParserNEWLINE        = 43
+	GraffleParserBLOCK_BEGIN    = 44
+	GraffleParserBLOCK_END      = 45
+	GraffleParserPRINTER        = 46
+	GraffleParserKEY_INPUT      = 47
+	GraffleParserG_N            = 48
+	GraffleParserV_N            = 49
+	GraffleParserE_N            = 50
+	GraffleParserWHERE          = 51
+	GraffleParserID             = 52
+	GraffleParserWS             = 53
 	GraffleParserL_PAREN        = 54
 	GraffleParserR_PAREN        = 55
 	GraffleParserL_CURLY        = 56
@@ -432,7 +432,7 @@ const (
 	GraffleParserRULE_default_stmnt                   = 10
 	GraffleParserRULE_one_line_stmnt                  = 11
 	GraffleParserRULE_mult_line_stmnt                 = 12
-	GraffleParserRULE_stmnt                           = 13
+	GraffleParserRULE_cycle_stmnt                     = 13
 	GraffleParserRULE_while_stmnt                     = 14
 	GraffleParserRULE_until_stmnt                     = 15
 	GraffleParserRULE_for_stmnt                       = 16
@@ -813,7 +813,7 @@ func (p *GraffleParser) Sequence() (localctx ISequenceContext) {
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for ok := true; ok; ok = (((_la-25)&-(0x1f+1)) == 0 && ((1<<uint((_la-25)))&((1<<(GraffleParserIF-25))|(1<<(GraffleParserWHILE-25))|(1<<(GraffleParserUNTIL-25))|(1<<(GraffleParserFOR-25))|(1<<(GraffleParserFROM-25))|(1<<(GraffleParserPRINTER-25))|(1<<(GraffleParserKEY_INPUT-25))|(1<<(GraffleParserID-25)))) != 0) {
+	for ok := true; ok; ok = (((_la-28)&-(0x1f+1)) == 0 && ((1<<uint((_la-28)))&((1<<(GraffleParserIF-28))|(1<<(GraffleParserWHILE-28))|(1<<(GraffleParserUNTIL-28))|(1<<(GraffleParserFOR-28))|(1<<(GraffleParserFROM-28))|(1<<(GraffleParserPRINTER-28))|(1<<(GraffleParserKEY_INPUT-28))|(1<<(GraffleParserID-28)))) != 0) {
 		{
 			p.SetState(128)
 			p.Sequence_element()
@@ -2413,14 +2413,14 @@ func NewOne_line_stmntContext(parser antlr.Parser, parent antlr.ParserRuleContex
 
 func (s *One_line_stmntContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *One_line_stmntContext) Stmnt() IStmntContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IStmntContext)(nil)).Elem(), 0)
+func (s *One_line_stmntContext) Cycle_stmnt() ICycle_stmntContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*ICycle_stmntContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IStmntContext)
+	return t.(ICycle_stmntContext)
 }
 
 func (s *One_line_stmntContext) Sequence_line() ISequence_lineContext {
@@ -2486,7 +2486,7 @@ func (p *GraffleParser) One_line_stmnt() (localctx IOne_line_stmntContext) {
 	p.EnterOuterAlt(localctx, 1)
 	{
 		p.SetState(235)
-		p.Stmnt()
+		p.Cycle_stmnt()
 	}
 	{
 		p.SetState(236)
@@ -2534,14 +2534,14 @@ func NewMult_line_stmntContext(parser antlr.Parser, parent antlr.ParserRuleConte
 
 func (s *Mult_line_stmntContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *Mult_line_stmntContext) Stmnt() IStmntContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IStmntContext)(nil)).Elem(), 0)
+func (s *Mult_line_stmntContext) Cycle_stmnt() ICycle_stmntContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*ICycle_stmntContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IStmntContext)
+	return t.(ICycle_stmntContext)
 }
 
 func (s *Mult_line_stmntContext) Sequence() ISequenceContext {
@@ -2617,7 +2617,7 @@ func (p *GraffleParser) Mult_line_stmnt() (localctx IMult_line_stmntContext) {
 	p.EnterOuterAlt(localctx, 1)
 	{
 		p.SetState(238)
-		p.Stmnt()
+		p.Cycle_stmnt()
 	}
 	{
 		p.SetState(239)
@@ -2631,45 +2631,45 @@ func (p *GraffleParser) Mult_line_stmnt() (localctx IMult_line_stmntContext) {
 	return localctx
 }
 
-// IStmntContext is an interface to support dynamic dispatch.
-type IStmntContext interface {
+// ICycle_stmntContext is an interface to support dynamic dispatch.
+type ICycle_stmntContext interface {
 	antlr.ParserRuleContext
 
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// IsStmntContext differentiates from other interfaces.
-	IsStmntContext()
+	// IsCycle_stmntContext differentiates from other interfaces.
+	IsCycle_stmntContext()
 }
 
-type StmntContext struct {
+type Cycle_stmntContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
 }
 
-func NewEmptyStmntContext() *StmntContext {
-	var p = new(StmntContext)
+func NewEmptyCycle_stmntContext() *Cycle_stmntContext {
+	var p = new(Cycle_stmntContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = GraffleParserRULE_stmnt
+	p.RuleIndex = GraffleParserRULE_cycle_stmnt
 	return p
 }
 
-func (*StmntContext) IsStmntContext() {}
+func (*Cycle_stmntContext) IsCycle_stmntContext() {}
 
-func NewStmntContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *StmntContext {
-	var p = new(StmntContext)
+func NewCycle_stmntContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Cycle_stmntContext {
+	var p = new(Cycle_stmntContext)
 
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = GraffleParserRULE_stmnt
+	p.RuleIndex = GraffleParserRULE_cycle_stmnt
 
 	return p
 }
 
-func (s *StmntContext) GetParser() antlr.Parser { return s.parser }
+func (s *Cycle_stmntContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *StmntContext) While_stmnt() IWhile_stmntContext {
+func (s *Cycle_stmntContext) While_stmnt() IWhile_stmntContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IWhile_stmntContext)(nil)).Elem(), 0)
 
 	if t == nil {
@@ -2679,7 +2679,7 @@ func (s *StmntContext) While_stmnt() IWhile_stmntContext {
 	return t.(IWhile_stmntContext)
 }
 
-func (s *StmntContext) Until_stmnt() IUntil_stmntContext {
+func (s *Cycle_stmntContext) Until_stmnt() IUntil_stmntContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IUntil_stmntContext)(nil)).Elem(), 0)
 
 	if t == nil {
@@ -2689,7 +2689,7 @@ func (s *StmntContext) Until_stmnt() IUntil_stmntContext {
 	return t.(IUntil_stmntContext)
 }
 
-func (s *StmntContext) For_stmnt() IFor_stmntContext {
+func (s *Cycle_stmntContext) For_stmnt() IFor_stmntContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IFor_stmntContext)(nil)).Elem(), 0)
 
 	if t == nil {
@@ -2699,7 +2699,7 @@ func (s *StmntContext) For_stmnt() IFor_stmntContext {
 	return t.(IFor_stmntContext)
 }
 
-func (s *StmntContext) From_to_stmnt() IFrom_to_stmntContext {
+func (s *Cycle_stmntContext) From_to_stmnt() IFrom_to_stmntContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IFrom_to_stmntContext)(nil)).Elem(), 0)
 
 	if t == nil {
@@ -2709,39 +2709,39 @@ func (s *StmntContext) From_to_stmnt() IFrom_to_stmntContext {
 	return t.(IFrom_to_stmntContext)
 }
 
-func (s *StmntContext) GetRuleContext() antlr.RuleContext {
+func (s *Cycle_stmntContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *StmntContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+func (s *Cycle_stmntContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *StmntContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *Cycle_stmntContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(GraffleParserListener); ok {
-		listenerT.EnterStmnt(s)
+		listenerT.EnterCycle_stmnt(s)
 	}
 }
 
-func (s *StmntContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *Cycle_stmntContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(GraffleParserListener); ok {
-		listenerT.ExitStmnt(s)
+		listenerT.ExitCycle_stmnt(s)
 	}
 }
 
-func (s *StmntContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *Cycle_stmntContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case GraffleParserVisitor:
-		return t.VisitStmnt(s)
+		return t.VisitCycle_stmnt(s)
 
 	default:
 		return t.VisitChildren(s)
 	}
 }
 
-func (p *GraffleParser) Stmnt() (localctx IStmntContext) {
-	localctx = NewStmntContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 26, GraffleParserRULE_stmnt)
+func (p *GraffleParser) Cycle_stmnt() (localctx ICycle_stmntContext) {
+	localctx = NewCycle_stmntContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 26, GraffleParserRULE_cycle_stmnt)
 
 	defer func() {
 		p.ExitRule()
@@ -2805,12 +2805,6 @@ type IWhile_stmntContext interface {
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// GetCond returns the cond rule contexts.
-	GetCond() ILogical_exprContext
-
-	// SetCond sets the cond rule contexts.
-	SetCond(ILogical_exprContext)
-
 	// IsWhile_stmntContext differentiates from other interfaces.
 	IsWhile_stmntContext()
 }
@@ -2818,7 +2812,6 @@ type IWhile_stmntContext interface {
 type While_stmntContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
-	cond   ILogical_exprContext
 }
 
 func NewEmptyWhile_stmntContext() *While_stmntContext {
@@ -2842,10 +2835,6 @@ func NewWhile_stmntContext(parser antlr.Parser, parent antlr.ParserRuleContext, 
 }
 
 func (s *While_stmntContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *While_stmntContext) GetCond() ILogical_exprContext { return s.cond }
-
-func (s *While_stmntContext) SetCond(v ILogical_exprContext) { s.cond = v }
 
 func (s *While_stmntContext) WHILE() antlr.TerminalNode {
 	return s.GetToken(GraffleParserWHILE, 0)
@@ -2923,10 +2912,7 @@ func (p *GraffleParser) While_stmnt() (localctx IWhile_stmntContext) {
 	}
 	{
 		p.SetState(249)
-
-		var _x = p.Logical_expr()
-
-		localctx.(*While_stmntContext).cond = _x
+		p.Logical_expr()
 	}
 	p.SetState(251)
 	p.GetErrorHandler().Sync(p)
@@ -2950,12 +2936,6 @@ type IUntil_stmntContext interface {
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// GetCond returns the cond rule contexts.
-	GetCond() ILogical_exprContext
-
-	// SetCond sets the cond rule contexts.
-	SetCond(ILogical_exprContext)
-
 	// IsUntil_stmntContext differentiates from other interfaces.
 	IsUntil_stmntContext()
 }
@@ -2963,7 +2943,6 @@ type IUntil_stmntContext interface {
 type Until_stmntContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
-	cond   ILogical_exprContext
 }
 
 func NewEmptyUntil_stmntContext() *Until_stmntContext {
@@ -2987,10 +2966,6 @@ func NewUntil_stmntContext(parser antlr.Parser, parent antlr.ParserRuleContext, 
 }
 
 func (s *Until_stmntContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *Until_stmntContext) GetCond() ILogical_exprContext { return s.cond }
-
-func (s *Until_stmntContext) SetCond(v ILogical_exprContext) { s.cond = v }
 
 func (s *Until_stmntContext) UNTIL() antlr.TerminalNode {
 	return s.GetToken(GraffleParserUNTIL, 0)
@@ -3068,10 +3043,7 @@ func (p *GraffleParser) Until_stmnt() (localctx IUntil_stmntContext) {
 	}
 	{
 		p.SetState(254)
-
-		var _x = p.Logical_expr()
-
-		localctx.(*Until_stmntContext).cond = _x
+		p.Logical_expr()
 	}
 	p.SetState(256)
 	p.GetErrorHandler().Sync(p)
@@ -3140,7 +3112,6 @@ func (s *For_stmntContext) ToStringTree(ruleNames []string, recog antlr.Recogniz
 
 type ForLogicalContext struct {
 	*For_stmntContext
-	cond ILogical_exprContext
 }
 
 func NewForLogicalContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ForLogicalContext {
@@ -3152,10 +3123,6 @@ func NewForLogicalContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *For
 
 	return p
 }
-
-func (s *ForLogicalContext) GetCond() ILogical_exprContext { return s.cond }
-
-func (s *ForLogicalContext) SetCond(v ILogical_exprContext) { s.cond = v }
 
 func (s *ForLogicalContext) GetRuleContext() antlr.RuleContext {
 	return s
@@ -3203,9 +3170,6 @@ func (s *ForLogicalContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 type ForVarContext struct {
 	*For_stmntContext
-	pre_act  IAtom_actionContext
-	cond     ILogical_exprContext
-	post_act IAtom_actionContext
 }
 
 func NewForVarContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ForVarContext {
@@ -3218,32 +3182,12 @@ func NewForVarContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ForVarC
 	return p
 }
 
-func (s *ForVarContext) GetPre_act() IAtom_actionContext { return s.pre_act }
-
-func (s *ForVarContext) GetCond() ILogical_exprContext { return s.cond }
-
-func (s *ForVarContext) GetPost_act() IAtom_actionContext { return s.post_act }
-
-func (s *ForVarContext) SetPre_act(v IAtom_actionContext) { s.pre_act = v }
-
-func (s *ForVarContext) SetCond(v ILogical_exprContext) { s.cond = v }
-
-func (s *ForVarContext) SetPost_act(v IAtom_actionContext) { s.post_act = v }
-
 func (s *ForVarContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
 func (s *ForVarContext) FOR() antlr.TerminalNode {
 	return s.GetToken(GraffleParserFOR, 0)
-}
-
-func (s *ForVarContext) AllARG_DELIM() []antlr.TerminalNode {
-	return s.GetTokens(GraffleParserARG_DELIM)
-}
-
-func (s *ForVarContext) ARG_DELIM(i int) antlr.TerminalNode {
-	return s.GetToken(GraffleParserARG_DELIM, i)
 }
 
 func (s *ForVarContext) AllAtom_action() []IAtom_actionContext {
@@ -3267,6 +3211,14 @@ func (s *ForVarContext) Atom_action(i int) IAtom_actionContext {
 	}
 
 	return t.(IAtom_actionContext)
+}
+
+func (s *ForVarContext) AllARG_DELIM() []antlr.TerminalNode {
+	return s.GetTokens(GraffleParserARG_DELIM)
+}
+
+func (s *ForVarContext) ARG_DELIM(i int) antlr.TerminalNode {
+	return s.GetToken(GraffleParserARG_DELIM, i)
 }
 
 func (s *ForVarContext) Logical_expr() ILogical_exprContext {
@@ -3307,8 +3259,6 @@ func (s *ForVarContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 type ForRangeContext struct {
 	*For_stmntContext
-	from IExprContext
-	to   IExprContext
 }
 
 func NewForRangeContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ForRangeContext {
@@ -3320,14 +3270,6 @@ func NewForRangeContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ForRa
 
 	return p
 }
-
-func (s *ForRangeContext) GetFrom() IExprContext { return s.from }
-
-func (s *ForRangeContext) GetTo() IExprContext { return s.to }
-
-func (s *ForRangeContext) SetFrom(v IExprContext) { s.from = v }
-
-func (s *ForRangeContext) SetTo(v IExprContext) { s.to = v }
 
 func (s *ForRangeContext) GetRuleContext() antlr.RuleContext {
 	return s
@@ -3351,10 +3293,6 @@ func (s *ForRangeContext) IN() antlr.TerminalNode {
 	return s.GetToken(GraffleParserIN, 0)
 }
 
-func (s *ForRangeContext) TO() antlr.TerminalNode {
-	return s.GetToken(GraffleParserTO, 0)
-}
-
 func (s *ForRangeContext) AllExpr() []IExprContext {
 	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IExprContext)(nil)).Elem())
 	var tst = make([]IExprContext, len(ts))
@@ -3376,6 +3314,10 @@ func (s *ForRangeContext) Expr(i int) IExprContext {
 	}
 
 	return t.(IExprContext)
+}
+
+func (s *ForRangeContext) TO() antlr.TerminalNode {
+	return s.GetToken(GraffleParserTO, 0)
 }
 
 func (s *ForRangeContext) RANGE() antlr.TerminalNode {
@@ -3445,10 +3387,7 @@ func (p *GraffleParser) For_stmnt() (localctx IFor_stmntContext) {
 		}
 		{
 			p.SetState(259)
-
-			var _x = p.Logical_expr()
-
-			localctx.(*ForLogicalContext).cond = _x
+			p.Logical_expr()
 		}
 		p.SetState(261)
 		p.GetErrorHandler().Sync(p)
@@ -3471,10 +3410,7 @@ func (p *GraffleParser) For_stmnt() (localctx IFor_stmntContext) {
 		}
 		{
 			p.SetState(264)
-
-			var _x = p.Atom_action()
-
-			localctx.(*ForVarContext).pre_act = _x
+			p.Atom_action()
 		}
 		{
 			p.SetState(265)
@@ -3482,10 +3418,7 @@ func (p *GraffleParser) For_stmnt() (localctx IFor_stmntContext) {
 		}
 		{
 			p.SetState(266)
-
-			var _x = p.Logical_expr()
-
-			localctx.(*ForVarContext).cond = _x
+			p.Logical_expr()
 		}
 		{
 			p.SetState(267)
@@ -3493,10 +3426,7 @@ func (p *GraffleParser) For_stmnt() (localctx IFor_stmntContext) {
 		}
 		{
 			p.SetState(268)
-
-			var _x = p.Atom_action()
-
-			localctx.(*ForVarContext).post_act = _x
+			p.Atom_action()
 		}
 		p.SetState(270)
 		p.GetErrorHandler().Sync(p)
@@ -3549,10 +3479,7 @@ func (p *GraffleParser) For_stmnt() (localctx IFor_stmntContext) {
 		}
 		{
 			p.SetState(281)
-
-			var _x = p.Expr()
-
-			localctx.(*ForRangeContext).from = _x
+			p.Expr()
 		}
 		{
 			p.SetState(282)
@@ -3560,10 +3487,7 @@ func (p *GraffleParser) For_stmnt() (localctx IFor_stmntContext) {
 		}
 		{
 			p.SetState(283)
-
-			var _x = p.Expr()
-
-			localctx.(*ForRangeContext).to = _x
+			p.Expr()
 		}
 		p.SetState(285)
 		p.GetErrorHandler().Sync(p)
@@ -3589,18 +3513,6 @@ type IFrom_to_stmntContext interface {
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// GetFrom returns the from rule contexts.
-	GetFrom() IExprContext
-
-	// GetTo returns the to rule contexts.
-	GetTo() IExprContext
-
-	// SetFrom sets the from rule contexts.
-	SetFrom(IExprContext)
-
-	// SetTo sets the to rule contexts.
-	SetTo(IExprContext)
-
 	// IsFrom_to_stmntContext differentiates from other interfaces.
 	IsFrom_to_stmntContext()
 }
@@ -3608,8 +3520,6 @@ type IFrom_to_stmntContext interface {
 type From_to_stmntContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
-	from   IExprContext
-	to     IExprContext
 }
 
 func NewEmptyFrom_to_stmntContext() *From_to_stmntContext {
@@ -3634,20 +3544,8 @@ func NewFrom_to_stmntContext(parser antlr.Parser, parent antlr.ParserRuleContext
 
 func (s *From_to_stmntContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *From_to_stmntContext) GetFrom() IExprContext { return s.from }
-
-func (s *From_to_stmntContext) GetTo() IExprContext { return s.to }
-
-func (s *From_to_stmntContext) SetFrom(v IExprContext) { s.from = v }
-
-func (s *From_to_stmntContext) SetTo(v IExprContext) { s.to = v }
-
 func (s *From_to_stmntContext) FROM() antlr.TerminalNode {
 	return s.GetToken(GraffleParserFROM, 0)
-}
-
-func (s *From_to_stmntContext) TO() antlr.TerminalNode {
-	return s.GetToken(GraffleParserTO, 0)
 }
 
 func (s *From_to_stmntContext) AllExpr() []IExprContext {
@@ -3671,6 +3569,10 @@ func (s *From_to_stmntContext) Expr(i int) IExprContext {
 	}
 
 	return t.(IExprContext)
+}
+
+func (s *From_to_stmntContext) TO() antlr.TerminalNode {
+	return s.GetToken(GraffleParserTO, 0)
 }
 
 func (s *From_to_stmntContext) DO() antlr.TerminalNode {
@@ -3735,10 +3637,7 @@ func (p *GraffleParser) From_to_stmnt() (localctx IFrom_to_stmntContext) {
 	}
 	{
 		p.SetState(290)
-
-		var _x = p.Expr()
-
-		localctx.(*From_to_stmntContext).from = _x
+		p.Expr()
 	}
 	{
 		p.SetState(291)
@@ -3746,10 +3645,7 @@ func (p *GraffleParser) From_to_stmnt() (localctx IFrom_to_stmntContext) {
 	}
 	{
 		p.SetState(292)
-
-		var _x = p.Expr()
-
-		localctx.(*From_to_stmntContext).to = _x
+		p.Expr()
 	}
 	p.SetState(294)
 	p.GetErrorHandler().Sync(p)
@@ -5644,7 +5540,7 @@ func (p *GraffleParser) Edge_type() (localctx IEdge_typeContext) {
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
-	case GraffleParserSTRING, GraffleParserBOOL, GraffleParserNOT, GraffleParserV_N, GraffleParserID, GraffleParserNUMBER, GraffleParserL_PAREN, GraffleParserSUB:
+	case GraffleParserNUMBER, GraffleParserSTRING, GraffleParserBOOL, GraffleParserNOT, GraffleParserV_N, GraffleParserID, GraffleParserL_PAREN, GraffleParserSUB:
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(383)
@@ -6691,7 +6587,7 @@ func (p *GraffleParser) Graph_type() (localctx IGraph_typeContext) {
 			p.Match(GraffleParserR_PAREN)
 		}
 
-	case GraffleParserSTRING, GraffleParserBOOL, GraffleParserNOT, GraffleParserV_N, GraffleParserID, GraffleParserNUMBER, GraffleParserL_PAREN, GraffleParserSUB:
+	case GraffleParserNUMBER, GraffleParserSTRING, GraffleParserBOOL, GraffleParserNOT, GraffleParserV_N, GraffleParserID, GraffleParserL_PAREN, GraffleParserSUB:
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(446)
@@ -9022,7 +8918,7 @@ func (p *GraffleParser) Function_call() (localctx IFunction_callContext) {
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<GraffleParserSTRING)|(1<<GraffleParserBOOL)|(1<<GraffleParserNOT))) != 0) || (((_la-46)&-(0x1f+1)) == 0 && ((1<<uint((_la-46)))&((1<<(GraffleParserV_N-46))|(1<<(GraffleParserID-46))|(1<<(GraffleParserNUMBER-46))|(1<<(GraffleParserL_PAREN-46))|(1<<(GraffleParserSUB-46)))) != 0) {
+	if (((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<GraffleParserNUMBER)|(1<<GraffleParserSTRING)|(1<<GraffleParserBOOL)|(1<<GraffleParserNOT))) != 0) || (((_la-49)&-(0x1f+1)) == 0 && ((1<<uint((_la-49)))&((1<<(GraffleParserV_N-49))|(1<<(GraffleParserID-49))|(1<<(GraffleParserL_PAREN-49))|(1<<(GraffleParserSUB-49)))) != 0) {
 		{
 			p.SetState(539)
 			p.Value()
@@ -9538,7 +9434,7 @@ func (p *GraffleParser) Builtin_type() (localctx IBuiltin_typeContext) {
 		p.SetState(563)
 		_la = p.GetTokenStream().LA(1)
 
-		if !(_la == GraffleParserSTRING || _la == GraffleParserBOOL || _la == GraffleParserNUMBER) {
+		if !(((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<GraffleParserNUMBER)|(1<<GraffleParserSTRING)|(1<<GraffleParserBOOL))) != 0) {
 			p.GetErrorHandler().RecoverInline(p)
 		} else {
 			p.GetErrorHandler().ReportMatch(p)

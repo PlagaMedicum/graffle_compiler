@@ -47,8 +47,8 @@ type GraffleParserVisitor interface {
 	// Visit a parse tree produced by GraffleParser#mult_line_stmnt.
 	VisitMult_line_stmnt(ctx *Mult_line_stmntContext) interface{}
 
-	// Visit a parse tree produced by GraffleParser#stmnt.
-	VisitStmnt(ctx *StmntContext) interface{}
+	// Visit a parse tree produced by GraffleParser#cycle_stmnt.
+	VisitCycle_stmnt(ctx *Cycle_stmntContext) interface{}
 
 	// Visit a parse tree produced by GraffleParser#while_stmnt.
 	VisitWhile_stmnt(ctx *While_stmntContext) interface{}

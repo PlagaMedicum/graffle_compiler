@@ -5,6 +5,12 @@ lexer grammar GraffleLexer;
 //
 
 // Types:
+NUMBER  : INT
+        | FLOAT
+        ;
+FLOAT   : INT Spaces ('.' | ',') Spaces Digit+ ;
+INT     : ('-' Spaces)? Digit+ ;
+
 STRING      : '"'  ( '\\"' | '\\\\' | . )*? '"'
             | '\'' ( '\\\'' | '\\\\' | . )*? '\''
             ;
@@ -16,7 +22,7 @@ BOOL    : True
         ;
 
 // Operators:
-// edges
+// arcs
 OR_EDGE_LR   : '->' ;
 OR_EDGE_RL   : '<-' ;
 UNOR_EDGE    : '--' ;
@@ -147,13 +153,6 @@ fragment Spaces     : ' '* ;
 //
 // No whitespace:
 //
-
-// Types:
-NUMBER  : INT
-        | FLOAT
-        ;
-FLOAT   : INT ('.' | ',') Digit+ ;
-INT     : '-'? Digit+ ;
 
 // Operators:
 // brackets
