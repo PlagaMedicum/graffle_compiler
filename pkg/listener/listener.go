@@ -21,6 +21,8 @@ func sprepend(s []string, a ...string) []string {
 	return append(a, s...)
 }
 
+const nsPostfix = "_gve"
+
 type Namespace map[string]struct{}
 
 type NamespaceStack []Namespace
@@ -166,13 +168,13 @@ func (s *GraffleListener) EnterIf_stmnt(ctx *parser.If_stmntContext) {
 
 // ExitIf_stmnt is called when production if_stmnt is exited.
 func (s *GraffleListener) ExitIf_stmnt(ctx *parser.If_stmntContext) {
-	else_sq := ""
+	elsesq := ""
 	if ctx.Else_stmnt() != nil {
-		else_sq = fmt.Sprintf("%s\n", s.popParam())
+		elsesq = fmt.Sprintf("%s\n", s.popParam())
 	}
-	if_sq := s.popParam()
+	ifsq := s.popParam()
 	cond := s.popParam()
-	s.pushParamf("if %s.Val() {%s\n} else {%s}", cond, if_sq, else_sq)
+	s.pushParamf("if %s.Val() {%s\n} else {%s}", cond, ifsq, elsesq)
 }
 
 // EnterElse_stmnt is called when production else_stmnt is entered.
@@ -185,13 +187,28 @@ func (s *GraffleListener) ExitElse_stmnt(ctx *parser.Else_stmntContext) {}
 func (s *GraffleListener) EnterIf_is_stmnt(ctx *parser.If_is_stmntContext) {}
 
 // ExitIf_is_stmnt is called when production if_is_stmnt is exited.
-func (s *GraffleListener) ExitIf_is_stmnt(ctx *parser.If_is_stmntContext) {}
+func (s *GraffleListener) ExitIf_is_stmnt(ctx *parser.If_is_stmntContext) {
+	defaultsq := ""
+	if ctx.Default_stmnt() != nil {
+		defaultsq = fmt.Sprintf("\ndefault:%s", s.popParam())
+	}
+	var casesqs string
+	for i := 0; i < len(ctx.AllCase_stmnt()); i++ {
+		casesqs = fmt.Sprintf("%s\n%s", casesqs, s.popParam())
+	}
+	head := s.popParam()
+	s.pushParamf("switch %s {%s%s}", head, casesqs, defaultsq)
+}
 
 // EnterCase_stmnt is called when production case_stmnt is entered.
 func (s *GraffleListener) EnterCase_stmnt(ctx *parser.Case_stmntContext) {}
 
 // ExitCase_stmnt is called when production case_stmnt is exited.
-func (s *GraffleListener) ExitCase_stmnt(ctx *parser.Case_stmntContext) {}
+func (s *GraffleListener) ExitCase_stmnt(ctx *parser.Case_stmntContext) {
+	sq := s.popParam()
+	val := s.popParam()
+	s.pushParamf("case %s:%s", val, sq)
+}
 
 // EnterDefault_stmnt is called when production default_stmnt is entered.
 func (s *GraffleListener) EnterDefault_stmnt(ctx *parser.Default_stmntContext) {}
@@ -288,7 +305,7 @@ func (s *GraffleListener) EnterFunction_declaration_head(ctx *parser.Function_de
 		log.Fatalf("Parsing error! Cannot declare function \"%s\" multiple times!", id)
 	}
 	s.nameStack.add(id)
-	s.writeBuf("\n%s := func(", id)
+	s.writeBuf("\n%s := func(", id+nsPostfix)
 	var args []string
 	for i, v := range ctx.AllVariable() {
 		str := v.GetText()
@@ -297,7 +314,7 @@ func (s *GraffleListener) EnterFunction_declaration_head(ctx *parser.Function_de
 		if i > 0 {
 			s.writeBuf(", ")
 		}
-		s.writeBuf(str)
+		s.writeBuf(str+nsPostfix)
 		s.nameStack.add(str)
 	}
 	s.writeBuf(" interface{}) interface{} {\n")
@@ -335,7 +352,7 @@ func (s *GraffleListener) ExitFunction_declaration_head(ctx *parser.Function_dec
 	match := re.FindStringSubmatch(ctx.GetReturn_val().GetText())
 	if match != nil {
 		for _, m := range match {
-			s.writeBuf("\nvar %s interface{};", m)
+			s.writeBuf("\nvar %s interface{};", m+nsPostfix)
 		}
 	}
 }
@@ -367,7 +384,7 @@ func (s *GraffleListener) EnterProcedure_declaration_head(ctx *parser.Procedure_
 		log.Fatalf("Parsing error! Cannot declare function \"%s\" multiple times!", id)
 	}
 	s.nameStack.add(id)
-	s.writeBuf("\n%s := func(", id)
+	s.writeBuf("\n%s := func(", id+nsPostfix)
 	var args []string
 	for i, v := range ctx.AllVariable() {
 		str := v.GetText()
@@ -376,7 +393,7 @@ func (s *GraffleListener) EnterProcedure_declaration_head(ctx *parser.Procedure_
 		if i > 0 {
 			s.writeBuf(", ")
 		}
-		s.writeBuf(str)
+		s.writeBuf(str+nsPostfix)
 		s.nameStack.add(str)
 	}
 	s.writeBuf(" interface{}) interface{} {\n")
@@ -403,10 +420,10 @@ func (s *GraffleListener) ExitVar_assign(ctx *parser.Var_assignContext) {
 		idstr := start.GetText()
 		a := s.popParam()
 		if s.nameStack.find(idstr) {
-			s.pushParamf("%s = %s", idstr, a)
+			s.pushParamf("%s = %s", idstr+nsPostfix, a)
 		} else {
 			s.nameStack.add(idstr)
-			s.pushParamf("%s := %s", idstr, a)
+			s.pushParamf("%s := %s", idstr+nsPostfix, a)
 		}
 	}
 }
@@ -445,7 +462,15 @@ func (s *GraffleListener) ExitArc(ctx *parser.ArcContext) {}
 func (s *GraffleListener) EnterVertice_assign(ctx *parser.Vertice_assignContext) {}
 
 // ExitVertice_assign is called when production vertice_assign is exited.
-func (s *GraffleListener) ExitVertice_assign(ctx *parser.Vertice_assignContext) {}
+func (s *GraffleListener) ExitVertice_assign(ctx *parser.Vertice_assignContext) {
+	val := s.popParam()
+	idstr := ctx.ID().GetText()
+	if s.nameStack.find(idstr) {
+		s.pushParamf("%s = NewVertice(%s)", idstr+nsPostfix, val)
+	} else {
+		s.pushParamf("%s := %s")
+	}
+}
 
 // EnterGraph_assign is called when production graph_assign is entered.
 func (s *GraffleListener) EnterGraph_assign(ctx *parser.Graph_assignContext) {}
@@ -577,10 +602,10 @@ func (s *GraffleListener) EnterBuilt_func_input(ctx *parser.Built_func_inputCont
 	if stop.GetTokenType() == parser.GraffleParserID {
 		idstr := stop.GetText()
 		if s.nameStack.find(idstr) {
-			s.pushParamf("%s = Input()", idstr)
+			s.pushParamf("%s = Input()", idstr+nsPostfix)
 		} else {
 			s.nameStack.add(idstr)
-			s.pushParamf("%s := Input()", idstr)
+			s.pushParamf("%s := Input()", idstr+nsPostfix)
 		}
 	}
 }
@@ -602,7 +627,7 @@ func (s *GraffleListener) ExitFunction_call(ctx *parser.Function_callContext) {
 		}
 		idstr := id.GetText()
 		if s.nameStack.find(idstr) {
-			s.pushParamf("%s(%s)", idstr, strings.Join(args, ", "))
+			s.pushParamf("%s(%s)", idstr+nsPostfix, strings.Join(args, ", "))
 		} else {
 			log.Fatalf("Parsing error! Undefined function \"%s\" call!", idstr)
 		}
@@ -627,7 +652,7 @@ func (s *GraffleListener) EnterVariable(ctx *parser.VariableContext) {
 	if id != nil {
 		idstr := id.GetText()
 		if s.nameStack.find(idstr) {
-			s.pushParam(ctx.GetText())
+			s.pushParam(ctx.GetText() + nsPostfix)
 		} else {
 			log.Fatalf("Parsing error! Undefined variable \"%s\"!", idstr)
 		}
@@ -644,7 +669,8 @@ func (s *GraffleListener) EnterBuiltin_type(ctx *parser.Builtin_typeContext) {
 		v := strings.ReplaceAll(ctx.GetText(), ",", ".")
 		s.pushParamf("NewNumber(%s)", v)
 	case parser.GraffleLexerSTRING:
-		s.pushParamf("NewString(%s)", ctx.GetText())
+		str := strings.ReplaceAll(ctx.GetText(), "'", "\"")
+		s.pushParamf("NewString(%s)", str)
 	case parser.GraffleParserBOOL:
 		v := strings.ToLower(ctx.GetText())
 		if v != "true" && v != "false" {
