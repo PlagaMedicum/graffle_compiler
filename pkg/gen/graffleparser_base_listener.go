@@ -209,41 +209,59 @@ func (s *BaseGraffleParserListener) EnterVertice_assign(ctx *Vertice_assignConte
 // ExitVertice_assign is called when production vertice_assign is exited.
 func (s *BaseGraffleParserListener) ExitVertice_assign(ctx *Vertice_assignContext) {}
 
-// EnterArc_assign is called when production arc_assign is entered.
-func (s *BaseGraffleParserListener) EnterArc_assign(ctx *Arc_assignContext) {}
+// EnterVertice_type is called when production vertice_type is entered.
+func (s *BaseGraffleParserListener) EnterVertice_type(ctx *Vertice_typeContext) {}
 
-// ExitArc_assign is called when production arc_assign is exited.
-func (s *BaseGraffleParserListener) ExitArc_assign(ctx *Arc_assignContext) {}
+// ExitVertice_type is called when production vertice_type is exited.
+func (s *BaseGraffleParserListener) ExitVertice_type(ctx *Vertice_typeContext) {}
 
-// EnterArc is called when production arc is entered.
-func (s *BaseGraffleParserListener) EnterArc(ctx *ArcContext) {}
+// EnterEdge_assign is called when production edge_assign is entered.
+func (s *BaseGraffleParserListener) EnterEdge_assign(ctx *Edge_assignContext) {}
 
-// ExitArc is called when production arc is exited.
-func (s *BaseGraffleParserListener) ExitArc(ctx *ArcContext) {}
+// ExitEdge_assign is called when production edge_assign is exited.
+func (s *BaseGraffleParserListener) ExitEdge_assign(ctx *Edge_assignContext) {}
 
-// EnterOr_w_arc_lr is called when production or_w_arc_lr is entered.
-func (s *BaseGraffleParserListener) EnterOr_w_arc_lr(ctx *Or_w_arc_lrContext) {}
+// EnterEdge_type is called when production edge_type is entered.
+func (s *BaseGraffleParserListener) EnterEdge_type(ctx *Edge_typeContext) {}
 
-// ExitOr_w_arc_lr is called when production or_w_arc_lr is exited.
-func (s *BaseGraffleParserListener) ExitOr_w_arc_lr(ctx *Or_w_arc_lrContext) {}
+// ExitEdge_type is called when production edge_type is exited.
+func (s *BaseGraffleParserListener) ExitEdge_type(ctx *Edge_typeContext) {}
 
-// EnterOr_w_arc_rl is called when production or_w_arc_rl is entered.
-func (s *BaseGraffleParserListener) EnterOr_w_arc_rl(ctx *Or_w_arc_rlContext) {}
+// EnterEdge is called when production edge is entered.
+func (s *BaseGraffleParserListener) EnterEdge(ctx *EdgeContext) {}
 
-// ExitOr_w_arc_rl is called when production or_w_arc_rl is exited.
-func (s *BaseGraffleParserListener) ExitOr_w_arc_rl(ctx *Or_w_arc_rlContext) {}
+// ExitEdge is called when production edge is exited.
+func (s *BaseGraffleParserListener) ExitEdge(ctx *EdgeContext) {}
 
-// EnterUnor_w_arc is called when production unor_w_arc is entered.
-func (s *BaseGraffleParserListener) EnterUnor_w_arc(ctx *Unor_w_arcContext) {}
+// EnterOr_w_edge_lr is called when production or_w_edge_lr is entered.
+func (s *BaseGraffleParserListener) EnterOr_w_edge_lr(ctx *Or_w_edge_lrContext) {}
 
-// ExitUnor_w_arc is called when production unor_w_arc is exited.
-func (s *BaseGraffleParserListener) ExitUnor_w_arc(ctx *Unor_w_arcContext) {}
+// ExitOr_w_edge_lr is called when production or_w_edge_lr is exited.
+func (s *BaseGraffleParserListener) ExitOr_w_edge_lr(ctx *Or_w_edge_lrContext) {}
+
+// EnterOr_w_edge_rl is called when production or_w_edge_rl is entered.
+func (s *BaseGraffleParserListener) EnterOr_w_edge_rl(ctx *Or_w_edge_rlContext) {}
+
+// ExitOr_w_edge_rl is called when production or_w_edge_rl is exited.
+func (s *BaseGraffleParserListener) ExitOr_w_edge_rl(ctx *Or_w_edge_rlContext) {}
+
+// EnterUnor_w_edge is called when production unor_w_edge is entered.
+func (s *BaseGraffleParserListener) EnterUnor_w_edge(ctx *Unor_w_edgeContext) {}
+
+// ExitUnor_w_edge is called when production unor_w_edge is exited.
+func (s *BaseGraffleParserListener) ExitUnor_w_edge(ctx *Unor_w_edgeContext) {}
 
 // EnterGraph_assign is called when production graph_assign is entered.
 func (s *BaseGraffleParserListener) EnterGraph_assign(ctx *Graph_assignContext) {}
 
 // ExitGraph_assign is called when production graph_assign is exited.
 func (s *BaseGraffleParserListener) ExitGraph_assign(ctx *Graph_assignContext) {}
+
+// EnterGraph_type is called when production graph_type is entered.
+func (s *BaseGraffleParserListener) EnterGraph_type(ctx *Graph_typeContext) {}
+
+// ExitGraph_type is called when production graph_type is exited.
+func (s *BaseGraffleParserListener) ExitGraph_type(ctx *Graph_typeContext) {}
 
 // EnterLabeled_assign is called when production labeled_assign is entered.
 func (s *BaseGraffleParserListener) EnterLabeled_assign(ctx *Labeled_assignContext) {}

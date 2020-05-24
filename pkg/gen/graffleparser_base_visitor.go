@@ -124,27 +124,39 @@ func (v *BaseGraffleParserVisitor) VisitVertice_assign(ctx *Vertice_assignContex
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGraffleParserVisitor) VisitArc_assign(ctx *Arc_assignContext) interface{} {
+func (v *BaseGraffleParserVisitor) VisitVertice_type(ctx *Vertice_typeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGraffleParserVisitor) VisitArc(ctx *ArcContext) interface{} {
+func (v *BaseGraffleParserVisitor) VisitEdge_assign(ctx *Edge_assignContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGraffleParserVisitor) VisitOr_w_arc_lr(ctx *Or_w_arc_lrContext) interface{} {
+func (v *BaseGraffleParserVisitor) VisitEdge_type(ctx *Edge_typeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGraffleParserVisitor) VisitOr_w_arc_rl(ctx *Or_w_arc_rlContext) interface{} {
+func (v *BaseGraffleParserVisitor) VisitEdge(ctx *EdgeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseGraffleParserVisitor) VisitUnor_w_arc(ctx *Unor_w_arcContext) interface{} {
+func (v *BaseGraffleParserVisitor) VisitOr_w_edge_lr(ctx *Or_w_edge_lrContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGraffleParserVisitor) VisitOr_w_edge_rl(ctx *Or_w_edge_rlContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGraffleParserVisitor) VisitUnor_w_edge(ctx *Unor_w_edgeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
 func (v *BaseGraffleParserVisitor) VisitGraph_assign(ctx *Graph_assignContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGraffleParserVisitor) VisitGraph_type(ctx *Graph_typeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

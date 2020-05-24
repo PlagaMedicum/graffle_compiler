@@ -16,10 +16,10 @@ BOOL    : True
         ;
 
 // Operators:
-// arcs
-OR_ARC_LR   : '->' ;
-OR_ARC_RL   : '<-' ;
-UNOR_ARC    : '--' ;
+// edges
+OR_EDGE_LR   : '->' ;
+OR_EDGE_RL   : '<-' ;
+UNOR_EDGE    : '--' ;
 
 // assignements
 ASSIGN          : '=' ;

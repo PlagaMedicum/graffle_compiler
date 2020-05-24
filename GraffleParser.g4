@@ -107,50 +107,58 @@ procedure_declaration_head
 
 // vars
 var_assign
-    : ID ASSIGN variable
+    : vertice_assign
+    | edge_assign
+    | graph_assign
+    | ID ASSIGN variable
     | ID ASSIGN value
     | ID arithm_assign_operator value
-    | vertice_assign
-    | arc_assign
-    | graph_assign
     | labeled_assign
     ;
 
 vertice_assign
-    : ID ASSIGN V_N '(' value ')'
+    : ID ASSIGN vertice_type
+    ;
+vertice_type
+    : V_N '(' value ')'
     ;
 
-arc_assign
-    : ID ASSIGN E_N '(' value ')'
-    | ID ASSIGN value arc value
+edge_assign
+    : ID ASSIGN edge_type
     ;
-arc
-    : OR_ARC_LR
-    | or_w_arc_lr
-    | OR_ARC_RL
-    | or_w_arc_rl
-    | UNOR_ARC
-    | unor_w_arc
+edge_type
+    : value edge value
+    | E_N '(' value ')'
     ;
-or_w_arc_lr
-    : '-' '[' weight=NUMBER ']' OR_ARC_LR
+edge
+    : OR_EDGE_LR
+    | or_w_edge_lr
+    | OR_EDGE_RL
+    | or_w_edge_rl
+    | UNOR_EDGE
+    | unor_w_edge
     ;
-or_w_arc_rl
-    : OR_ARC_RL '[' weight=NUMBER ']' '-'
+or_w_edge_lr
+    : '-' '[' weight=NUMBER ']' OR_EDGE_LR
     ;
-unor_w_arc
+or_w_edge_rl
+    : OR_EDGE_RL '[' weight=NUMBER ']' '-'
+    ;
+unor_w_edge
     : '-' '[' weight=NUMBER ']' '-'
     ;
 
 graph_assign
-    : ID ASSIGN G_N '(' value (ARG_DELIM value)* ')'
-    | ID ASSIGN value (ARG_DELIM value)+
+    : ID ASSIGN graph_type
     | ID arithm_assign_operator value (ARG_DELIM value)+
+    ;
+graph_type
+    : G_N '(' value (ARG_DELIM value)*')'
+    | value (ARG_DELIM value)+
     ;
 
 labeled_assign
-    : vertice_assign label?
-    | arc_assign label?
+    | edge_assign label?
     | graph_assign label?
     ;
 
@@ -158,6 +166,10 @@ labeled_assign
 expr
     : variable
     | integral_expr
+    | builtin_type
+    | vertice_type
+    | '(' edge_type ')'
+    | '(' graph_type ')'
     ;
 
 integral_expr
@@ -243,7 +255,6 @@ value
     : logical_expr
     | arithm_expr
     | expr
-    | builtin_type
     ;
 variable
     : '-'? ID

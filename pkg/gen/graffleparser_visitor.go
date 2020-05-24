@@ -95,23 +95,32 @@ type GraffleParserVisitor interface {
 	// Visit a parse tree produced by GraffleParser#vertice_assign.
 	VisitVertice_assign(ctx *Vertice_assignContext) interface{}
 
-	// Visit a parse tree produced by GraffleParser#arc_assign.
-	VisitArc_assign(ctx *Arc_assignContext) interface{}
+	// Visit a parse tree produced by GraffleParser#vertice_type.
+	VisitVertice_type(ctx *Vertice_typeContext) interface{}
 
-	// Visit a parse tree produced by GraffleParser#arc.
-	VisitArc(ctx *ArcContext) interface{}
+	// Visit a parse tree produced by GraffleParser#edge_assign.
+	VisitEdge_assign(ctx *Edge_assignContext) interface{}
 
-	// Visit a parse tree produced by GraffleParser#or_w_arc_lr.
-	VisitOr_w_arc_lr(ctx *Or_w_arc_lrContext) interface{}
+	// Visit a parse tree produced by GraffleParser#edge_type.
+	VisitEdge_type(ctx *Edge_typeContext) interface{}
 
-	// Visit a parse tree produced by GraffleParser#or_w_arc_rl.
-	VisitOr_w_arc_rl(ctx *Or_w_arc_rlContext) interface{}
+	// Visit a parse tree produced by GraffleParser#edge.
+	VisitEdge(ctx *EdgeContext) interface{}
 
-	// Visit a parse tree produced by GraffleParser#unor_w_arc.
-	VisitUnor_w_arc(ctx *Unor_w_arcContext) interface{}
+	// Visit a parse tree produced by GraffleParser#or_w_edge_lr.
+	VisitOr_w_edge_lr(ctx *Or_w_edge_lrContext) interface{}
+
+	// Visit a parse tree produced by GraffleParser#or_w_edge_rl.
+	VisitOr_w_edge_rl(ctx *Or_w_edge_rlContext) interface{}
+
+	// Visit a parse tree produced by GraffleParser#unor_w_edge.
+	VisitUnor_w_edge(ctx *Unor_w_edgeContext) interface{}
 
 	// Visit a parse tree produced by GraffleParser#graph_assign.
 	VisitGraph_assign(ctx *Graph_assignContext) interface{}
+
+	// Visit a parse tree produced by GraffleParser#graph_type.
+	VisitGraph_type(ctx *Graph_typeContext) interface{}
 
 	// Visit a parse tree produced by GraffleParser#labeled_assign.
 	VisitLabeled_assign(ctx *Labeled_assignContext) interface{}

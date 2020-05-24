@@ -95,23 +95,32 @@ type GraffleParserListener interface {
 	// EnterVertice_assign is called when entering the vertice_assign production.
 	EnterVertice_assign(c *Vertice_assignContext)
 
-	// EnterArc_assign is called when entering the arc_assign production.
-	EnterArc_assign(c *Arc_assignContext)
+	// EnterVertice_type is called when entering the vertice_type production.
+	EnterVertice_type(c *Vertice_typeContext)
 
-	// EnterArc is called when entering the arc production.
-	EnterArc(c *ArcContext)
+	// EnterEdge_assign is called when entering the edge_assign production.
+	EnterEdge_assign(c *Edge_assignContext)
 
-	// EnterOr_w_arc_lr is called when entering the or_w_arc_lr production.
-	EnterOr_w_arc_lr(c *Or_w_arc_lrContext)
+	// EnterEdge_type is called when entering the edge_type production.
+	EnterEdge_type(c *Edge_typeContext)
 
-	// EnterOr_w_arc_rl is called when entering the or_w_arc_rl production.
-	EnterOr_w_arc_rl(c *Or_w_arc_rlContext)
+	// EnterEdge is called when entering the edge production.
+	EnterEdge(c *EdgeContext)
 
-	// EnterUnor_w_arc is called when entering the unor_w_arc production.
-	EnterUnor_w_arc(c *Unor_w_arcContext)
+	// EnterOr_w_edge_lr is called when entering the or_w_edge_lr production.
+	EnterOr_w_edge_lr(c *Or_w_edge_lrContext)
+
+	// EnterOr_w_edge_rl is called when entering the or_w_edge_rl production.
+	EnterOr_w_edge_rl(c *Or_w_edge_rlContext)
+
+	// EnterUnor_w_edge is called when entering the unor_w_edge production.
+	EnterUnor_w_edge(c *Unor_w_edgeContext)
 
 	// EnterGraph_assign is called when entering the graph_assign production.
 	EnterGraph_assign(c *Graph_assignContext)
+
+	// EnterGraph_type is called when entering the graph_type production.
+	EnterGraph_type(c *Graph_typeContext)
 
 	// EnterLabeled_assign is called when entering the labeled_assign production.
 	EnterLabeled_assign(c *Labeled_assignContext)
@@ -260,23 +269,32 @@ type GraffleParserListener interface {
 	// ExitVertice_assign is called when exiting the vertice_assign production.
 	ExitVertice_assign(c *Vertice_assignContext)
 
-	// ExitArc_assign is called when exiting the arc_assign production.
-	ExitArc_assign(c *Arc_assignContext)
+	// ExitVertice_type is called when exiting the vertice_type production.
+	ExitVertice_type(c *Vertice_typeContext)
 
-	// ExitArc is called when exiting the arc production.
-	ExitArc(c *ArcContext)
+	// ExitEdge_assign is called when exiting the edge_assign production.
+	ExitEdge_assign(c *Edge_assignContext)
 
-	// ExitOr_w_arc_lr is called when exiting the or_w_arc_lr production.
-	ExitOr_w_arc_lr(c *Or_w_arc_lrContext)
+	// ExitEdge_type is called when exiting the edge_type production.
+	ExitEdge_type(c *Edge_typeContext)
 
-	// ExitOr_w_arc_rl is called when exiting the or_w_arc_rl production.
-	ExitOr_w_arc_rl(c *Or_w_arc_rlContext)
+	// ExitEdge is called when exiting the edge production.
+	ExitEdge(c *EdgeContext)
 
-	// ExitUnor_w_arc is called when exiting the unor_w_arc production.
-	ExitUnor_w_arc(c *Unor_w_arcContext)
+	// ExitOr_w_edge_lr is called when exiting the or_w_edge_lr production.
+	ExitOr_w_edge_lr(c *Or_w_edge_lrContext)
+
+	// ExitOr_w_edge_rl is called when exiting the or_w_edge_rl production.
+	ExitOr_w_edge_rl(c *Or_w_edge_rlContext)
+
+	// ExitUnor_w_edge is called when exiting the unor_w_edge production.
+	ExitUnor_w_edge(c *Unor_w_edgeContext)
 
 	// ExitGraph_assign is called when exiting the graph_assign production.
 	ExitGraph_assign(c *Graph_assignContext)
+
+	// ExitGraph_type is called when exiting the graph_type production.
+	ExitGraph_type(c *Graph_typeContext)
 
 	// ExitLabeled_assign is called when exiting the labeled_assign production.
 	ExitLabeled_assign(c *Labeled_assignContext)

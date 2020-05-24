@@ -437,19 +437,19 @@ var lexerLiteralNames = []string{
 }
 
 var lexerSymbolicNames = []string{
-	"", "STRING", "LABEL", "ML_LABEL", "BOOL", "OR_ARC_LR", "OR_ARC_RL", "UNOR_ARC",
-	"ASSIGN", "ADD_ASSIGN", "SUB_ASSIGN", "MULT_ASSIGN", "DIV_ASSIGN", "NEQ",
-	"EQUALS", "LESS_THAN", "GR_THAN", "LESS_THAN_E", "GR_THAN_E", "AND", "OR",
-	"XOR", "NOR", "NAND", "NOT", "IF", "THEN", "ELSE", "IS", "DEFAULT", "WHILE",
-	"UNTIL", "FOR", "IN", "RANGE", "FROM", "TO", "DO", "SKIP_ITERATION", "BREAK",
-	"NEWLINE", "BLOCK_BEGIN", "BLOCK_END", "PRINTER", "KEY_INPUT", "G_N", "V_N",
-	"E_N", "WHERE", "ID", "WS", "NUMBER", "FLOAT", "INT", "L_PAREN", "R_PAREN",
-	"L_CURLY", "R_CURLY", "L_BRACKET", "R_BRACKET", "ADD", "SUB", "MULT", "DIV",
-	"ACT_DELIM", "ARG_DELIM", "LINE_COMMENT", "M_LINE_COMMENT",
+	"", "STRING", "LABEL", "ML_LABEL", "BOOL", "OR_EDGE_LR", "OR_EDGE_RL",
+	"UNOR_EDGE", "ASSIGN", "ADD_ASSIGN", "SUB_ASSIGN", "MULT_ASSIGN", "DIV_ASSIGN",
+	"NEQ", "EQUALS", "LESS_THAN", "GR_THAN", "LESS_THAN_E", "GR_THAN_E", "AND",
+	"OR", "XOR", "NOR", "NAND", "NOT", "IF", "THEN", "ELSE", "IS", "DEFAULT",
+	"WHILE", "UNTIL", "FOR", "IN", "RANGE", "FROM", "TO", "DO", "SKIP_ITERATION",
+	"BREAK", "NEWLINE", "BLOCK_BEGIN", "BLOCK_END", "PRINTER", "KEY_INPUT",
+	"G_N", "V_N", "E_N", "WHERE", "ID", "WS", "NUMBER", "FLOAT", "INT", "L_PAREN",
+	"R_PAREN", "L_CURLY", "R_CURLY", "L_BRACKET", "R_BRACKET", "ADD", "SUB",
+	"MULT", "DIV", "ACT_DELIM", "ARG_DELIM", "LINE_COMMENT", "M_LINE_COMMENT",
 }
 
 var lexerRuleNames = []string{
-	"STRING", "LABEL", "ML_LABEL", "BOOL", "OR_ARC_LR", "OR_ARC_RL", "UNOR_ARC",
+	"STRING", "LABEL", "ML_LABEL", "BOOL", "OR_EDGE_LR", "OR_EDGE_RL", "UNOR_EDGE",
 	"ASSIGN", "ADD_ASSIGN", "SUB_ASSIGN", "MULT_ASSIGN", "DIV_ASSIGN", "NEQ",
 	"EQUALS", "LESS_THAN", "GR_THAN", "LESS_THAN_E", "GR_THAN_E", "AND", "OR",
 	"XOR", "NOR", "NAND", "NOT", "IF", "THEN", "ELSE", "IS", "DEFAULT", "WHILE",
@@ -501,9 +501,9 @@ const (
 	GraffleLexerLABEL          = 2
 	GraffleLexerML_LABEL       = 3
 	GraffleLexerBOOL           = 4
-	GraffleLexerOR_ARC_LR      = 5
-	GraffleLexerOR_ARC_RL      = 6
-	GraffleLexerUNOR_ARC       = 7
+	GraffleLexerOR_EDGE_LR     = 5
+	GraffleLexerOR_EDGE_RL     = 6
+	GraffleLexerUNOR_EDGE      = 7
 	GraffleLexerASSIGN         = 8
 	GraffleLexerADD_ASSIGN     = 9
 	GraffleLexerSUB_ASSIGN     = 10
