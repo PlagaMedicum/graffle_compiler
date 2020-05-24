@@ -39,16 +39,58 @@ type Bool struct {
 	bool
 }
 
-func NewNumber(val float64) Number {
-	return Number{val}
+func NewNumber(val interface{}) Number {
+	if v, b := val.(int); b {
+		return Number{float64(v)}
+	}
+
+	if v, b := val.(int32); b {
+		return Number{float64(v)}
+	}
+
+	if v, b := val.(int64); b {
+		return Number{float64(v)}
+	}
+
+	if v, b := val.(float32); b {
+		return Number{float64(v)}
+	}
+
+	if v, b := val.(float64); b {
+		return Number{v}
+	}
+	if vi, bi := val.(NumericType); bi {
+		if v, b := vi.Number(); b {
+			return v
+		}
+	}
+
+	log.Fatalf("Cannot convert to Number type: %t", val)
+	return Number{}
 }
 
-func NewString(val string) String {
-	return String{val}
+func NewString(val interface{}) String {
+	if v, b := val.(string); b {
+		return String{v}
+	}
+	if vi, bi := val.(StringType); bi {
+		return vi.String()
+	}
+
+	log.Fatalf("Cannot convert to String type: %t", val)
+	return String{}
 }
 
-func NewBool(val bool) Bool {
-	return Bool{val}
+func NewBool(val interface{}) Bool {
+	if v, b := val.(bool); b {
+		return Bool{v}
+	}
+	if vi, bi := val.(LogicalType); bi {
+		return vi.Bool()
+	}
+
+	log.Fatalf("Cannot convert to Bool type: %t", val)
+	return Bool{}
 }
 
 func (n Number) Val() float64 {
@@ -209,26 +251,47 @@ func NewVertice(val interface{}) Vertice {
 	return NewVertice(false)
 }
 
-func NewEdge(v1, v2 Vertice, w Number, d bool) Edge {
-	return Edge{v1: v1, v2: v2, weight: w, isDirected: d}
+func NewEdge(v1, v2 interface{}, w Number, d int) Edge {
+	v1v, v2v := NewVertice(v1), NewVertice(v2)
+
+	switch d {
+	case 0:
+		return Edge{v1: v1v, v2: v2v, weight: w, isDirected: false}
+	case 1:
+		return Edge{v1: v1v, v2: v2v, weight: w, isDirected: true}
+	case -1:
+		return Edge{v1: v2v, v2: v1v, weight: w, isDirected: true}
+	}
+	log.Fatalf("Error creating edge! Wrong direction value: %d", d)
+	return Edge{}
+}
+
+func ToEdge(i interface{}) Edge {
+	log.Fatalf("Error! Converting to Edge from \"%t\" is not implemented", i)
+	return Edge{}
 }
 
 func NewGraph(args ...interface{}) Graph {
 	var g Graph
 
 	for _, a := range args {
-		if v, b := a.(BuiltinType); b {
-			g.AddVertice(NewVertice(v))
+		if abi, b := a.(BuiltinType); b {
+			g.AddVertice(NewVertice(abi))
+			continue
 		}
-		if v, b := a.(Vertice); b {
-			g.AddVertice(v)
+		if av, b := a.(Vertice); b {
+			g.AddVertice(av)
+			continue
 		}
-		if e, b := a.(Edge); b {
-			g.AddEdge(e)
+		if ae, b := a.(Edge); b {
+			g.AddEdge(ae)
+			continue
 		}
-		if g, b := a.(Graph); b {
-			g.AddGraph(g)
+		if ag, b := a.(Graph); b {
+			g.AddGraph(ag)
+			continue
 		}
+		log.Fatalf("Cannot convert type \"%t\" to Graph!", a)
 	}
 
 	return g
@@ -239,7 +302,7 @@ func (v *Vertice) Label(l string) {
 }
 
 func (v Vertice) String() String {
-	str := v.val.String()
+	str := v.val.String().Val()
 	if v.label == "" {
 		return NewString(fmt.Sprintf("(%s)", str))
 	}
@@ -255,11 +318,11 @@ func (e *Edge) Label(l string) {
 }
 
 func (e Edge) String() String {
-	v1 := e.v1.String()
+	v1 := e.v1.String().Val()
 	str := fmt.Sprintf("%s -", v1)
 
 	if e.weight.float64 != 0 {
-		w := e.weight.String()
+		w := e.weight.String().Val()
 		str = fmt.Sprintf("%s[%s]-", str, w)
 	}
 
@@ -267,7 +330,7 @@ func (e Edge) String() String {
 		str += ">"
 	}
 
-	v2 := e.v2.String()
+	v2 := e.v2.String().Val()
 	str = fmt.Sprintf("%s %s", str, v2)
 
 	if e.label != "" {
@@ -288,21 +351,23 @@ func (g *Graph) Label(l string) {
 	g.label = l
 }
 
-func (g Graph) String() (String, bool) {
-	var str string
+func (g Graph) String() String {
+	str := "{"
 	for _, v := range g.GetSingleVertices() {
-		str = fmt.Sprintf("%s\n\t%s;", str, v.String())
+		str = fmt.Sprintf("%s\n\t%s;", str, v.String().Val())
 	}
 
 	for _, e := range g.e {
-		str = fmt.Sprintf("%s\n\t%s;", str, e.String())
+		str = fmt.Sprintf("%s\n\t%s;", str, e.String().Val())
 	}
 
 	if g.label != "" {
-		str = fmt.Sprintf("{%s\n}@[%s]", str, g.label)
+		str = fmt.Sprintf("%s\n}@[%s]", str, g.label)
+	} else {
+		str = fmt.Sprintf("%s\n}", str)
 	}
 
-	return NewString(str), true
+	return NewString(str)
 }
 
 func (g Graph) Bool() Bool {
@@ -312,7 +377,46 @@ func (g Graph) Bool() Bool {
 	return NewBool(true)
 }
 
-func Add(l, r interface{}) BuiltinType {
+func Assign(v *interface{}, a interface{}) {
+	if (*v) == nil {
+		*v = a
+		return
+	}
+
+	if _, vb := (*v).(Number); vb {
+		*v = NewNumber(a)
+		return
+	}
+
+	if _, vb := (*v).(String); vb {
+		*v = NewString(a)
+		return
+	}
+
+	if _, vb := (*v).(Bool); vb {
+		*v = NewBool(a)
+		return
+	}
+
+	if _, vb := (*v).(Vertice); vb {
+		*v = NewVertice(a)
+		return
+	}
+
+	if _, vb := (*v).(Edge); vb {
+		*v = ToEdge(a)
+		return
+	}
+
+	if _, vb := (*v).(Graph); vb {
+		*v = NewGraph(a)
+		return
+	}
+
+	log.Fatalf("Assignement error! Cannot assign %t to %t", a, *v)
+}
+
+func Add(l, r interface{}) interface{} {
 	li, lb := l.(NumericType)
 	ri, rb := r.(NumericType)
 	if lb && rb {
@@ -322,7 +426,10 @@ func Add(l, r interface{}) BuiltinType {
 			ln.float64 += rn.float64
 			return ln
 		}
+	} else {
+		return NewGraph(l, r)
 	}
+
 	log.Fatalf("Error! Wrong types passed in Addition! left: %t, right: %t", l, r)
 	return NewNumber(0)
 }
@@ -493,8 +600,8 @@ func GreaterOrEquals(l, r interface{}) Bool {
 
 func Print(i interface{}) {
 	if bi, b := i.(StringType); b {
-		str := bi.String()
-		fmt.Println(str.string)
+		str := bi.String().Val()
+		fmt.Println(str)
 		return
 	}
 
