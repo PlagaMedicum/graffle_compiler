@@ -13,8 +13,8 @@ go run ./cmd/graffle/main.go [PATH TO SRC FILE]
     ` Multi-line
       comment `
 ```
-1. Function declaration
-```go
+2. Function declaration
+```lisp
 factorial(value) = answer, where
     if value equals to 0, then
         answer = 1.
@@ -31,11 +31,11 @@ f2(k) = a, where if k == false, then a = "NO". Else a = "YES". end. end
 f3(i) = a, where if i is 1 then a = 1. is 2 then a = 10. default a = "RRRRARRRR!". end. end
 
 procedure()
-    <<< "I am the dragon!"
+    <<< "Procedure called"
 end
 ```
-1. Conditional statements
-```go
+3. Conditional statements
+```lisp
 if a
     <<< "OK"
 else
@@ -51,8 +51,8 @@ if a
         <<< "Well..."
 end
 ```
-1. Cycles
-```go
+4. Cycles
+```lisp
 for i = 0, i less than 10, i+=1
     print "Test for"
 end.
@@ -72,8 +72,8 @@ end
 
 from 0 to 10 print 'Test from to'
 ```
-1. Built-in types
-```go
+5. Built-in types
+```lisp
 v1 = 12 @ int vertice
 v2 = true @ boolean s here
 v3 = "Why do we all must to wear those ridiculous ties?!" @[ This was
@@ -89,8 +89,8 @@ g2 = G(g1 + v3) @ graph converted from summ of graph and vertice
 g = (g1 + g2) @ summ of graphs
 g = g1 * g2 @ let's change the label
 ```
-1. Standard functions
-```python
+6. Standard functions
+```lisp
     ``` Print operator
     <<< "Why do we all must to wear those ridiculous ties?!"
     Print "Freeman, yo fool!"
@@ -101,7 +101,7 @@ g = g1 * g2 @ let's change the label
 ```
 
 ## Вариант задания
-Реализация — `antlr4`. Целевой код — `go`(`gccgo`).
+Реализация — `antlr4`. Целевой код — `go`.
 
 ### Язык
 Графовый язык.
