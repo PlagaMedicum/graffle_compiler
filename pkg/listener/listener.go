@@ -97,9 +97,7 @@ func (s *GraffleListener) ExitEveryRule(ctx antlr.ParserRuleContext) {}
 func (s *GraffleListener) EnterFile(ctx *parser.FileContext) {
 	s.writeBuf(`package main
 
-import . "github.com/PlagaMedicum/graffle/pkg/runtime"
-
-func main() {`)
+import . "github.com/PlagaMedicum/graffle/pkg/runtime"`)
 	s.nameStack.push()
 }
 
@@ -111,6 +109,14 @@ func (s *GraffleListener) ExitFile(ctx *parser.FileContext) {
 	}
 	s.writeBuf("\n}")
 	s.nameStack.pop()
+}
+
+// EnterFunctions_block is called when production functions_block is entered.
+func (s *GraffleListener) EnterFunctions_block(ctx *parser.Functions_blockContext) {}
+
+// ExitFunctions_block is called when production functions_block is exited.
+func (s *GraffleListener) ExitFunctions_block(ctx *parser.Functions_blockContext) {
+	s.writeBuf("\nfunc main() {")
 }
 
 // EnterSequence is called when production sequence is entered.
@@ -182,6 +188,12 @@ func (s *GraffleListener) EnterElse_stmnt(ctx *parser.Else_stmntContext) {}
 
 // ExitElse_stmnt is called when production else_stmnt is exited.
 func (s *GraffleListener) ExitElse_stmnt(ctx *parser.Else_stmntContext) {}
+
+// EnterElif_stmnt is called when production elif_stmnt is entered.
+func (s *GraffleListener) EnterElif_stmnt(ctx *parser.Elif_stmntContext) {}
+
+// ExitElif_stmnt is called when production elif_stmnt is exited.
+func (s *GraffleListener) ExitElif_stmnt(ctx *parser.Elif_stmntContext) {}
 
 // EnterIf_is_stmnt is called when production if_is_stmnt is entered.
 func (s *GraffleListener) EnterIf_is_stmnt(ctx *parser.If_is_stmntContext) {}
@@ -287,6 +299,7 @@ func (s *GraffleListener) EnterFunction_declaration(ctx *parser.Function_declara
 
 // ExitFunction_declaration is called when production function_declaration is exited.
 func (s *GraffleListener) ExitFunction_declaration(ctx *parser.Function_declarationContext) {
+	s.writeBuf("\n")
 }
 
 // EnterOne_line_function_declaration is called when production one_line_function_declaration is entered.
@@ -317,7 +330,7 @@ func (s *GraffleListener) EnterFunction_declaration_head(ctx *parser.Function_de
 	}
 	s.nameStack.add(id)
 	s.nameStack.push()
-	s.writeBuf("\n%s := func(", id+nsPostfix)
+	s.writeBuf("\nfunc %s(", id+nsPostfix)
 	var args []string
 	for i, v := range ctx.AllVariable() {
 		str := v.GetText()
@@ -396,7 +409,7 @@ func (s *GraffleListener) EnterProcedure_declaration_head(ctx *parser.Procedure_
 	}
 	s.nameStack.add(id)
 	s.nameStack.push()
-	s.writeBuf("\n%s := func(", id+nsPostfix)
+	s.writeBuf("\nfunc %s(", id+nsPostfix)
 	var args []string
 	for i, v := range ctx.AllVariable() {
 		str := v.GetText()
@@ -577,9 +590,7 @@ func (s *GraffleListener) EnterExpr(ctx *parser.ExprContext) {
 func (s *GraffleListener) ExitExpr(ctx *parser.ExprContext) {}
 
 // EnterIntegral_expr is called when production integral_expr is entered.
-func (s *GraffleListener) EnterIntegral_expr(ctx *parser.Integral_exprContext) {
-	ctx.GetToken(parser.GraffleLexerNUMBER, 0)
-}
+func (s *GraffleListener) EnterIntegral_expr(ctx *parser.Integral_exprContext) {}
 
 // ExitIntegral_expr is called when production integral_expr is exited.
 func (s *GraffleListener) ExitIntegral_expr(ctx *parser.Integral_exprContext) {}
@@ -759,9 +770,6 @@ func (s *GraffleListener) ExitVariable(ctx *parser.VariableContext) {}
 // EnterBuiltin_type is called when production builtin is entered.
 func (s *GraffleListener) EnterBuiltin_type(ctx *parser.Builtin_typeContext) {
 	switch ctx.GetStart().GetTokenType() {
-	case parser.GraffleParserNUMBER:
-		v := strings.ReplaceAll(ctx.GetText(), ",", ".")
-		s.pushParamf("NewNumber(%s)", v)
 	case parser.GraffleLexerSTRING:
 		str := strings.ReplaceAll(ctx.GetText(), "'", "\"")
 		s.pushParamf("NewString(%s)", str)
@@ -780,6 +788,15 @@ func (s *GraffleListener) ExitBuiltin_type(ctx *parser.Builtin_typeContext) {}
 
 // EnterBlock_end is called when production block_end is entered.
 func (s *GraffleListener) EnterBlock_end(ctx *parser.Block_endContext) {}
+
+// EnterNumber_type is called when production number_type is entered.
+func (s *GraffleListener) EnterNumber_type(ctx *parser.Number_typeContext) {}
+
+// ExitNumber_type is called when production number_type is exited.
+func (s *GraffleListener) ExitNumber_type(ctx *parser.Number_typeContext) {
+	v := strings.ReplaceAll(ctx.GetText(), ",", ".")
+	s.pushParamf("NewNumber(%s)", v)
+}
 
 // ExitBlock_end is called when production block_end is exited.
 func (s *GraffleListener) ExitBlock_end(ctx *parser.Block_endContext) {}

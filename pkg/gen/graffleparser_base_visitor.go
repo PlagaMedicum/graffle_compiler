@@ -12,6 +12,10 @@ func (v *BaseGraffleParserVisitor) VisitFile(ctx *FileContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseGraffleParserVisitor) VisitFunctions_block(ctx *Functions_blockContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseGraffleParserVisitor) VisitSequence(ctx *SequenceContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -37,6 +41,10 @@ func (v *BaseGraffleParserVisitor) VisitIf_stmnt(ctx *If_stmntContext) interface
 }
 
 func (v *BaseGraffleParserVisitor) VisitElse_stmnt(ctx *Else_stmntContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGraffleParserVisitor) VisitElif_stmnt(ctx *Elif_stmntContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -233,6 +241,10 @@ func (v *BaseGraffleParserVisitor) VisitVariable(ctx *VariableContext) interface
 }
 
 func (v *BaseGraffleParserVisitor) VisitBuiltin_type(ctx *Builtin_typeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseGraffleParserVisitor) VisitNumber_type(ctx *Number_typeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

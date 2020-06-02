@@ -27,6 +27,12 @@ func (s *BaseGraffleParserListener) EnterFile(ctx *FileContext) {}
 // ExitFile is called when production file is exited.
 func (s *BaseGraffleParserListener) ExitFile(ctx *FileContext) {}
 
+// EnterFunctions_block is called when production functions_block is entered.
+func (s *BaseGraffleParserListener) EnterFunctions_block(ctx *Functions_blockContext) {}
+
+// ExitFunctions_block is called when production functions_block is exited.
+func (s *BaseGraffleParserListener) ExitFunctions_block(ctx *Functions_blockContext) {}
+
 // EnterSequence is called when production sequence is entered.
 func (s *BaseGraffleParserListener) EnterSequence(ctx *SequenceContext) {}
 
@@ -70,6 +76,12 @@ func (s *BaseGraffleParserListener) EnterElse_stmnt(ctx *Else_stmntContext) {}
 
 // ExitElse_stmnt is called when production else_stmnt is exited.
 func (s *BaseGraffleParserListener) ExitElse_stmnt(ctx *Else_stmntContext) {}
+
+// EnterElif_stmnt is called when production elif_stmnt is entered.
+func (s *BaseGraffleParserListener) EnterElif_stmnt(ctx *Elif_stmntContext) {}
+
+// ExitElif_stmnt is called when production elif_stmnt is exited.
+func (s *BaseGraffleParserListener) ExitElif_stmnt(ctx *Elif_stmntContext) {}
 
 // EnterIf_is_stmnt is called when production if_is_stmnt is entered.
 func (s *BaseGraffleParserListener) EnterIf_is_stmnt(ctx *If_is_stmntContext) {}
@@ -376,6 +388,12 @@ func (s *BaseGraffleParserListener) EnterBuiltin_type(ctx *Builtin_typeContext) 
 
 // ExitBuiltin_type is called when production builtin_type is exited.
 func (s *BaseGraffleParserListener) ExitBuiltin_type(ctx *Builtin_typeContext) {}
+
+// EnterNumber_type is called when production number_type is entered.
+func (s *BaseGraffleParserListener) EnterNumber_type(ctx *Number_typeContext) {}
+
+// ExitNumber_type is called when production number_type is exited.
+func (s *BaseGraffleParserListener) ExitNumber_type(ctx *Number_typeContext) {}
 
 // EnterBlock_end is called when production block_end is entered.
 func (s *BaseGraffleParserListener) EnterBlock_end(ctx *Block_endContext) {}

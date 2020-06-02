@@ -5,11 +5,7 @@ lexer grammar GraffleLexer;
 //
 
 // Types:
-NUMBER  : INT
-        | FLOAT
-        ;
-FLOAT   : INT Spaces ('.' | ',') Spaces Digit+ ;
-INT     : ('-' Spaces)? Digit+ ;
+INT     : Digit+ ;
 
 STRING      : '"'  ( '\\"' | '\\\\' | . )*? '"'
             | '\'' ( '\\\'' | '\\\\' | . )*? '\''
@@ -89,6 +85,8 @@ NOT         : '!'
 IF      : [Ii]'f' ;
 THEN    : [Tt]'hen' ;
 ELSE    : [Ee]'lse' ;
+ELIF    : [Ee]'lif'
+        | ELSE Spaces IF;
 IS      : [Ii]'s' ;
 DEFAULT : [Dd]'efault' ;
 

@@ -5,7 +5,10 @@ options {
 }
 
 file
-    : (NEWLINE? function_declaration)* sequence EOF?
+    : functions_block sequence EOF?
+    ;
+functions_block
+    : (NEWLINE? function_declaration)*
     ;
 
 sequence
@@ -33,10 +36,13 @@ atom_action
 
 // Statements:
 if_stmnt
-    : IF logical_expr ( ','? (THEN | DO | THEN DO) )? sequence else_stmnt? block_end
+    : IF logical_expr ( ','? (THEN | DO | THEN DO) )? sequence (else_stmnt | elif_stmnt)? block_end
     ;
 else_stmnt
     : NEWLINE? ELSE DO? sequence
+    ;
+elif_stmnt
+    : ELIF logical_expr ( ','? (THEN | DO | THEN DO) )? sequence (else_stmnt | elif_stmnt)?
     ;
 
 if_is_stmnt
@@ -139,13 +145,13 @@ edge
     | unor_w_edge
     ;
 or_w_edge_lr
-    : '-' '[' weight=NUMBER ']' OR_EDGE_LR
+    : '-' '[' weight=number_type ']' OR_EDGE_LR
     ;
 or_w_edge_rl
-    : OR_EDGE_RL '[' weight=NUMBER ']' '-'
+    : OR_EDGE_RL '[' weight=number_type ']' '-'
     ;
 unor_w_edge
-    : '-' '[' weight=NUMBER ']' '-'
+    : '-' '[' weight=number_type ']' '-'
     ;
 
 graph_assign
@@ -252,8 +258,8 @@ label
     | ML_LABEL
     ;
 value
-    : logical_expr
-    | arithm_expr
+    : arithm_expr
+    | logical_expr
     | expr
     ;
 variable
@@ -261,9 +267,12 @@ variable
     ;
 
 builtin_type
-    : NUMBER
+    : number_type
     | STRING
     | BOOL
+    ;
+number_type
+    : '-'? INT (('.' | ',') INT)?
     ;
 
 block_end

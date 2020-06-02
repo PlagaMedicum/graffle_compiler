@@ -11,6 +11,9 @@ type GraffleParserVisitor interface {
 	// Visit a parse tree produced by GraffleParser#file.
 	VisitFile(ctx *FileContext) interface{}
 
+	// Visit a parse tree produced by GraffleParser#functions_block.
+	VisitFunctions_block(ctx *Functions_blockContext) interface{}
+
 	// Visit a parse tree produced by GraffleParser#sequence.
 	VisitSequence(ctx *SequenceContext) interface{}
 
@@ -31,6 +34,9 @@ type GraffleParserVisitor interface {
 
 	// Visit a parse tree produced by GraffleParser#else_stmnt.
 	VisitElse_stmnt(ctx *Else_stmntContext) interface{}
+
+	// Visit a parse tree produced by GraffleParser#elif_stmnt.
+	VisitElif_stmnt(ctx *Elif_stmntContext) interface{}
 
 	// Visit a parse tree produced by GraffleParser#if_is_stmnt.
 	VisitIf_is_stmnt(ctx *If_is_stmntContext) interface{}
@@ -178,6 +184,9 @@ type GraffleParserVisitor interface {
 
 	// Visit a parse tree produced by GraffleParser#builtin_type.
 	VisitBuiltin_type(ctx *Builtin_typeContext) interface{}
+
+	// Visit a parse tree produced by GraffleParser#number_type.
+	VisitNumber_type(ctx *Number_typeContext) interface{}
 
 	// Visit a parse tree produced by GraffleParser#block_end.
 	VisitBlock_end(ctx *Block_endContext) interface{}

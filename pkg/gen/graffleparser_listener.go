@@ -11,6 +11,9 @@ type GraffleParserListener interface {
 	// EnterFile is called when entering the file production.
 	EnterFile(c *FileContext)
 
+	// EnterFunctions_block is called when entering the functions_block production.
+	EnterFunctions_block(c *Functions_blockContext)
+
 	// EnterSequence is called when entering the sequence production.
 	EnterSequence(c *SequenceContext)
 
@@ -31,6 +34,9 @@ type GraffleParserListener interface {
 
 	// EnterElse_stmnt is called when entering the else_stmnt production.
 	EnterElse_stmnt(c *Else_stmntContext)
+
+	// EnterElif_stmnt is called when entering the elif_stmnt production.
+	EnterElif_stmnt(c *Elif_stmntContext)
 
 	// EnterIf_is_stmnt is called when entering the if_is_stmnt production.
 	EnterIf_is_stmnt(c *If_is_stmntContext)
@@ -179,11 +185,17 @@ type GraffleParserListener interface {
 	// EnterBuiltin_type is called when entering the builtin_type production.
 	EnterBuiltin_type(c *Builtin_typeContext)
 
+	// EnterNumber_type is called when entering the number_type production.
+	EnterNumber_type(c *Number_typeContext)
+
 	// EnterBlock_end is called when entering the block_end production.
 	EnterBlock_end(c *Block_endContext)
 
 	// ExitFile is called when exiting the file production.
 	ExitFile(c *FileContext)
+
+	// ExitFunctions_block is called when exiting the functions_block production.
+	ExitFunctions_block(c *Functions_blockContext)
 
 	// ExitSequence is called when exiting the sequence production.
 	ExitSequence(c *SequenceContext)
@@ -205,6 +217,9 @@ type GraffleParserListener interface {
 
 	// ExitElse_stmnt is called when exiting the else_stmnt production.
 	ExitElse_stmnt(c *Else_stmntContext)
+
+	// ExitElif_stmnt is called when exiting the elif_stmnt production.
+	ExitElif_stmnt(c *Elif_stmntContext)
 
 	// ExitIf_is_stmnt is called when exiting the if_is_stmnt production.
 	ExitIf_is_stmnt(c *If_is_stmntContext)
@@ -352,6 +367,9 @@ type GraffleParserListener interface {
 
 	// ExitBuiltin_type is called when exiting the builtin_type production.
 	ExitBuiltin_type(c *Builtin_typeContext)
+
+	// ExitNumber_type is called when exiting the number_type production.
+	ExitNumber_type(c *Number_typeContext)
 
 	// ExitBlock_end is called when exiting the block_end production.
 	ExitBlock_end(c *Block_endContext)
