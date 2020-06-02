@@ -175,25 +175,36 @@ func (s *GraffleListener) EnterIf_stmnt(ctx *parser.If_stmntContext) {
 // ExitIf_stmnt is called when production if_stmnt is exited.
 func (s *GraffleListener) ExitIf_stmnt(ctx *parser.If_stmntContext) {
 	elsesq := ""
-	if ctx.Else_stmnt() != nil {
+	if ctx.Else_stmnt() != nil || ctx.Elif_stmnt() != nil {
 		elsesq = fmt.Sprintf("%s\n", s.popParam())
 	}
 	ifsq := s.popParam()
 	cond := s.popParam()
-	s.pushParamf("if %s.Val() {%s\n} else {%s}", cond, ifsq, elsesq)
+	s.pushParamf("if %s.Val() {%s\n%s}", cond, ifsq, elsesq)
 }
 
 // EnterElse_stmnt is called when production else_stmnt is entered.
 func (s *GraffleListener) EnterElse_stmnt(ctx *parser.Else_stmntContext) {}
 
 // ExitElse_stmnt is called when production else_stmnt is exited.
-func (s *GraffleListener) ExitElse_stmnt(ctx *parser.Else_stmntContext) {}
+func (s *GraffleListener) ExitElse_stmnt(ctx *parser.Else_stmntContext) {
+	sq := s.popParam()
+	s.pushParamf("} else {%s", sq)
+}
 
 // EnterElif_stmnt is called when production elif_stmnt is entered.
 func (s *GraffleListener) EnterElif_stmnt(ctx *parser.Elif_stmntContext) {}
 
 // ExitElif_stmnt is called when production elif_stmnt is exited.
-func (s *GraffleListener) ExitElif_stmnt(ctx *parser.Elif_stmntContext) {}
+func (s *GraffleListener) ExitElif_stmnt(ctx *parser.Elif_stmntContext) {
+	elsesq := ""
+	if ctx.Else_stmnt() != nil || ctx.Elif_stmnt() != nil {
+		elsesq = fmt.Sprintf("\n%s", s.popParam())
+	}
+	sq := s.popParam()
+	cond := s.popParam()
+	s.pushParamf("} else if %s.Val() {%s%s", cond, sq, elsesq)
+}
 
 // EnterIf_is_stmnt is called when production if_is_stmnt is entered.
 func (s *GraffleListener) EnterIf_is_stmnt(ctx *parser.If_is_stmntContext) {}
