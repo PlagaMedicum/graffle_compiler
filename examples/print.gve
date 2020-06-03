@@ -13,13 +13,13 @@ cycle_test(a)
     end
 end
 
-v = V("SAS")
+v = V("SAS") @ vertice
 <<< v
 
-e = "Start" -[50]-> "End"
+e = "Start" -[50]-> "End" @ edge
 <<< e
 
-g = G("OK.", v, e, (v -- v))
+g = G("OK.", v, e, (v -- v)) @ graph
 g = g + ((v <- "2"), false)
 <<< g
 
