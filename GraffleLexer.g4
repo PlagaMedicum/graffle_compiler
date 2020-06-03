@@ -38,7 +38,6 @@ NEQ         : NOT Spaces '='
             ;
 EQUALS      : '=='
             | [Ee]'quals' (Spaces [Tt]'o')?
-            | Is
             ;
 LESS_THAN   : '<'
             | Is? Spaces [Ll]'ess' (Spaces Than)?
