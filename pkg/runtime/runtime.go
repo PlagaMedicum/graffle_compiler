@@ -40,57 +40,48 @@ type Bool struct {
 }
 
 func NewNumber(val interface{}) Number {
-	if v, b := val.(int); b {
+	switch v := val.(type) {
+	case int:
 		return Number{float64(v)}
-	}
-
-	if v, b := val.(int32); b {
+	case int32:
 		return Number{float64(v)}
-	}
-
-	if v, b := val.(int64); b {
+	case int64:
 		return Number{float64(v)}
-	}
-
-	if v, b := val.(float32); b {
+	case float32:
 		return Number{float64(v)}
-	}
-
-	if v, b := val.(float64); b {
+	case float64:
 		return Number{v}
-	}
-
-	if vi, bi := val.(NumericType); bi {
-		if v, b := vi.Number(); b {
-			return v
+	case NumericType:
+		if vi, b := v.Number(); b {
+			return vi
 		}
 	}
 
-	log.Fatalf("Cannot convert to Number type: %t", val)
+	log.Fatalf("Cannot convert to Number type: %T", val)
 	return Number{}
 }
 
 func NewString(val interface{}) String {
-	if v, b := val.(string); b {
+	switch v := val.(type) {
+	case string:
 		return String{v}
-	}
-	if vi, bi := val.(StringType); bi {
-		return vi.String()
+	case StringType:
+		return v.String()
 	}
 
-	log.Fatalf("Cannot convert to String type: %t", val)
+	log.Fatalf("Cannot convert to String type: %T", val)
 	return String{}
 }
 
 func NewBool(val interface{}) Bool {
-	if v, b := val.(bool); b {
+	switch v := val.(type) {
+	case bool:
 		return Bool{v}
-	}
-	if vi, bi := val.(LogicalType); bi {
-		return vi.Bool()
+	case LogicalType:
+		return v.Bool()
 	}
 
-	log.Fatalf("Cannot convert to Bool type: %t", val)
+	log.Fatalf("Cannot convert to Bool type: %T", val)
 	return Bool{}
 }
 
@@ -216,6 +207,10 @@ func (g *Graph) AddGraph(ng Graph) {
 	for _, e := range ng.e {
 		g.AddEdge(e)
 	}
+
+	if g.label == "" {
+		g.label = ng.label
+	}
 }
 
 func (g *Graph) GetSingleVertices() []Vertice {
@@ -235,22 +230,16 @@ func (g *Graph) GetSingleVertices() []Vertice {
 }
 
 func NewVertice(val interface{}) Vertice {
-	bo, b := val.(bool)
-	if b {
-		return Vertice{val: NewBool(bo)}
-	}
-
-	bi, b := val.(BuiltinType)
-	if b {
-		return Vertice{val: bi}
-	}
-
-	v, b := val.(Vertice)
-	if b {
+	switch v := val.(type) {
+	case bool:
+		return Vertice{val: NewBool(v)}
+	case BuiltinType:
+		return Vertice{val: v}
+	case Vertice:
 		return v
 	}
 
-	log.Fatalf("Assignement error! Cannot create vertice from type: %t", val)
+	log.Fatalf("Assignement error! Cannot create vertice from type: %T", val)
 	return NewVertice(false)
 }
 
@@ -270,7 +259,7 @@ func NewEdge(v1, v2 interface{}, w Number, d int) Edge {
 }
 
 func ToEdge(i interface{}) Edge {
-	log.Fatalf("Error! Converting to Edge from \"%t\" is not implemented", i)
+	log.Fatalf("Error! Converting to Edge from \"%T\" is not implemented", i)
 	return Edge{}
 }
 
@@ -278,23 +267,21 @@ func NewGraph(args ...interface{}) Graph {
 	var g Graph
 
 	for _, a := range args {
-		if abi, b := a.(BuiltinType); b {
-			g.AddVertice(NewVertice(abi))
+		switch v := a.(type) {
+		case BuiltinType:
+			g.AddVertice(NewVertice(v))
+			continue
+		case Vertice:
+			g.AddVertice(v)
+			continue
+		case Edge:
+			g.AddEdge(v)
+			continue
+		case Graph:
+			g.AddGraph(v)
 			continue
 		}
-		if av, b := a.(Vertice); b {
-			g.AddVertice(av)
-			continue
-		}
-		if ae, b := a.(Edge); b {
-			g.AddEdge(ae)
-			continue
-		}
-		if ag, b := a.(Graph); b {
-			g.AddGraph(ag)
-			continue
-		}
-		log.Fatalf("Cannot convert type \"%t\" to Graph!", a)
+		log.Fatalf("Cannot convert type \"%T\" to Graph!", a)
 	}
 
 	return g
@@ -386,37 +373,50 @@ func Assign(v *interface{}, a interface{}) {
 		return
 	}
 
-	if _, vb := (*v).(Number); vb {
+	switch (*v).(type) {
+	case Number:
 		*v = NewNumber(a)
 		return
-	}
-
-	if _, vb := (*v).(String); vb {
+	case String:
 		*v = NewString(a)
 		return
-	}
-
-	if _, vb := (*v).(Bool); vb {
+	case Bool:
 		*v = NewBool(a)
 		return
-	}
-
-	if _, vb := (*v).(Vertice); vb {
+	case Vertice:
 		*v = NewVertice(a)
 		return
-	}
-
-	if _, vb := (*v).(Edge); vb {
+	case Edge:
 		*v = ToEdge(a)
 		return
-	}
-
-	if _, vb := (*v).(Graph); vb {
+	case Graph:
 		*v = NewGraph(a)
 		return
 	}
 
-	log.Fatalf("Assignement error! Cannot assign %t to %t", a, *v)
+	log.Fatalf("Assignement error! Cannot assign %T to %T", a, *v)
+}
+
+func Label(i *interface{}, l string) {
+	switch v := (*i).(type) {
+	case Labeled:
+		v.Label(l)
+		*i = v
+		return
+	case Vertice:
+		v.Label(l)
+		*i = v
+		return
+	case Edge:
+		v.Label(l)
+		*i = v
+		return
+	case Graph:
+		v.Label(l)
+		*i = v
+		return
+	}
+	log.Fatalf("Error! Cannot label type: %T", *i)
 }
 
 func Add(l, r interface{}) interface{} {
@@ -433,7 +433,7 @@ func Add(l, r interface{}) interface{} {
 		return NewGraph(l, r)
 	}
 
-	log.Fatalf("Error! Wrong types passed in Addition! left: %t, right: %t", l, r)
+	log.Fatalf("Error! Wrong types passed in Addition! left: %T, right: %T", l, r)
 	return nil
 }
 
@@ -449,7 +449,7 @@ func Subtract(l, r interface{}) interface{} {
 		}
 	}
 
-	log.Fatalf("Error! Wrong types passed in Subtraction! left: %t, right: %t", l, r)
+	log.Fatalf("Error! Wrong types passed in Subtraction! left: %T, right: %T", l, r)
 	return nil
 }
 
@@ -465,7 +465,7 @@ func Multiply(l, r interface{}) interface{} {
 		}
 	}
 
-	log.Fatalf("Error! Wrong types passed in Multiplication! left: %t, right: %t", l, r)
+	log.Fatalf("Error! Wrong types passed in Multiplication! left: %T, right: %T", l, r)
 	return nil
 }
 
@@ -481,7 +481,7 @@ func Divide(l, r interface{}) interface{} {
 		}
 	}
 
-	log.Fatalf("Error! Wrong types passed in Dividing! left: %t, right: %t", l, r)
+	log.Fatalf("Error! Wrong types passed in Dividing! left: %T, right: %T", l, r)
 	return nil
 }
 
@@ -492,7 +492,7 @@ func Not(a interface{}) Bool {
 		return NewBool(!v.bool)
 	}
 
-	log.Fatalf("Error! Wrong type passed in \"Not\" operation! type: %t", a)
+	log.Fatalf("Error! Wrong type passed in \"Not\" operation! type: %T", a)
 	return NewBool(false)
 }
 
@@ -505,7 +505,7 @@ func And(l, r interface{}) Bool {
 		return NewBool(lv.bool && rv.bool)
 	}
 
-	log.Fatalf("Error! Wrong types passed in \"And\" operation! left: %t, right: %t", l, r)
+	log.Fatalf("Error! Wrong types passed in \"And\" operation! left: %T, right: %T", l, r)
 	return NewBool(false)
 }
 
@@ -518,7 +518,7 @@ func Or(l, r interface{}) Bool {
 		return NewBool(lv.bool || rv.bool)
 	}
 
-	log.Fatalf("Error! Wrong types passed in \"Or\" operation! left: %t, right: %t", l, r)
+	log.Fatalf("Error! Wrong types passed in \"Or\" operation! left: %T, right: %T", l, r)
 	return NewBool(false)
 }
 
@@ -531,7 +531,7 @@ func ExclusiveOr(l, r interface{}) Bool {
 		return NewBool((lv.bool && !rv.bool) || (!lv.bool && rv.bool))
 	}
 
-	log.Fatalf("Error! Wrong types passed in \"Or\" operation! left: %t, right: %t", l, r)
+	log.Fatalf("Error! Wrong types passed in \"Or\" operation! left: %T, right: %T", l, r)
 	return NewBool(false)
 }
 
@@ -545,11 +545,11 @@ func Equals(l, r interface{}) Bool {
 			return NewBool(lv.float64 == rv.float64)
 		}
 
-		log.Fatalf("Error! Wrong operands, cannot evaluate \"Equals\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
+		log.Fatalf("Error! Wrong operands, cannot evaluate \"Equals\" operation! left: %T %s, right: %T %s", li, li.String(), ri, ri.String())
 		return NewBool(false)
 	}
 
-	log.Fatalf("Error! Wrong types passed in \"Equals\" operation! left: %t, right: %t", l, r)
+	log.Fatalf("Error! Wrong types passed in \"Equals\" operation! left: %T, right: %T", l, r)
 	return NewBool(false)
 }
 
@@ -563,11 +563,11 @@ func Less(l, r interface{}) Bool {
 			return NewBool(lv.float64 < rv.float64)
 		}
 
-		log.Fatalf("Error! Wrong operands, cannot evaluate \"Less than\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
+		log.Fatalf("Error! Wrong operands, cannot evaluate \"Less than\" operation! left: %T %s, right: %T %s", li, li.String(), ri, ri.String())
 		return NewBool(false)
 	}
 
-	log.Fatalf("Error! Wrong types passed in \"Less than\" operation! left: %t, right: %t", l, r)
+	log.Fatalf("Error! Wrong types passed in \"Less than\" operation! left: %T, right: %T", l, r)
 	return NewBool(false)
 }
 
@@ -581,11 +581,11 @@ func Greater(l, r interface{}) Bool {
 			return NewBool(lv.float64 > rv.float64)
 		}
 
-		log.Fatalf("Error! Wrong operands, cannot evaluate \"Greater than\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
+		log.Fatalf("Error! Wrong operands, cannot evaluate \"Greater than\" operation! left: %T %s, right: %T %s", li, li.String(), ri, ri.String())
 		return NewBool(false)
 	}
 
-	log.Fatalf("Error! Wrong types passed in \"Greater than\" operation! left: %t, right: %t", l, r)
+	log.Fatalf("Error! Wrong types passed in \"Greater than\" operation! left: %T, right: %T", l, r)
 	return NewBool(false)
 }
 
@@ -599,11 +599,11 @@ func LessOrEquals(l, r interface{}) Bool {
 			return NewBool(lv.float64 <= rv.float64)
 		}
 
-		log.Fatalf("Error! Wrong operands, cannot evaluate \"Less than or equals\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
+		log.Fatalf("Error! Wrong operands, cannot evaluate \"Less than or equals\" operation! left: %T %s, right: %T %s", li, li.String(), ri, ri.String())
 		return NewBool(false)
 	}
 
-	log.Fatalf("Error! Wrong types passed in \"Less than or equals\" operation! left: %t, right: %t", l, r)
+	log.Fatalf("Error! Wrong types passed in \"Less than or equals\" operation! left: %T, right: %T", l, r)
 	return NewBool(false)
 }
 
@@ -617,11 +617,11 @@ func GreaterOrEquals(l, r interface{}) Bool {
 			return NewBool(lv.float64 >= rv.float64)
 		}
 
-		log.Fatalf("Error! Wrong operands, cannot evaluate \"Greater than or equals\" operation! left: %t %s, right: %t %s", li, li.String(), ri, ri.String())
+		log.Fatalf("Error! Wrong operands, cannot evaluate \"Greater than or equals\" operation! left: %T %s, right: %T %s", li, li.String(), ri, ri.String())
 		return NewBool(false)
 	}
 
-	log.Fatalf("Error! Wrong types passed in \"Greater than or equals\" operation! left: %t, right: %t", l, r)
+	log.Fatalf("Error! Wrong types passed in \"Greater than or equals\" operation! left: %T, right: %T", l, r)
 	return NewBool(false)
 }
 

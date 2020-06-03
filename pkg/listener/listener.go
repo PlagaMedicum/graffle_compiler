@@ -505,7 +505,6 @@ func (s *GraffleListener) EnterOr_w_edge_lr(ctx *parser.Or_w_edge_lrContext) {}
 
 // ExitOr_w_edge_lr is called when production or_w_edge_lr is exited.
 func (s *GraffleListener) ExitOr_w_edge_lr(ctx *parser.Or_w_edge_lrContext) {
-	s.pushParam(ctx.GetWeight().GetText())
 }
 
 // EnterOr_w_edge_rl is called when production or_w_edge_rl is entered.
@@ -513,7 +512,6 @@ func (s *GraffleListener) EnterOr_w_edge_rl(ctx *parser.Or_w_edge_rlContext) {}
 
 // ExitOr_w_edge_rl is called when production or_w_edge_rl is exited.
 func (s *GraffleListener) ExitOr_w_edge_rl(ctx *parser.Or_w_edge_rlContext) {
-	s.pushParam(ctx.GetWeight().GetText())
 }
 
 // EnterUnor_w_edge is called when production unor_w_edge is entered.
@@ -521,7 +519,6 @@ func (s *GraffleListener) EnterUnor_w_edge(ctx *parser.Unor_w_edgeContext) {}
 
 // ExitUnor_w_edge is called when production unor_w_edge is exited.
 func (s *GraffleListener) ExitUnor_w_edge(ctx *parser.Unor_w_edgeContext) {
-	s.pushParam(ctx.GetWeight().GetText())
 }
 
 // EnterEdge is called when production edge is entered.
@@ -591,7 +588,26 @@ func (s *GraffleListener) ExitGraph_type(ctx *parser.Graph_typeContext) {
 func (s *GraffleListener) EnterLabeled_assign(ctx *parser.Labeled_assignContext) {}
 
 // ExitLabeled_assign is called when production labeled_assign is exited.
-func (s *GraffleListener) ExitLabeled_assign(ctx *parser.Labeled_assignContext) {}
+func (s *GraffleListener) ExitLabeled_assign(ctx *parser.Labeled_assignContext) {
+	start := ctx.GetStart()
+	if start.GetTokenType() != parser.GraffleParserID {
+		log.Fatal("parsing error: no ID token in labeled assign!")
+	}
+	id := start.GetText() + nsPostfix
+
+	label := ctx.Label()
+	labelstr := strings.TrimPrefix(label.GetText(), "@")
+	for strings.HasPrefix(labelstr, " ") {
+		labelstr = strings.TrimPrefix(labelstr, " ")
+	}
+	if label.GetStart().GetTokenType() == parser.GraffleParserML_LABEL {
+		labelstr = strings.TrimPrefix(labelstr, "[")
+		labelstr = strings.TrimSuffix(labelstr, "]")
+	}
+
+	stmt := s.popParam()
+	s.pushParam(fmt.Sprintf("%s\nLabel(&%s, \"%s\")", stmt, id, labelstr))
+}
 
 // EnterExpr is called when production expr is entered.
 func (s *GraffleListener) EnterExpr(ctx *parser.ExprContext) {
