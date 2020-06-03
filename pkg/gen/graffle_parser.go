@@ -6135,12 +6135,6 @@ type IOr_w_edge_lrContext interface {
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// GetWeight returns the weight rule contexts.
-	GetWeight() INumber_typeContext
-
-	// SetWeight sets the weight rule contexts.
-	SetWeight(INumber_typeContext)
-
 	// IsOr_w_edge_lrContext differentiates from other interfaces.
 	IsOr_w_edge_lrContext()
 }
@@ -6148,7 +6142,6 @@ type IOr_w_edge_lrContext interface {
 type Or_w_edge_lrContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
-	weight INumber_typeContext
 }
 
 func NewEmptyOr_w_edge_lrContext() *Or_w_edge_lrContext {
@@ -6173,24 +6166,12 @@ func NewOr_w_edge_lrContext(parser antlr.Parser, parent antlr.ParserRuleContext,
 
 func (s *Or_w_edge_lrContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *Or_w_edge_lrContext) GetWeight() INumber_typeContext { return s.weight }
-
-func (s *Or_w_edge_lrContext) SetWeight(v INumber_typeContext) { s.weight = v }
-
 func (s *Or_w_edge_lrContext) SUB() antlr.TerminalNode {
 	return s.GetToken(GraffleParserSUB, 0)
 }
 
 func (s *Or_w_edge_lrContext) L_BRACKET() antlr.TerminalNode {
 	return s.GetToken(GraffleParserL_BRACKET, 0)
-}
-
-func (s *Or_w_edge_lrContext) R_BRACKET() antlr.TerminalNode {
-	return s.GetToken(GraffleParserR_BRACKET, 0)
-}
-
-func (s *Or_w_edge_lrContext) OR_EDGE_LR() antlr.TerminalNode {
-	return s.GetToken(GraffleParserOR_EDGE_LR, 0)
 }
 
 func (s *Or_w_edge_lrContext) Number_type() INumber_typeContext {
@@ -6201,6 +6182,14 @@ func (s *Or_w_edge_lrContext) Number_type() INumber_typeContext {
 	}
 
 	return t.(INumber_typeContext)
+}
+
+func (s *Or_w_edge_lrContext) R_BRACKET() antlr.TerminalNode {
+	return s.GetToken(GraffleParserR_BRACKET, 0)
+}
+
+func (s *Or_w_edge_lrContext) OR_EDGE_LR() antlr.TerminalNode {
+	return s.GetToken(GraffleParserOR_EDGE_LR, 0)
 }
 
 func (s *Or_w_edge_lrContext) GetRuleContext() antlr.RuleContext {
@@ -6264,10 +6253,7 @@ func (p *GraffleParser) Or_w_edge_lr() (localctx IOr_w_edge_lrContext) {
 	}
 	{
 		p.SetState(430)
-
-		var _x = p.Number_type()
-
-		localctx.(*Or_w_edge_lrContext).weight = _x
+		p.Number_type()
 	}
 	{
 		p.SetState(431)
@@ -6288,12 +6274,6 @@ type IOr_w_edge_rlContext interface {
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// GetWeight returns the weight rule contexts.
-	GetWeight() INumber_typeContext
-
-	// SetWeight sets the weight rule contexts.
-	SetWeight(INumber_typeContext)
-
 	// IsOr_w_edge_rlContext differentiates from other interfaces.
 	IsOr_w_edge_rlContext()
 }
@@ -6301,7 +6281,6 @@ type IOr_w_edge_rlContext interface {
 type Or_w_edge_rlContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
-	weight INumber_typeContext
 }
 
 func NewEmptyOr_w_edge_rlContext() *Or_w_edge_rlContext {
@@ -6326,24 +6305,12 @@ func NewOr_w_edge_rlContext(parser antlr.Parser, parent antlr.ParserRuleContext,
 
 func (s *Or_w_edge_rlContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *Or_w_edge_rlContext) GetWeight() INumber_typeContext { return s.weight }
-
-func (s *Or_w_edge_rlContext) SetWeight(v INumber_typeContext) { s.weight = v }
-
 func (s *Or_w_edge_rlContext) OR_EDGE_RL() antlr.TerminalNode {
 	return s.GetToken(GraffleParserOR_EDGE_RL, 0)
 }
 
 func (s *Or_w_edge_rlContext) L_BRACKET() antlr.TerminalNode {
 	return s.GetToken(GraffleParserL_BRACKET, 0)
-}
-
-func (s *Or_w_edge_rlContext) R_BRACKET() antlr.TerminalNode {
-	return s.GetToken(GraffleParserR_BRACKET, 0)
-}
-
-func (s *Or_w_edge_rlContext) SUB() antlr.TerminalNode {
-	return s.GetToken(GraffleParserSUB, 0)
 }
 
 func (s *Or_w_edge_rlContext) Number_type() INumber_typeContext {
@@ -6354,6 +6321,14 @@ func (s *Or_w_edge_rlContext) Number_type() INumber_typeContext {
 	}
 
 	return t.(INumber_typeContext)
+}
+
+func (s *Or_w_edge_rlContext) R_BRACKET() antlr.TerminalNode {
+	return s.GetToken(GraffleParserR_BRACKET, 0)
+}
+
+func (s *Or_w_edge_rlContext) SUB() antlr.TerminalNode {
+	return s.GetToken(GraffleParserSUB, 0)
 }
 
 func (s *Or_w_edge_rlContext) GetRuleContext() antlr.RuleContext {
@@ -6417,10 +6392,7 @@ func (p *GraffleParser) Or_w_edge_rl() (localctx IOr_w_edge_rlContext) {
 	}
 	{
 		p.SetState(436)
-
-		var _x = p.Number_type()
-
-		localctx.(*Or_w_edge_rlContext).weight = _x
+		p.Number_type()
 	}
 	{
 		p.SetState(437)
@@ -6441,12 +6413,6 @@ type IUnor_w_edgeContext interface {
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// GetWeight returns the weight rule contexts.
-	GetWeight() INumber_typeContext
-
-	// SetWeight sets the weight rule contexts.
-	SetWeight(INumber_typeContext)
-
 	// IsUnor_w_edgeContext differentiates from other interfaces.
 	IsUnor_w_edgeContext()
 }
@@ -6454,7 +6420,6 @@ type IUnor_w_edgeContext interface {
 type Unor_w_edgeContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
-	weight INumber_typeContext
 }
 
 func NewEmptyUnor_w_edgeContext() *Unor_w_edgeContext {
@@ -6479,10 +6444,6 @@ func NewUnor_w_edgeContext(parser antlr.Parser, parent antlr.ParserRuleContext, 
 
 func (s *Unor_w_edgeContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *Unor_w_edgeContext) GetWeight() INumber_typeContext { return s.weight }
-
-func (s *Unor_w_edgeContext) SetWeight(v INumber_typeContext) { s.weight = v }
-
 func (s *Unor_w_edgeContext) AllSUB() []antlr.TerminalNode {
 	return s.GetTokens(GraffleParserSUB)
 }
@@ -6495,10 +6456,6 @@ func (s *Unor_w_edgeContext) L_BRACKET() antlr.TerminalNode {
 	return s.GetToken(GraffleParserL_BRACKET, 0)
 }
 
-func (s *Unor_w_edgeContext) R_BRACKET() antlr.TerminalNode {
-	return s.GetToken(GraffleParserR_BRACKET, 0)
-}
-
 func (s *Unor_w_edgeContext) Number_type() INumber_typeContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*INumber_typeContext)(nil)).Elem(), 0)
 
@@ -6507,6 +6464,10 @@ func (s *Unor_w_edgeContext) Number_type() INumber_typeContext {
 	}
 
 	return t.(INumber_typeContext)
+}
+
+func (s *Unor_w_edgeContext) R_BRACKET() antlr.TerminalNode {
+	return s.GetToken(GraffleParserR_BRACKET, 0)
 }
 
 func (s *Unor_w_edgeContext) GetRuleContext() antlr.RuleContext {
@@ -6570,10 +6531,7 @@ func (p *GraffleParser) Unor_w_edge() (localctx IUnor_w_edgeContext) {
 	}
 	{
 		p.SetState(442)
-
-		var _x = p.Number_type()
-
-		localctx.(*Unor_w_edgeContext).weight = _x
+		p.Number_type()
 	}
 	{
 		p.SetState(443)
