@@ -15,7 +15,7 @@ so it can look more like natural text(with a lot of words,
 capitalisation and punktuation), or like shorthand friendly code.
 
 1. Hello world
-    ```python
+    ```lua
     print "Hello, World!"
     ``` This is equivalent to:
     <<< "Hello, World!"
@@ -74,7 +74,7 @@ capitalisation and punktuation), or like shorthand friendly code.
     end
     ```
 1. Cycles
-    ```lisp
+    ```lua
     for i = 0, i < 10, i += 1
         print "Test for"
     end
@@ -112,7 +112,7 @@ capitalisation and punktuation), or like shorthand friendly code.
     g = g1 * g2 @ let's change the label
     ```
 1. Standard functions
-    ```lisp
+    ```lua
     ``` Print operator
     <<< "Why do we all must to wear those ridiculous ties?!"
     Print "Freeman, yo fool!".
