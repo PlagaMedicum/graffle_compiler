@@ -145,13 +145,13 @@ edge
     | unor_w_edge
     ;
 or_w_edge_lr
-    : '-' '[' weight=number_type ']' OR_EDGE_LR
+    : '-' '[' number_type ']' OR_EDGE_LR
     ;
 or_w_edge_rl
-    : OR_EDGE_RL '[' weight=number_type ']' '-'
+    : OR_EDGE_RL '[' number_type ']' '-'
     ;
 unor_w_edge
-    : '-' '[' weight=number_type ']' '-'
+    : '-' '[' number_type ']' '-'
     ;
 
 graph_assign
@@ -164,7 +164,8 @@ graph_type
     ;
 
 labeled_assign
-    : edge_assign label?
+    : vertice_assign label?
+    | edge_assign label?
     | graph_assign label?
     ;
 
